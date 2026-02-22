@@ -1,23 +1,22 @@
 import logo from "./logo.svg";
 import { useState, useEffect } from "react";
+import { Routes, Route, Link } from "react-router-dom";
 import axios from "axios";
 import "./App.css";
-import CreateItem from "./CreateItem";
+import CreateItem from "./components/CreateItem";
+import ItemList from "./components/ItemList";
+import Navbar from "./components/Navbar";
+import Transactions from "./components/Transactions";
 
 function App() {
-  const [items, setItems] = useState();
-  const getItems = async () => {
-    // const response = await axios.get("http://localhost:3500/grocery-items");
-    // console.log(response.data);
-  };
-
-  useEffect(() => {
-    getItems();
-  }, []);
   return (
     <div className="App">
-      <h4>Transaction</h4>
-      <CreateItem />
+      <Navbar />
+      <Routes>
+        <Route path="transactions" element={<Transactions />} />
+        <Route path="create-item" element={<CreateItem />} />
+        <Route path="item-list" element={<ItemList />} />
+      </Routes>
     </div>
   );
 }

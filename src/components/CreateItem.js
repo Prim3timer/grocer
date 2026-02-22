@@ -44,6 +44,7 @@ const CreateItem = () => {
     "Kilowatt (kW)",
     "Litre (L)",
     "Pound (lbs)",
+    "Cup (Cp)",
   ];
 
   const catArray = ["vegetable", "grain", "meat", "fish", "seasoning"];
@@ -115,11 +116,11 @@ const CreateItem = () => {
         const newItem = {
           name: `${name}`,
           availablePrices: withPriceValue,
-          unitMeasure: withUnitValue,
+          availableUnitMeasures: withUnitValue,
           description,
           qty: ole,
           category,
-          // image: files,
+          image: file.name,
           now,
         };
 
@@ -131,7 +132,7 @@ const CreateItem = () => {
         );
         console.log(response.data);
         const response2 = await axios.post(
-          `http://localhost:3500/items/pic/${newItem.name}`,
+          `http://localhost:3500/grocery-items/pic/${newItem.name}`,
           formData,
         );
         if (response) {
@@ -200,7 +201,7 @@ const CreateItem = () => {
 
   return (
     <div className="create-item">
-      <h2 id="create-item-heading">Create Item</h2>
+      <h3 id="create-item-heading">Create Item</h3>
       <form id="create-item-form" onSubmit={(e) => handleSubmit(e)}>
         <h4>Name:</h4>
         <input
@@ -237,7 +238,7 @@ const CreateItem = () => {
         <input
           type="text"
           list="measure2"
-          required
+          // required
           value={unitMeasure2}
           onChange={(e) => setUnitMeasure2(e.target.value)}
         />
