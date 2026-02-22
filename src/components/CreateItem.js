@@ -203,104 +203,123 @@ const CreateItem = () => {
     <div className="create-item">
       <h3 id="create-item-heading">Create Item</h3>
       <form id="create-item-form" onSubmit={(e) => handleSubmit(e)}>
-        <h4>Name:</h4>
-        <input
-          ref={itemRef}
-          type="text"
-          required
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+        <label>
+          Name:
+          <br />
+          <input
+            ref={itemRef}
+            type="text"
+            required
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </label>
 
         {/* <h3 id="ulu" */}
-        <h4>Unit Measure1:</h4>
-        <input
-          type="text"
-          list="measure"
-          value={unitMeasure}
-          onChange={(e) => setUnitMeasure(e.target.value)}
-          required
-        />
-        <datalist id="measure">
-          {measurements.map((measurement, i) => {
-            return (
-              <option
-                key={i}
-                className="create-item-options"
-                value={measurement}
-              >
-                {measurement}
-              </option>
-            );
-          })}
-        </datalist>
-        <h4>Unit Measure2:</h4>
-        <input
-          type="text"
-          list="measure2"
-          // required
-          value={unitMeasure2}
-          onChange={(e) => setUnitMeasure2(e.target.value)}
-        />
-        <datalist id="measure2">
-          {measurements.map((measurement, i) => {
-            return (
-              <option
-                key={i}
-                className="create-item-options"
-                value={measurement}
-              >
-                {measurement}
-              </option>
-            );
-          })}
-        </datalist>
-        <br />
+        <article className="unit-measures">
+          <div>
+            <h4>Availaible UnitMeasures:</h4>
+            <input
+              type="text"
+              list="measure"
+              value={unitMeasure}
+              onChange={(e) => setUnitMeasure(e.target.value)}
+              required
+            />
+            <datalist id="measure">
+              {measurements.map((measurement, i) => {
+                return (
+                  <option
+                    key={i}
+                    className="create-item-options"
+                    value={measurement}
+                  >
+                    {measurement}
+                  </option>
+                );
+              })}
+            </datalist>
+          </div>
+          <div>
+            <input
+              type="text"
+              list="measure2"
+              // required
+              value={unitMeasure2}
+              onChange={(e) => setUnitMeasure2(e.target.value)}
+            />
+            <datalist id="measure2">
+              {measurements.map((measurement, i) => {
+                return (
+                  <option
+                    key={i}
+                    className="create-item-options"
+                    value={measurement}
+                  >
+                    {measurement}
+                  </option>
+                );
+              })}
+            </datalist>
+          </div>
+        </article>
         <section className="create-item-price-header"></section>
+        {/* <br /> */}
         <div className="create-item-price-cont">
-          <h4>Availabale Prices</h4>
-
-          <input
-            type="text"
-            value={firstPrice}
-            onChange={(e) => handleFirstPrice(e)}
-          />
-          <input
-            type="text"
-            value={secondPrice}
-            onChange={(e) => handleSecondPrice(e)}
-          />
+          <article>
+            <h4>Availabale Prices</h4>
+            <input
+              type="text"
+              value={firstPrice}
+              required
+              onChange={(e) => handleFirstPrice(e)}
+            />
+          </article>
+          <article>
+            <input
+              type="text"
+              value={secondPrice}
+              onChange={(e) => handleSecondPrice(e)}
+            />
+          </article>
         </div>
-        <h4>in stock:</h4>
-        <input
-          type="text"
-          required
-          value={ole}
-          onChange={(e) => setOle(e.target.value)}
-        />
-        <br />
-        <h4>category:</h4>
-        <input
-          type="text"
-          //   id="catogory"
-          list="category"
-          required
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        />
+        <label>
+          in stock: <br />
+          <input
+            type="text"
+            required
+            value={ole}
+            onChange={(e) => setOle(e.target.value)}
+          />
+        </label>
+
+        <label>
+          category:
+          <br />
+          <input
+            type="text"
+            //   id="catogory"
+            list="category"
+            required
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          />
+        </label>
         <datalist id="category">
           {catArray.map((cat) => {
             return <option value={cat}>{cat}</option>;
           })}
         </datalist>
-        <p>Description:</p>
-        <textarea
-          maxLength={300}
-          className="item-description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        ></textarea>
-        <br />
+        <label>
+          Description: <br />
+          <textarea
+            maxLength={300}
+            className="item-description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          ></textarea>
+        </label>
+
         <div className="create-item-image-box">
           <h4>Add Image</h4>
           <p>Maximum size of 2MB.</p>
@@ -311,10 +330,11 @@ const CreateItem = () => {
             multiple
           />
         </div>
-        <br />
-        <button type="submit" className="pop">
-          Add Item
-        </button>
+        <section className="action-create">
+          <button type="submit" className="pop">
+            Add Item
+          </button>
+        </section>
       </form>
       <h3 className={showUpdate ? "delete" : "hide-show-update"}>
         {isMatched}
