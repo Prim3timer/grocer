@@ -8,7 +8,7 @@ const Navbar = () => {
       {multiLinks.map((link) => {
         const { id, name, path } = link;
         return (
-          <div className="paths">
+          <div className="paths" key={id}>
             <Link to={path} className="lining">
               {name}
             </Link>

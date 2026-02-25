@@ -22,7 +22,7 @@ const multiLinks = [
   {
     id: 5,
     name: "sales",
-    path: "/gen-sales",
+    path: "/sales",
   },
   //   {
   //     id: 6,

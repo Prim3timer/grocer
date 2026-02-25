@@ -11,8 +11,11 @@ const ItemList = () => {
         {items &&
           items.items.map((item) => {
             return (
-              <div>
-                <img src={`${picUrl}/images/${item.name}/${item.img}`} alt="" />
+              <div key={item._id}>
+                <img
+                  src={`${picUrl}/images/groceryImages/${item.name}/${item.img}`}
+                  alt=""
+                />
                 <h4>{item.availablePrices[0]}</h4>
                 <h3>{item.name}</h3>
                 <p>{item.description}</p>

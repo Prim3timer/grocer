@@ -218,14 +218,17 @@ const CreateItem = () => {
         {/* <h3 id="ulu" */}
         <article className="unit-measures">
           <div>
-            <h4>Availaible UnitMeasures:</h4>
-            <input
-              type="text"
-              list="measure"
-              value={unitMeasure}
-              onChange={(e) => setUnitMeasure(e.target.value)}
-              required
-            />
+            <label>
+              Availaible UnitMeasures:
+              <br />
+              <input
+                type="text"
+                list="measure"
+                value={unitMeasure}
+                onChange={(e) => setUnitMeasure(e.target.value)}
+                required
+              />
+            </label>
             <datalist id="measure">
               {measurements.map((measurement, i) => {
                 return (
@@ -267,13 +270,16 @@ const CreateItem = () => {
         {/* <br /> */}
         <div className="create-item-price-cont">
           <article>
-            <h4>Availabale Prices</h4>
-            <input
-              type="text"
-              value={firstPrice}
-              required
-              onChange={(e) => handleFirstPrice(e)}
-            />
+            <label>
+              Availabale Prices:
+              <br />
+              <input
+                type="text"
+                value={firstPrice}
+                required
+                onChange={(e) => handleFirstPrice(e)}
+              />
+            </label>
           </article>
           <article>
             <input

@@ -1,16 +1,24 @@
-import { createContext, useEffect, useState } from "react";
-import axios from "axios";
+import { createContext, useEffect, useReducer, useState } from "react";
+import axios from "../app/api/axios";
+import initialState from "../store";
+import reducer from "../reducer";
 
 const ItemContext = createContext({});
-
+console.log(process.env.REACT_APP_URL);
+const currency = "$";
 export const ItemProvider = ({ children }) => {
+  // const [state, dispatch] = useReducer(reducer, initialState)
   const picUrl = "http://localhost:3500";
   const [items, setItems] = useState();
   const getItems = async () => {
-    const response = await axios.get("http://localhost:3500/grocery-items");
+    const response = await axios.get(`/grocery-items`);
     console.log(response.data);
     if (response.data) setItems(response.data);
   };
+
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
 
   useEffect(() => {
     getItems();
@@ -21,6 +29,8 @@ export const ItemProvider = ({ children }) => {
       value={{
         items,
         picUrl,
+        numberWithCommas,
+        currency,
       }}
     >
       {children}
