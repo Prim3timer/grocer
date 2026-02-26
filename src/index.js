@@ -10,14 +10,17 @@ import {
   HashRouter,
 } from "react-router-dom";
 import { ItemProvider } from "./context/itemProvider";
+import { AuthProvider } from "./context/authProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <ItemProvider>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    </ItemProvider>
+    <AuthProvider>
+      <ItemProvider>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </ItemProvider>
+    </AuthProvider>
   </BrowserRouter>,
 );

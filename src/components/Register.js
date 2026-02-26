@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 const USER_REGEX = /^[A-z][A-z0-9-_]{2,23}$/;
 const EMAIL_REGEX = /^(?=.*[a-z])(?=.*[!@#$%]).{3,50}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const REGISTER_URL = "/register";
+const REGISTER_URL = "/grocery-register";
 
 const ACTION = {
   USER: "user",
@@ -107,7 +107,6 @@ const Register = () => {
       console.log(response?.data);
       console.log(response?.accessToken);
       console.log(JSON.stringify(response));
-      // setSuccess(true);
       dispatch({ type: ACTION.SUCCESS, payload: true });
       //clear state and controlled inputs
       //need value attrib on inputs for this
@@ -135,7 +134,7 @@ const Register = () => {
         <section className="success">
           <h1>Success!</h1>
           <p>
-            <Link to="/#login">Sign In</Link>
+            <Link to="/login">Sign In</Link>
           </p>
         </section>
       ) : (

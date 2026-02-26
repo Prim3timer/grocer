@@ -219,7 +219,7 @@ const Transactions = () => {
         ""
       )}
 
-      <h3 className={state.alertMsg ? "delete" : "no-delete"  }>
+      <h3 className={state.alertMsg ? "delete" : "no-delete"}>
         {state.alertMsg}
       </h3>
       <div className="trans-item-cont">

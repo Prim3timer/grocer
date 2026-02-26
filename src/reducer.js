@@ -2,6 +2,10 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "user":
       return { ...state, user: action.payload };
+    case "users":
+      return { ...state, users: action.payload };
+    case "auth":
+      return { ...state, auth: action.payload };
     case "validName":
       return { ...state, validName: action.payload };
     case "validEmail":
@@ -22,6 +26,8 @@ const reducer = (state, action) => {
       return { ...state, validMatch: action.payload };
     case "matchFocus":
       return { ...state, matchFocus: action.payload };
+    case "success":
+      return { ...state, success: action.payload };
     case "errMsg":
       return { ...state, errMsg: action.payload };
     case "TRANSARRAY":

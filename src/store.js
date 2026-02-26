@@ -1,5 +1,7 @@
 const initialState = {
   user: {},
+  users: [],
+  auth: {},
   validName: false,
   userFocus: false,
   pwd: "",

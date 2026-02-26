@@ -8,11 +8,10 @@ console.log(process.env.REACT_APP_URL);
 const currency = "$";
 export const ItemProvider = ({ children }) => {
   // const [state, dispatch] = useReducer(reducer, initialState)
-  // const picUrl = process.env.REACT_APP_URL;
-  const picUrl = "http://localhost:3500";
+  const picUrl = process.env.REACT_APP_URL;
   const [items, setItems] = useState();
   const getItems = async () => {
-    const response = await axios.get(`http://localhost:3500/grocery-items`);
+    const response = await axios.get(`/grocery-items`);
     console.log(response.data);
     if (response.data) setItems(response.data);
   };

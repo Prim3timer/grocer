@@ -21,7 +21,7 @@ function App() {
       <div className="grower">
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route path="/" index element={<Register />} />
+            <Route path="/register" index element={<Register />} />
             <Route path="/login" element={<Login />} />
 
             <Route path="transactions" element={<Transactions />} />
