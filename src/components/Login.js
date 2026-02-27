@@ -18,7 +18,9 @@ import reducer from "../reducer";
 const LOGIN_URL = "/grocery-auth";
 
 const Login = () => {
-  const { auth, persistence, setPersistence } = useContext(AuthContext);
+  const { auth, setAuth, persistence, setPersistence } =
+    useContext(AuthContext);
+  const [state, dispatch] = useReducer(reducer, initialState);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/transactions";
@@ -65,18 +67,100 @@ const Login = () => {
 
       const authObj = { user, roles, accessToken, picker };
 
-      dispatch({ type: "auth", payload: authObj });
+      setAuth({ user, roles, accessToken, picker });
       setUser("");
       setPwd("");
       // get the user to where they wanted to go before they were kicked out to
       // the login page
       navigate(from, { replace: true });
-    } catch (error) {}
+    } catch (err) {
+      if (!err?.response) {
+        dispatch({ type: "errMsg", payload: "No server Response" });
+      } else if (err.response?.status === 400) {
+        dispatch({ type: "errMsg", payload: "Missing Username or Password" });
+      } else if (err.response?.status === 401) {
+        dispatch({ type: "errMsg", payload: "Unauthorized" });
+      } else {
+        dispatch({ type: "errMsg", payload: "Login Failed" });
+      }
+      // set the focus on error display so the screen reader can read that info
+      errRef.current.focus();
+    }
+    dispatch({ type: "user", payload: user });
   };
+
+  const togglePersist = () => {
+    setPersistence((prev) => !prev);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("persistence", persistence);
+  }, [persistence]);
 
   return (
     <div>
-      <h3>Login</h3>
+      <section className="login">
+        <p
+          ref={errRef}
+          className={state.errMsg ? "errmsg" : "offscreen"}
+          aria-live="assertive"
+        >
+          {state.errMsg}
+        </p>
+        <h5 className="login-header">Sign In</h5>
+        <form onSubmit={handleSubmit} className="login-form">
+          <label htmlFor="username">Username:</label>
+          <input
+            type="text"
+            id="username"
+            ref={userRef}
+            autoComplete="off"
+            onChange={(e) => setUser(e.target.value)}
+            value={user}
+            required
+          />
+
+          <label htmlFor="password">Password:</label>
+          <article>
+            <input
+              type={isPassword}
+              className="login-password"
+              //  placeholder='password'
+              onChange={(e) => setPwd(e.target.value)}
+              value={pwd}
+              required
+            ></input>
+            <section className="password-icon-container">
+              {" "}
+              <FontAwesomeIcon
+                icon={passwordCheck2}
+                onClick={showPassord}
+                className="show-password"
+              />
+            </section>
+            {/* <span onClick={showPassord} className='show-password'>show</span> */}
+          </article>
+          {/* Rhinohorn1# */}
+          <button className="sign-in" type="submit">
+            Sign In
+          </button>
+        </form>
+        <article className="sign-up-cont">
+          <p>Need an Account?</p>
+          <Link className="sign-in-link" to="/register">
+            Sign Up
+          </Link>
+          <div className="persistCheck">
+            <input
+              type="checkbox"
+              id="persist"
+              onChange={togglePersist}
+              checked={persistence}
+            />
+            <label htmlFor="persist">trust this device</label>
+          </div>
+        </article>
+      </section>
     </div>
   );
 };

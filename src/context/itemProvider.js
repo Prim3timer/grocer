@@ -4,7 +4,6 @@ import initialState from "../store";
 import reducer from "../reducer";
 
 const ItemContext = createContext({});
-console.log(process.env.REACT_APP_URL);
 const currency = "$";
 export const ItemProvider = ({ children }) => {
   // const [state, dispatch] = useReducer(reducer, initialState)

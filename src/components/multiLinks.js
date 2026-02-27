@@ -34,17 +34,6 @@ const multiLinks = [
   //     name: "admin",
   //     path: "/admin",
   //   },
-  //   {
-  //     id: 8,
-  //     name: "categories",
-  //     path: "/categories",
-  //   },
-
-  {
-    id: 9,
-    name: "register",
-    path: "/register",
-  },
 ];
 
 export default multiLinks;

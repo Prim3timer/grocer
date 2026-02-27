@@ -1,5 +1,6 @@
 import { useContext, useState, useRef, useReducer, useEffect } from "react";
 import ItemContext from "../context/itemProvider";
+import AuthContext from "../context/authProvider";
 import initialState from "../store";
 import reducer from "../reducer";
 import { FaTrashAlt, FaPlus } from "react-icons/fa";
@@ -7,7 +8,9 @@ import axios from "axios";
 
 const Transactions = () => {
   const { items, picUrl, numberWithCommas, currency } = useContext(ItemContext);
+  const { auth } = useContext(AuthContext);
   const [state, dispatch] = useReducer(reducer, initialState);
+  console.log(auth);
   const [firstRedChecker, setFirstRedChecker] = useState("");
   const [success, setSuccess] = useState(false);
   const [noShow, setNoShow] = useState(false);

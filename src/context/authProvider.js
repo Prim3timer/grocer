@@ -9,20 +9,22 @@ const AuthContext = createContext({});
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const user = {};
+  // const user = {};
   const users = [];
-  const auth = {};
+  const [auth, setAuth] = useState();
 
-  const [persistence, setPersistence] = useState(
-    JSON.parse(localStorage.getItem("persistence")) || false,
-  );
+  // const [persistence, setPersistence] = useState(
+  //   JSON.parse(localStorage.getItem("persistence")) || false,
+  // );
   return (
     <AuthContext.Provider
       value={{
+        // persistence,
         ...state,
-        user,
+        // user,
         users,
         auth,
+        setAuth,
       }}
     >
       {children}

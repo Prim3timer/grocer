@@ -1,5 +1,5 @@
 const initialState = {
-  user: {},
+  user: "",
   users: [],
   auth: {},
   validName: false,
