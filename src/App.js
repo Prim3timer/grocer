@@ -12,6 +12,8 @@ import Inventory from "./components/Inventory";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Layout from "./components/Layout";
+import Receipts from "./components/Receipts";
+import Missing from "./components/Missing";
 import AuthContext from "./context/authProvider";
 
 function App() {
@@ -20,11 +22,12 @@ function App() {
   return (
     <main className="App">
       <Navbar />
-      {auth.accessToken && <h5 className="greetings">Welcome, {auth.user}</h5>}
+      {/* <h5 className="greetings">Welcome, {auth.user}</h5> */}
       <div className="grower">
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route path="/login" index element={<Login />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
 
             <Route path="transactions" element={<Transactions />} />
@@ -32,7 +35,9 @@ function App() {
             <Route path="item-list" element={<ItemList />} />
             <Route path="sales" element={<Sales />} />
             <Route path="inventory" element={<Inventory />} />
+            <Route path="receipts" element={<Receipts />} />
           </Route>
+          <Route path="*" element={<Missing />} />
         </Routes>
       </div>
       <p className="footer">&copy; {year} Amalu Productions.</p>

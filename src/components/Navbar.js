@@ -22,19 +22,16 @@ const Navbar = () => {
         const { id, name, path } = link;
         return (
           <div className="paths" key={id}>
-            {auth.accessToken && (
-              <Link to={path} className="lining">
-                {name}
-              </Link>
-            )}
+            <Link to={path} className="lining">
+              {name}
+            </Link>
           </div>
         );
       })}
-      {auth.accessToken && (
-        <Link to="/login" className="lining" onClick={logout}>
-          logout
-        </Link>
-      )}
+
+      <Link to="/login" className="lining" onClick={logout}>
+        logout
+      </Link>
     </div>
   );
 };

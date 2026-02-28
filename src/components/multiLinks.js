@@ -24,11 +24,11 @@ const multiLinks = [
     name: "sales",
     path: "/sales",
   },
-  //   {
-  //     id: 6,
-  //     name: "receipts",
-  //     path: "/gen-shopping",
-  //   },
+  {
+    id: 6,
+    name: "receipts",
+    path: "/receipts",
+  },
   //   {
   //     id: 7,
   //     name: "admin",

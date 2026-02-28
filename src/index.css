@@ -582,3 +582,19 @@ button {
 .no-delete {
   display: none;
 }
+
+.receipt-main-cont {
+display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.receipts {
+  /* background-color: yellow; */
+  text-align: left;
+  max-width: 80vw;
+}
+
+.biz-name {
+  text-align: center;
+}

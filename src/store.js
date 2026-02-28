@@ -1,3 +1,5 @@
+import Transactions from "./components/Transactions";
+
 const initialState = {
   user: "",
   users: [],
@@ -19,6 +21,11 @@ const initialState = {
   balance: 0,
   email: "",
   errMsg: "",
+  price: "",
+  tranItemName: "",
+  transactions: [],
+  cancel: false,
+  currentTransaction: {},
 };
 
 export default initialState;

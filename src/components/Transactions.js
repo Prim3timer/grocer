@@ -4,7 +4,7 @@ import AuthContext from "../context/authProvider";
 import initialState from "../store";
 import reducer from "../reducer";
 import { FaTrashAlt, FaPlus } from "react-icons/fa";
-import axios from "axios";
+import axios from "../app/api/axios";
 
 const Transactions = () => {
   const { items, picUrl, numberWithCommas, currency } = useContext(ItemContext);
@@ -38,7 +38,8 @@ const Transactions = () => {
   };
 
   const onUnitMeasureChange = (e, id) => {
-    dispatch({ type: "UNITMEASURE", payload: e.target.value, id });
+    console.log(e.target.value);
+    dispatch({ type: "unitMeasure", payload: e.target.value, id });
   };
   console.log(state.transArray);
 
@@ -54,9 +55,11 @@ const Transactions = () => {
         );
         currentItem.total = currentItem.availablePrices[0];
         // dispatch({ type: "name", payload: inputRef.current.value });
+        dispatch({ type: "unitMeasure", payload: e.target.value });
         const acutalItem = {
           ...currentItem,
           qty: 1,
+          price: currentItem.availablePrices[0],
           unitMeasure: currentItem.availableUnitMeasures[0],
         };
         const match = state.transArray.find(
@@ -109,11 +112,11 @@ const Transactions = () => {
           // cashierID: auth.picker,
           goods: transArray,
           grandTotal: total,
-          status: "shipped",
           date: now,
         };
-        console.log(transItems.goods);
-        // const response = await axios.post("/transactions", transItems);
+        console.log(transItems);
+        const response = await axios.post("/grocery-transactions", transItems);
+        console.log(response.data.message);
 
         dispatch({ type: "CASH", payload: false });
         // if (response) {
@@ -266,7 +269,7 @@ const Transactions = () => {
                     <select
                       className="measure-options"
                       size={"1"}
-                      value={state.unitMeasure}
+                      value={item.unitMeasure}
                       onChange={(e) => onUnitMeasureChange(e, item._id)}
                     >
                       {item.availableUnitMeasures.map((measure) => {

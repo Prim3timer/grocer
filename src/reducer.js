@@ -40,12 +40,12 @@ const reducer = (state, action) => {
       return { ...state, transArray: filterate };
     case "FIELDCHANGE":
       const tempCart3 = state.transArray.map((item) => {
-        //  state.qty = action.payload
+        const theIndeces = item.availableUnitMeasures.indexOf(item.unitMeasure);
         if (item._id === action.id) {
           return {
             ...item,
             qty: action.payload,
-            total: item.availablePrices[0] * action.payload,
+            total: item.availablePrices[theIndeces] * action.payload,
           };
         }
         return item;
@@ -56,7 +56,11 @@ const reducer = (state, action) => {
     case "getTotal":
       const { amount, total } = state.transArray.reduce(
         (cartTotal, cartItem) => {
-          cartTotal.total += cartItem.availablePrices[0] * cartItem.qty;
+          const theIndeces = cartItem.availableUnitMeasures.indexOf(
+            cartItem.unitMeasure,
+          );
+          cartTotal.total +=
+            cartItem.availablePrices[theIndeces] * cartItem.qty;
           cartTotal.amount += cartItem.qty;
           return cartTotal;
         },
@@ -68,10 +72,20 @@ const reducer = (state, action) => {
       return { ...state, amount, total };
     case "ALERTMSG":
       return { ...state, alertMsg: action.payload };
-    case "UNITMEASURE":
+    case "unitMeasure":
       const currentArray = state.transArray.map((item) => {
         if (item._id === action.id) {
-          return { ...item, unitMeasure: action.payload };
+          const currentIndex = item.availableUnitMeasures.indexOf(
+            action.payload,
+          );
+          return {
+            ...item,
+            unitMeasure: action.payload,
+            total: item.availablePrices[currentIndex],
+            price: item.availablePrices[currentIndex],
+            qty: 1,
+            total: item.availablePrices[currentIndex] * item.qty,
+          };
         }
         return item;
       });
@@ -84,6 +98,14 @@ const reducer = (state, action) => {
       state.paidAmount = action.payload;
       const newBalance = state.paidAmount - state.total;
       return { ...state, balance: newBalance };
+    case "price":
+      return { ...state, price: action.payload };
+    case "transactions":
+      return { ...state, transactions: action.payload };
+    case "cancel":
+      return { ...state, cancel: action.payload };
+    case "currentTransaction":
+      return { ...state, currentTransaction: action.payload };
     default:
       throw new Error();
   }
