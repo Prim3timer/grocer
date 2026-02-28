@@ -14,7 +14,6 @@ import reducer from "../reducer";
 const Navbar = () => {
   const { auth } = useContext(AuthContext);
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(state.auth);
   const logout = useLogout();
   return (
     <div className="navbar">

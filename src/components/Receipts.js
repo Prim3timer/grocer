@@ -78,7 +78,8 @@ const Receipts = () => {
                       <h4>{good.name}</h4>
                       <p>
                         Qty: {parseFloat(good.qty).toFixed(2)}{" "}
-                        {good.unitMeasure.split(" ")[1].slice(1, -1)}
+                        {good.unitMeasure}
+                        {good.qty > 1 ? "s" : ""}
                       </p>
                       <p>
                         Unit Price: {currency}
@@ -92,7 +93,7 @@ const Receipts = () => {
                   );
                 })}
                 <p>
-                  card ending in: ...
+                  cash paid:
                   {transaction.last4 ? transaction.last4 : ""}
                 </p>
                 <h4 className="receipts-grand-total">

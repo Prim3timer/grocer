@@ -265,7 +265,7 @@ code {
 }
 
 
-.items-list img {
+.items-list img, .edit-item img {
   width: 200px;
 }
 

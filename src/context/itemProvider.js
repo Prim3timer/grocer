@@ -13,7 +13,6 @@ export const ItemProvider = ({ children }) => {
   const bizName = "Mawuhi Mart";
   const getItems = async () => {
     const response = await axios.get(`/grocery-items`);
-    console.log(response.data);
     if (response.data) setItems(response.data);
   };
 

@@ -8,9 +8,8 @@ import axios from "../app/api/axios";
 
 const Transactions = () => {
   const { items, picUrl, numberWithCommas, currency } = useContext(ItemContext);
-  const { auth } = useContext(AuthContext);
+  const { auth, getTransactions } = useContext(AuthContext);
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(auth);
   const [firstRedChecker, setFirstRedChecker] = useState("");
   const [success, setSuccess] = useState(false);
   const [noShow, setNoShow] = useState(false);
@@ -19,9 +18,13 @@ const Transactions = () => {
   const inputRef = useRef();
   const qtyRef = useRef();
   const cashPaidRef = useRef(null);
+  const [cashPaid, setCashPaid] = useState(0);
   // this was created to in liu of transArray as an array dependency due to conflict
   const [transArrayChangeLiu, setTransArrayChangeLiu] = useState(0);
   const [cash, setCash] = useState(false);
+
+  const [currentTransArray, setCurrentTransArray] = useState([]);
+
   const trueCash = () => {
     const emptyQty = state.transArray.filter((item) => item.qty === "");
     if (state.transArray.length && emptyQty.length === 0) {
@@ -34,14 +37,12 @@ const Transactions = () => {
   };
 
   const cardCheckout = () => {
-    console.log("done sales");
+    // console.log("done sales");
   };
 
   const onUnitMeasureChange = (e, id) => {
-    console.log(e.target.value);
     dispatch({ type: "unitMeasure", payload: e.target.value, id });
   };
-  console.log(state.transArray);
 
   const handleAdd = (e, i) => {
     e.preventDefault();
@@ -72,7 +73,6 @@ const Transactions = () => {
           });
           // inputRef.current.focus();
           setNoShow(true);
-          console.log(acutalItem);
           dispatch({ type: "TRANSARRAY", payload: acutalItem });
 
           inputRef.current.value = "";
@@ -110,13 +110,12 @@ const Transactions = () => {
         const transItems = {
           // cashier: auth.user,
           // cashierID: auth.picker,
+          paidAmount: state.paidAmount,
           goods: transArray,
           grandTotal: total,
           date: now,
         };
-        console.log(transItems);
         const response = await axios.post("/grocery-transactions", transItems);
-        console.log(response.data.message);
 
         dispatch({ type: "CASH", payload: false });
         // if (response) {
@@ -129,16 +128,14 @@ const Transactions = () => {
         // }
 
         transItems.goods.map((good) => {
-          const invs = items.map(async (inv) => {
-            console.log(inv.name);
-            console.log(good.name);
+          const invs = items.items.map(async (inv) => {
             if (inv.name === good.name) {
               const goodObj = {
                 name: inv.name,
                 qty: inv.qty - good.qty < 1 ? 0 : inv.qty - good.qty,
                 // date: now
               };
-              await axios.put(`items/dynam`, goodObj);
+              await axios.put(`grocery-items/inventory-update`, goodObj);
             }
           });
         });
@@ -167,16 +164,22 @@ const Transactions = () => {
 
   useEffect(() => {
     dispatch({ type: "getTotal" });
-    console.log("totalitarian");
   }, [state.transArray, success]);
 
   useEffect(() => {
     // state.transArray.reverse();
-    console.log(state.transArray);
     if (state.transArray.length) {
       qtyRef.current.focus();
     }
   }, [transArrayChangeLiu]);
+
+  // useEffect(() => {
+  //   currentTransaction();
+  // }, []);
+
+  useEffect(() => {
+    // console.log(`cashpaidref is: ${cashPaidRef.current.value}`);
+  }, []);
 
   return (
     <div className="trans-cont">
@@ -234,9 +237,7 @@ const Transactions = () => {
         ) : (
           state.transArray.map((item, index) => {
             //  console.log(item.unitMeasure)
-            {
-              console.log(item);
-            }
+
             return (
               <section key={index} className="trans-item">
                 <section className="trans-name-and-img">
@@ -313,7 +314,7 @@ const Transactions = () => {
           })
         )}
       </div>
-      {console.log(cash)}
+
       {state.cash === true && (
         <section
           className="cash-payment"

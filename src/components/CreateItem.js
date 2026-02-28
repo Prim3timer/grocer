@@ -24,62 +24,11 @@ const CreateItem = () => {
   const [isMatched, setIsMatched] = useState(false);
   const [ole, setOle] = useState("");
   const [category, setCategory] = useState("Groceries");
+  const [numerator, setNumerator] = useState(0);
 
-  const measurements = [
-    "grams (g)",
-    "Piece (pc)",
-    "Plate (Plt)",
-    "Dozen (dz)",
-    "Bottle (Btl)",
-    "ounce (oz)",
-    "centiliter (CL)",
-    "Sachet (sct)",
-    "Ounce (Oz)",
-    "Set (St)",
-    "Bag (Bg)",
-    "Pair (pr)",
-    "centimiters (cm)",
-    "Kilogram (kg)",
-    "Kilowatthour (kWh)",
-    "Kilowatt (kW)",
-    "Litre (L)",
-    "Pound (lbs)",
-    "Cup (Cp)",
-  ];
+  const numaRef = useRef();
 
   const catArray = ["vegetable", "grain", "meat", "fish", "seasoning"];
-
-  const colours = [
-    "black",
-    "red",
-    "green",
-    "blue",
-    "brown",
-    "dark brown",
-    "yellowish brown",
-    "white",
-    "icy blue",
-    "graphite",
-    "gold",
-    "silver",
-    "crafted black",
-    "navy",
-    "pink",
-    "silver shadow",
-    "beige",
-    "reddish brown",
-    "tan",
-    "wheat",
-    "purple",
-    "gray ",
-  ];
-
-  const footSize = [
-    3, 3.5, 4, 4.5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12,
-    12.5, 13, 13.5, 14,
-  ];
-
-  const storage = [64, 128, 256, 500, 512, 1000, 2000];
 
   const handleFile = (e) => {
     setFile(e.target.files[0]);
@@ -120,6 +69,7 @@ const CreateItem = () => {
           description,
           qty: ole,
           category,
+          numerator,
           image: file.name,
           now,
         };
@@ -199,6 +149,21 @@ const CreateItem = () => {
     console.log(availableUnitMeasures);
   };
 
+  const demSetter = (e) => {
+    // unitMeasure2 && console.log(numaRef.current.value());
+    if (unitMeasure.toLowerCase() === "dozen".toLowerCase()) {
+      setNumerator(12);
+    } else {
+      setNumerator(0);
+    }
+  };
+
+  console.log(numerator);
+
+  useEffect(() => {
+    demSetter();
+  }, [unitMeasure]);
+
   return (
     <div className="create-item">
       <h3 id="create-item-heading">Create Item</h3>
@@ -219,59 +184,38 @@ const CreateItem = () => {
         <article className="unit-measures">
           <div>
             <label>
-              Availaible UnitMeasures:
+              First Unit Measure:
               <br />
               <input
                 type="text"
-                list="measure"
                 value={unitMeasure}
                 onChange={(e) => setUnitMeasure(e.target.value)}
                 required
               />
             </label>
-            <datalist id="measure">
-              {measurements.map((measurement, i) => {
-                return (
-                  <option
-                    key={i}
-                    className="create-item-options"
-                    value={measurement}
-                  >
-                    {measurement}
-                  </option>
-                );
-              })}
-            </datalist>
           </div>
-          <div>
-            <input
-              type="text"
-              list="measure2"
-              // required
-              value={unitMeasure2}
-              onChange={(e) => setUnitMeasure2(e.target.value)}
-            />
-            <datalist id="measure2">
-              {measurements.map((measurement, i) => {
-                return (
-                  <option
-                    key={i}
-                    className="create-item-options"
-                    value={measurement}
-                  >
-                    {measurement}
-                  </option>
-                );
-              })}
-            </datalist>
-          </div>
+          {firstPrice && (
+            <div>
+              <label>
+                Second Unit Measure
+                <br />
+                <input
+                  type="text"
+                  placeholder="optional"
+                  // required
+                  value={unitMeasure2}
+                  onChange={(e) => setUnitMeasure2(e.target.value)}
+                />
+              </label>
+            </div>
+          )}
         </article>
         <section className="create-item-price-header"></section>
         {/* <br /> */}
         <div className="create-item-price-cont">
           <article>
             <label>
-              Availabale Prices:
+              Fisrt Price:
               <br />
               <input
                 type="text"
@@ -281,15 +225,35 @@ const CreateItem = () => {
               />
             </label>
           </article>
-          <article>
-            <input
-              type="text"
-              value={secondPrice}
-              onChange={(e) => handleSecondPrice(e)}
-            />
-          </article>
+          {unitMeasure2 && (
+            <article>
+              <label>
+                Second Price <br />
+                <input
+                  type="text"
+                  value={secondPrice}
+                  onChange={(e) => handleSecondPrice(e)}
+                  required
+                />
+              </label>
+            </article>
+          )}
         </div>
         <label>
+          {unitMeasure2 && (
+            <div>
+              <label>
+                How many {unitMeasure2}s in a {unitMeasure}?
+                <br />
+                <input
+                  type="text"
+                  required
+                  value={numerator}
+                  onChange={(e) => setNumerator(e.target.value)}
+                />
+              </label>
+            </div>
+          )}
           in stock: <br />
           <input
             type="text"

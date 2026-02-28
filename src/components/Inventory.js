@@ -34,7 +34,10 @@ const Inventory = () => {
 
   return (
     <div className="inventory">
-      <h3>Inventory</h3>
+      <h3>
+        Inventory {state.search2 ? ` ${state.search2} ` : ""} ({" "}
+        {inventItems && inventItems.length} items)
+      </h3>
       <form
         className="searcher"
         //   onSubmit={(e)=> e.preventDefault()}
@@ -44,7 +47,7 @@ const Inventory = () => {
           //   id="invent-search"
           type="text"
           role="searchbox"
-          placeholder="Search by name"
+          placeholder="filter by name"
           value={state.search}
           onChange={(e) =>
             dispatch({ type: "search", payload: e.target.value })
@@ -54,24 +57,27 @@ const Inventory = () => {
         />
         {/* <article> */}
         {/* <h3><label>Search by stock level</label></h3> */}
-        <input
-          //  id="invent-search"
+        <div>
+          <span>under or equal to</span>{" "}
+          <input
+            //  id="invent-search"
 
-          placeholder="pick a number"
-          role="searchbox"
-          value={state.search2}
-          onChange={(e) =>
-            dispatch({ type: "search2", payload: e.target.value })
-          }
-        />
+            placeholder="pick a number"
+            role="searchbox"
+            value={state.search2}
+            onChange={(e) =>
+              dispatch({ type: "search2", payload: e.target.value })
+            }
+          />
+        </div>
         {/* </article> */}
       </form>
       <table className="inventory-table">
         <tbody>
           <tr className="invent-header-trow">
-            <th>NAME</th>
-            <th>IN-STOCK</th>
-            <th> LAST UPDATED</th>
+            <th>Name</th>
+            <th>In-Stock</th>
+            <th> Last Udated</th>
             {/* <th>ACTION</th> */}
           </tr>
           {inventItems &&

@@ -20,6 +20,7 @@ const ItemList = () => {
                   />
                   <h4>{item.availablePrices[0]}</h4>
                   <h3>{item.name}</h3>
+                  <h3>{item.denominator}</h3>
                   <p>{item.description}</p>
                 </div>
               );
