@@ -106,6 +106,12 @@ const reducer = (state, action) => {
       return { ...state, cancel: action.payload };
     case "currentTransaction":
       return { ...state, currentTransaction: action.payload };
+    case "currentTransactions":
+      return { ...state, currentTransactions: action.payload };
+    case "search":
+      return { ...state, search: action.payload };
+    case "search2":
+      return { ...state, search2: action.payload };
     default:
       throw new Error();
   }

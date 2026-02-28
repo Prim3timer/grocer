@@ -26,6 +26,9 @@ const initialState = {
   transactions: [],
   cancel: false,
   currentTransaction: {},
+  currentTransactions: [],
+  search: "",
+  search2: "",
 };
 
 export default initialState;

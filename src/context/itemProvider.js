@@ -37,7 +37,7 @@ export const ItemProvider = ({ children }) => {
   }, []);
   useEffect(() => {
     getTransactions();
-  }, [state.transactions.length]);
+  }, []);
 
   return (
     <ItemContext.Provider
@@ -47,6 +47,7 @@ export const ItemProvider = ({ children }) => {
         numberWithCommas,
         currency,
         bizName,
+        getTransactions,
         ...state,
       }}
     >

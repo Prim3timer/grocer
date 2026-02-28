@@ -8,7 +8,7 @@ import ItemContext from "../context/itemProvider";
 import { FaTrashAlt } from "react-icons/fa";
 
 const Receipts = () => {
-  const { transactions, bizName, numberWithCommas, currency } =
+  const { transactions, bizName, numberWithCommas, currency, getTransactions } =
     useContext(ItemContext);
 
   const { auth } = useContext(AuthContext);
@@ -49,10 +49,15 @@ const Receipts = () => {
       const newTransList = transactions.filter(
         (item) => item._id !== state.currentTransaction._id,
       );
+      console.log(newTransList);
 
       dispatch({ type: "transactions", payload: newTransList });
     }
   };
+
+  useEffect(() => {
+    getTransactions();
+  }, [state.transactions.length]);
 
   return (
     <div>

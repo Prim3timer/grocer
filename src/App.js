@@ -13,6 +13,7 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Layout from "./components/Layout";
 import Receipts from "./components/Receipts";
+import EditItem from "./components/EditItem";
 import Missing from "./components/Missing";
 import AuthContext from "./context/authProvider";
 
@@ -36,6 +37,7 @@ function App() {
             <Route path="sales" element={<Sales />} />
             <Route path="inventory" element={<Inventory />} />
             <Route path="receipts" element={<Receipts />} />
+            <Route path="edit-item" element={<EditItem />} />
           </Route>
           <Route path="*" element={<Missing />} />
         </Routes>
