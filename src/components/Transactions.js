@@ -113,6 +113,8 @@ const Transactions = () => {
           paidAmount: state.paidAmount,
           goods: transArray,
           grandTotal: total,
+          // denominator,
+          // numerator,
           date: now,
         };
         const response = await axios.post("/grocery-transactions", transItems);
@@ -127,18 +129,20 @@ const Transactions = () => {
         //   dispatch({ type: "transArray", payload: [] });
         // }
 
-        transItems.goods.map((good) => {
-          const invs = items.items.map(async (inv) => {
-            if (inv.name === good.name) {
-              const goodObj = {
-                name: inv.name,
-                qty: inv.qty - good.qty < 1 ? 0 : inv.qty - good.qty,
-                // date: now
-              };
-              await axios.put(`grocery-items/inventory-update`, goodObj);
-            }
-          });
-        });
+        // transItems.goods.map((good) => {
+        //   const invs = items.items.map(async (inv) => {
+        //     if (inv.name === good.name) {
+        //       const goodObj = {
+        //         name: inv.name,
+        //         qty: inv.qty - good.qty < 1 ? 0 : inv.qty - good.qty,
+        //         // date: now
+        //       };
+
+        //       await axios.put(`grocery-items/inventory-update${}`, goodObj);
+        //     }
+        //   });
+        // });
+        console.log(transItems);
 
         setSuccess(true);
         setTimeout(() => {
@@ -183,7 +187,7 @@ const Transactions = () => {
 
   return (
     <div className="trans-cont">
-      <h3>Transactions</h3>
+      <h3 className="header">Transactions</h3>
       <section>
         <fieldset className="field">
           <form className="tran-form">
@@ -233,7 +237,7 @@ const Transactions = () => {
       </h3>
       <div className="trans-item-cont">
         {!state.transArray.length ? (
-          <p>empty list</p>
+          <p>empty cart</p>
         ) : (
           state.transArray.map((item, index) => {
             //  console.log(item.unitMeasure)

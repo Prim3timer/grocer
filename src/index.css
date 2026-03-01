@@ -265,7 +265,7 @@ code {
 }
 
 
-.items-list img, .edit-item img {
+.items-list img {
   width: 200px;
 }
 
@@ -273,9 +273,9 @@ code {
   color: white;
   text-decoration: none;
 }
-h3 {
-  margin: 1rem;
-}
+  .header {
+    margin: 1rem;
+  }
 
 .create-item {
   display: flex;
@@ -283,6 +283,15 @@ h3 {
   align-items: center;
   
   
+}
+
+.item-dets-cont {
+  display: flex;
+  align-items: center;
+  row-gap: .2rem;
+  /* background-color: red; */
+  flex-direction: column;
+  /* column-gap: 2rem; */
 }
 
 #create-item-form {
@@ -320,6 +329,7 @@ label {
 textarea {
   width: 300px;
   height: 300px;
+  font-size: 1.5rem;
 }
 
 .create-item-image-box {
@@ -633,7 +643,7 @@ display: flex;
   width: 60vw;
 }
 
-.inventory-table td {
+.inventory-table th, td {
   padding: .5rem;
 }
 
@@ -654,3 +664,43 @@ display: flex;
 
 }
 
+.edit-item {
+  margin-bottom: 1rem;
+}
+
+.edit-item img {
+  width: 300px;
+}
+
+.edit-item-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-item-form input {
+  font-size: 1.5rem;
+}
+
+.edit-delete-text {
+  display: flex;
+  margin-top: 2rem;
+  align-items: center;
+  justify-content: center;
+  column-gap: 5rem;
+}
+
+.user-action {
+  width: 68px;
+  height: 68px;
+  color: var(--COLOR);
+  font-size: 2rem;
+  display: grid;
+  place-content: center;
+  background-color: white;
+  border-color: transparent;
+}
+
+.item-description {
+  font-size: 1.5rem;
+  padding: .2em;
+}

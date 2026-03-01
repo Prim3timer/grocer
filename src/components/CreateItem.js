@@ -166,7 +166,7 @@ const CreateItem = () => {
 
   return (
     <div className="create-item">
-      <h3 id="create-item-heading">Create Item</h3>
+      <h3 className="header">Create Item</h3>
       <form id="create-item-form" onSubmit={(e) => handleSubmit(e)}>
         <label>
           Name:

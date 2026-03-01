@@ -31,6 +31,12 @@ export const ItemProvider = ({ children }) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
+  const oneItem = (id) => {
+    localStorage.setItem("itemId", id);
+    console.log(id);
+    // localStorage.setItem("memUser", auth.picker);
+  };
+
   useEffect(() => {
     getItems();
   }, []);
@@ -47,6 +53,8 @@ export const ItemProvider = ({ children }) => {
         currency,
         bizName,
         getTransactions,
+        oneItem,
+        getItems,
         ...state,
       }}
     >

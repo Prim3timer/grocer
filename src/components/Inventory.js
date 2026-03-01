@@ -15,18 +15,17 @@ const Inventory = () => {
       const filterate = items.items.filter((inner) =>
         inner.name.toLowerCase().includes(state.search.toLowerCase()),
       );
-      setInventItems(filterate);
-
       if (state.search2) {
         const stockFilter =
           filterate && filterate.filter((item) => item.qty <= state.search2);
         // dispatch({ type: "items", payload: stockFilter && stockFilter });
         setInventItems(stockFilter);
-      }
+      } else setInventItems(filterate);
     } catch (error) {
       dispatch({ type: "errMsg", payload: error.Message });
     }
   };
+  console.log(inventItems);
 
   useEffect(() => {
     getTrans();
@@ -34,9 +33,8 @@ const Inventory = () => {
 
   return (
     <div className="inventory">
-      <h3>
-        Inventory {state.search2 ? ` ${state.search2} ` : ""} ({" "}
-        {inventItems && inventItems.length} items)
+      <h3 className="header">
+        Inventory ({inventItems && inventItems.length} items)
       </h3>
       <form
         className="searcher"

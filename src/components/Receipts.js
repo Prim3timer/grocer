@@ -61,7 +61,7 @@ const Receipts = () => {
 
   return (
     <div>
-      <h3>Receipts ({transactions.length})</h3>
+      <h3 className="header">Receipts ({transactions.length})</h3>
       {transactions.map((transaction) => {
         const theDay = new Date(transaction.date).toString().substring(4, 25);
         return (
