@@ -97,7 +97,7 @@ const reducer = (state, action) => {
     case "difference":
       state.paidAmount = action.payload;
       const newBalance = state.paidAmount - state.total;
-      return { ...state, balance: newBalance };
+      return { ...state, balance: newBalance, cashPaid: action.payload };
     case "price":
       return { ...state, price: action.payload };
     case "transactions":

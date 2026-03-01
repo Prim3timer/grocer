@@ -29,6 +29,7 @@ const initialState = {
   currentTransactions: [],
   search: "",
   search2: "",
+  cashPaid: "",
 };
 
 export default initialState;

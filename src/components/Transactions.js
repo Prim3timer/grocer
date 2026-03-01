@@ -17,8 +17,8 @@ const Transactions = () => {
   const now = new Date();
   const inputRef = useRef();
   const qtyRef = useRef();
+  const [numerator, setNumerator] = useState();
   const cashPaidRef = useRef(null);
-  const [cashPaid, setCashPaid] = useState(0);
   // this was created to in liu of transArray as an array dependency due to conflict
   const [transArrayChangeLiu, setTransArrayChangeLiu] = useState(0);
   const [cash, setCash] = useState(false);
@@ -113,8 +113,8 @@ const Transactions = () => {
           paidAmount: state.paidAmount,
           goods: transArray,
           grandTotal: total,
-          // denominator,
-          // numerator,
+          cashPaid: state.cashPaid,
+          numerator,
           date: now,
         };
         const response = await axios.post("/grocery-transactions", transItems);
@@ -334,9 +334,8 @@ const Transactions = () => {
           <form>
             <h4>Cash Paid:</h4>
             <input
-              ref={cashPaidRef}
               className="cash-amount2"
-              value={state.paidAmount}
+              value={state.cashPaid}
               onChange={(e) =>
                 dispatch({ type: "difference", payload: e.target.value })
               }

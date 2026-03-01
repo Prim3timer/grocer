@@ -28,8 +28,6 @@ const Receipts = () => {
     // }
   };
 
-  //   console.log(state.currentTransaction);
-
   const remainDelete = () => {
     // this condition statement is to enable the removal of the confirm window once any part of the
     // page is touched.
@@ -93,8 +91,8 @@ const Receipts = () => {
                   );
                 })}
                 <p>
-                  cash paid:
-                  {transaction.last4 ? transaction.last4 : ""}
+                  cash paid: {currency}
+                  {transaction.cashPaid}
                 </p>
                 <h4 className="receipts-grand-total">
                   Grand Total: {currency}
