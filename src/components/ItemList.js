@@ -3,7 +3,7 @@ import ItemContext from "../context/itemProvider";
 import { Link } from "react-router-dom";
 
 const ItemList = () => {
-  const { items, picUrl, oneItem } = useContext(ItemContext);
+  const { items, picUrl, oneItem, currency } = useContext(ItemContext);
   console.log(items);
   return (
     <Link to="/edit-item" className="items-link">
@@ -22,11 +22,25 @@ const ItemList = () => {
                     src={`${picUrl}/images/groceryImages/${item.name}/${item.img}`}
                     alt=""
                   />
-                  <h3>{item.availablePrices[0]}</h3>
+                  <h3>
+                    {currency}
+                    {item.availablePrices[0]}
+                  </h3>
                   <h4>{item.name}</h4>
                   <h4>{item.numerator !== 0 ? item.numerator : ""}</h4>
                   <h4>{item.availableUnitMeasures[0]}</h4>
                   <p>{item.description}</p>
+                  <p>
+                    created:{" "}
+                    {new Date(item.dateCreated).toLocaleString("en-US", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                      hour: "numeric",
+                      minute: "numeric",
+                      second: "numeric",
+                    })}
+                  </p>
                 </div>
               );
             })}

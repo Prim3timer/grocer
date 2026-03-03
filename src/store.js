@@ -30,6 +30,7 @@ const initialState = {
   search: "",
   search2: "",
   cashPaid: "",
+  success: false,
 };
 
 export default initialState;

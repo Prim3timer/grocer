@@ -112,6 +112,8 @@ const reducer = (state, action) => {
       return { ...state, search: action.payload };
     case "search2":
       return { ...state, search2: action.payload };
+    case "success":
+      return { ...state, success: action.payload };
     default:
       throw new Error();
   }

@@ -11,11 +11,12 @@ import initialState from "../store";
 import reducer from "../reducer";
 import axios from "../app/api/axios";
 import { useNavigate } from "react-router-dom";
+import { type } from "@testing-library/user-event/dist/type";
 
 const EditItem = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { items, picUrl, getItems } = useContext(ItemContext);
-  const [initialName, setInitalName] = useState("");
+  const [currentPic, setCurrentPic] = useState("");
   const itemId = localStorage.getItem("itemId");
   const [name, setName] = useState("");
   const [firstPrice, setFirstPrice] = useState("");
@@ -24,11 +25,14 @@ const EditItem = () => {
   const [secondUnitMeasure, setSecondUnitMeasure] = useState("");
   const [currentItem, setCurrentItem] = useState({});
   const [description, setDescription] = useState("");
-  const [numerator, setNumerator] = useState("");
+  const [denominator, setDenominator] = useState("");
+  const [file, setFile] = useState({});
   const now = new Date();
   const navigate = useNavigate();
 
+  console.log(file, state.success, currentPic);
   const getCurrentItem = () => {
+    setFile("");
     const item = items && items.items.find((item) => item._id === itemId);
     console.log(item);
     console.log(picUrl);
@@ -38,7 +42,8 @@ const EditItem = () => {
       setFirstPrice(item.availablePrices[0]);
       setFirstUnitMeasure(item.availableUnitMeasures[0]);
       setDescription(item.description);
-      setNumerator(item.numerator);
+      setDenominator(item.denominator);
+      setCurrentPic(item.img);
       if (item.availablePrices.length > 1) {
         setSecondPrice(item.availablePrices[1]);
         setSecondUnitMeasure(item.availableUnitMeasures[1]);
@@ -61,7 +66,7 @@ const EditItem = () => {
         secondPrice,
         firstUnitMeasure,
         secondUnitMeasure,
-        numerator,
+        denominator,
         description,
         // image: files,
         now,
@@ -69,7 +74,7 @@ const EditItem = () => {
       console.log(newItem);
 
       const response2 = await axios.patch(
-        `/grocery-items/texts/${JSON.stringify(newItem)}?id=${currentItem._id}&firstName=${initialName}&index=${itemId}`,
+        `/grocery-items/texts/${JSON.stringify(newItem)}?id=${currentItem._id}&firstName=${currentItem.n}&index=${itemId}`,
       );
       dispatch({ type: "success", payload: true });
       // dispatch({ type: "errMsg", payload: response2.data.message });
@@ -99,6 +104,7 @@ const EditItem = () => {
         navigate("/item-list");
       }
     } catch (error) {
+      dispatch({ type: "success", payload: true });
       dispatch({ type: "errMsg", payload: error.message });
     }
     // console.log("deleted");
@@ -112,23 +118,154 @@ const EditItem = () => {
       dispatch({ type: "cancel", payload: false });
     }
   };
-  console.log(Boolean(currentItem.img));
+
+  const handleFile = (e) => {
+    try {
+      e.preventDefault();
+      setFile(e.target.files[0]);
+      console.log(e.target.files[0]);
+      if (file && file.size <= 2000000) {
+        // setInitalName(file.name);
+        // setSuccess(true);
+        // setId(ide);
+        // setPicArray(newArray);
+        // setId(ide);
+      } else if (file.size > 200000) {
+        dispatch({ type: "success", payload: true });
+        console.log("please choose a smaller file");
+        dispatch({ type: "errMsg", payload: "please choose a smaller file" });
+      }
+      console.log(e.target.files[0]);
+    } catch (error) {
+      dispatch({ type: "errMsg", payload: error.message });
+    }
+  };
+
+  const handleUpload = async () => {
+    console.log("upload");
+    try {
+      if (file.size > 2000000) {
+        dispatch({
+          type: "errMsg",
+          payload: "Please limit file sizes to 2MB. Thank you.",
+        });
+      } else {
+        const formData = new FormData();
+        const imageName = file.name;
+        formData.append("image", file);
+        const response = await axios.patch(
+          `/grocery/pic/${currentItem.name}?id=${currentItem._id}`,
+          formData,
+        );
+        // setFile("");
+        if (response) {
+          console.log(response.data.message);
+
+          dispatch({ type: "success", payload: true });
+          dispatch({ type: "errMsg", payload: response.data.message });
+
+          setTimeout(() => {
+            dispatch({ type: "success", payload: false });
+          }, 3000);
+        }
+      }
+    } catch (error) {
+      dispatch({ type: "errMsg", payload: error.message });
+    }
+    setCurrentPic("");
+  };
+
+  const handleDeletePic = async (image) => {
+    try {
+      console.log(image);
+      const response = await axios.delete(
+        `/grocery-delete-pic/${currentItem.img}?name=${currentItem.name}&id=${currentItem._id}`,
+      );
+      if (response) {
+        dispatch({ type: "success", payload: true });
+        dispatch({ type: "errMsg", payload: response.data });
+        setTimeout(() => {
+          dispatch({ type: "success", payload: false });
+        }, 3000);
+      }
+    } catch (error) {
+      dispatch({ type: "errMsg", payload: error.message });
+    }
+  };
+
+  const imgFunc = async () => {
+    if (file && file.size > 2000000) {
+      dispatch({
+        type: "errMsg",
+        payload: "Please limit file sizes to 2MB. Thank you.",
+      });
+    } else {
+      const response = await axios.get("/grocery-items");
+
+      const backPic = response.data.items.find((item) => item._id === itemId);
+      console.log(backPic);
+      setTimeout(() => {
+        setCurrentPic(backPic.img);
+      }, 150);
+    }
+  };
+
+  useEffect(() => {
+    imgFunc();
+  }, [state.success]);
 
   useEffect(() => {
     getCurrentItem();
   }, []);
   return (
     <div className="edit-item">
-      <h3>Edit Item</h3>
+      <h3 className="header">Edit Item</h3>
       <h4>{currentItem.name}</h4>
       {currentItem && (
         <div>
-          <img
-            src={
-              currentItem.img &&
-              `${picUrl}/images/groceryImages/${currentItem.name}/${currentItem.img}`
-            }
-          />
+          <article className="canvas">
+            {currentPic !== "" ? (
+              <section>
+                <img
+                  src={
+                    currentItem.img &&
+                    `${picUrl}/images/groceryImages/${currentItem.name}/${
+                      currentPic
+                    }`
+                  }
+                />
+                <label
+                  onClick={() => handleDeletePic(currentItem.img)}
+                  className="del-icon-outer"
+                >
+                  {" "}
+                  <FontAwesomeIcon
+                    className="del-icon-inner"
+                    icon={faTimes}
+                  />{" "}
+                </label>
+              </section>
+            ) : !file && currentPic === "" ? (
+              <div className="plus">
+                <p className="plus-header">upload an image</p>
+                <label htmlFor="addImage">
+                  <FontAwesomeIcon icon={faPlus} className="fa-plus" />
+                </label>
+                <input
+                  type="file"
+                  className={"add-pic-edit"}
+                  onChange={(e) => handleFile(e)}
+                  // onClick={() => hanldeImageId(pic.id)}
+                  htmlFor="addImage"
+                />
+              </div>
+            ) : (
+              <div className="file-present">
+                <p className="pic-name">{file.name}</p>
+                <button onClick={handleUpload}>upload</button>
+              </div>
+            )}
+          </article>
 
           <form className="edit-item-form">
             <label>
@@ -182,8 +319,8 @@ const EditItem = () => {
               <br />
               <input
                 type="text"
-                value={numerator}
-                onChange={(e) => setNumerator(e.target.value)}
+                value={denominator}
+                onChange={(e) => setDenominator(e.target.value)}
               />
             </label>
             <label>
@@ -238,6 +375,7 @@ const EditItem = () => {
           <FontAwesomeIcon icon={faSave} />
         </button>
       </section>
+      {state.success ? <h2 className="delete">{state.errMsg}</h2> : ""}
     </div>
   );
 };

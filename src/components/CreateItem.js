@@ -9,10 +9,6 @@ const CreateItem = () => {
   const [unitMeasure2, setUnitMeasure2] = useState("");
   const [description, setDescription] = useState("");
   const [availableUnitMeasures, setAvailableUnitMeasures] = useState([]);
-  const [availableColours, setAvailableColours] = useState([]);
-  const [availableStorage, setAvailableStorage] = useState([]);
-  const [availableFootSizes, setAvailableFootSizes] = useState([]);
-  const [availablePrices, setAvailablePrices] = useState([]);
   const [firstPrice, setFirstPrice] = useState("");
   const [secondPrice, setSecondPrice] = useState("");
   const [thirdPrice, setThirdPrice] = useState("");
@@ -24,7 +20,7 @@ const CreateItem = () => {
   const [isMatched, setIsMatched] = useState(false);
   const [ole, setOle] = useState("");
   const [category, setCategory] = useState("Groceries");
-  const [numerator, setNumerator] = useState(0);
+  const [denominator, setDenominator] = useState(0);
 
   const numaRef = useRef();
 
@@ -69,7 +65,7 @@ const CreateItem = () => {
           description,
           qty: ole,
           category,
-          numerator,
+          denominator,
           image: file.name,
           now,
         };
@@ -113,31 +109,6 @@ const CreateItem = () => {
     console.log(availableUnitMeasures);
   }, [unitMeasure, unitMeasure2]);
 
-  const onColourChange = (e) => {
-    const values = Array.from(
-      e.target.selectedOptions,
-      (option) => option.value,
-    );
-    setAvailableColours(values);
-  };
-
-  const onStorageChange = (e) => {
-    const values = Array.from(
-      e.target.selectedOptions,
-      (option) => option.value,
-    );
-    console.log(values);
-    setAvailableStorage(values);
-  };
-
-  const onFootSizeChange = (e) => {
-    const values = Array.from(
-      e.target.selectedOptions,
-      (option) => option.value,
-    );
-    setAvailableFootSizes(values);
-  };
-
   const handleFirstPrice = (e) => {
     setFirstPrice(e.target.value);
   };
@@ -152,13 +123,11 @@ const CreateItem = () => {
   const demSetter = (e) => {
     // unitMeasure2 && console.log(numaRef.current.value());
     if (unitMeasure.toLowerCase() === "dozen".toLowerCase()) {
-      setNumerator(12);
+      setDenominator(12);
     } else {
-      setNumerator(0);
+      setDenominator(0);
     }
   };
-
-  console.log(numerator);
 
   useEffect(() => {
     demSetter();
@@ -248,8 +217,8 @@ const CreateItem = () => {
                 <input
                   type="text"
                   required
-                  value={numerator}
-                  onChange={(e) => setNumerator(e.target.value)}
+                  value={denominator}
+                  onChange={(e) => setDenominator(e.target.value)}
                 />
               </label>
             </div>

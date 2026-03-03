@@ -108,7 +108,11 @@ const Inventory = () => {
                     {/* {inv.unitMeasure.split(" ")[1].slice(1, -1)} */}
                   </th>
                   <td className="sales-items">
-                    {new Date(inv.date).toString().substring(4, 25)}
+                    {new Date(inv.date).toLocaleString("en-us", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    })}
                   </td>
                   {/* <td 
      ref={invRef}
