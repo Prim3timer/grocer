@@ -84,6 +84,7 @@ const reducer = (state, action) => {
             total: item.availablePrices[currentIndex],
             price: item.availablePrices[currentIndex],
             qty: 1,
+            index: action.index,
             total: item.availablePrices[currentIndex] * item.qty,
           };
         }
@@ -114,6 +115,8 @@ const reducer = (state, action) => {
       return { ...state, search2: action.payload };
     case "success":
       return { ...state, success: action.payload };
+    case "inventMeasure":
+      return { ...state };
     default:
       throw new Error();
   }

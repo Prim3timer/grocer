@@ -294,6 +294,11 @@ code {
   /* column-gap: 2rem; */
 }
 
+ .item-dets-cont img {
+  width:200px;
+  height: 200px;
+ }
+
 #create-item-form {
   font-size: 1.5rem;
   display: flex;
@@ -343,6 +348,10 @@ textarea {
 .action-create button {
   font-size: 1.5rem;
   padding: .5rem;
+}
+
+.empty-cart {
+  margin: 2rem 0;
 }
 
 
@@ -653,6 +662,11 @@ display: flex;
   border-bottom: 2px solid brown;
 }
 
+.measure-inventory {
+  font-size: 1.5rem;
+  width: 6rem;
+}
+
 .searcher {
   display: flex;
   flex-direction: column;
@@ -679,7 +693,6 @@ display: flex;
 }
 
 .edit-item-form {
-  clear: both;
   display: flex;
   flex-direction: column;
 }
@@ -723,7 +736,13 @@ position: relative;
   width: 300px;
   height: 300px;
   justify-self: center;
-  margin: 0 0 2rem 0;
+  margin: 0 0 4rem 0;
+}
+
+.canvas img {
+  object-fit: cover;
+  width: 300px;
+  height: 300px;
 }
 
 .plus {

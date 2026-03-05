@@ -25,8 +25,11 @@ const EditItem = () => {
   const [secondUnitMeasure, setSecondUnitMeasure] = useState("");
   const [currentItem, setCurrentItem] = useState({});
   const [description, setDescription] = useState("");
-  const [denominator, setDenominator] = useState("");
+  const [denominator, setDenominator] = useState(0);
+  const [numerator, setNumerator] = useState(0);
+  const [category, setCategory] = useState("");
   const [file, setFile] = useState({});
+  const [qty, setQty] = useState(0);
   const now = new Date();
   const navigate = useNavigate();
 
@@ -44,6 +47,9 @@ const EditItem = () => {
       setDescription(item.description);
       setDenominator(item.denominator);
       setCurrentPic(item.img);
+      setCategory(item.category);
+      setNumerator(item.numerator);
+      setQty(item.qty);
       if (item.availablePrices.length > 1) {
         setSecondPrice(item.availablePrices[1]);
         setSecondUnitMeasure(item.availableUnitMeasures[1]);
@@ -59,14 +65,14 @@ const EditItem = () => {
     // const priceArray = [firstPrice, secondPrice, thirdPrice, fourthPrice];
     try {
       const newItem = {
-        // name: afa,
-        // price: priceArray,
-        quantity: currentItem.qty,
+        name,
+        quantity: qty,
         firstPrice,
         secondPrice,
         firstUnitMeasure,
         secondUnitMeasure,
         denominator,
+        numerator,
         description,
         // image: files,
         now,
@@ -74,10 +80,13 @@ const EditItem = () => {
       console.log(newItem);
 
       const response2 = await axios.patch(
-        `/grocery-items/texts/${JSON.stringify(newItem)}?id=${currentItem._id}&firstName=${currentItem.n}&index=${itemId}`,
+        `/grocery-items/texts/${JSON.stringify(newItem)}?id=${currentItem._id}&firstName=${currentItem.name}&index=${itemId}`,
+        newItem,
       );
-      dispatch({ type: "success", payload: true });
-      // dispatch({ type: "errMsg", payload: response2.data.message });
+      if (response2) {
+        dispatch({ type: "success", payload: true });
+        dispatch({ type: "errMsg", payload: response2.data });
+      }
     } catch (error) {
       dispatch({ type: "errMsg", payload: error.message });
     } finally {
@@ -175,7 +184,7 @@ const EditItem = () => {
     setCurrentPic("");
   };
 
-  const handleDeletePic = async (image) => {
+  const handleDeletePic = async (image, e) => {
     try {
       console.log(image);
       const response = await axios.delete(
@@ -184,6 +193,8 @@ const EditItem = () => {
       if (response) {
         dispatch({ type: "success", payload: true });
         dispatch({ type: "errMsg", payload: response.data });
+        setFile("");
+        setCurrentPic("");
         setTimeout(() => {
           dispatch({ type: "success", payload: false });
         }, 3000);
@@ -206,13 +217,13 @@ const EditItem = () => {
       console.log(backPic);
       setTimeout(() => {
         setCurrentPic(backPic.img);
-      }, 150);
+      }, 100);
     }
   };
 
   useEffect(() => {
     imgFunc();
-  }, [state.success]);
+  }, [state.success, file]);
 
   useEffect(() => {
     getCurrentItem();
@@ -224,7 +235,7 @@ const EditItem = () => {
       {currentItem && (
         <div>
           <article className="canvas">
-            {currentPic !== "" ? (
+            {currentPic ? (
               <section>
                 <img
                   src={
@@ -235,7 +246,7 @@ const EditItem = () => {
                   }
                 />
                 <label
-                  onClick={() => handleDeletePic(currentItem.img)}
+                  onClick={(e) => handleDeletePic(currentItem.img, e)}
                   className="del-icon-outer"
                 >
                   {" "}
@@ -245,7 +256,12 @@ const EditItem = () => {
                   />{" "}
                 </label>
               </section>
-            ) : !file && currentPic === "" ? (
+            ) : file ? (
+              <div className="file-present">
+                <p className="pic-name">{file.name}</p>
+                <button onClick={handleUpload}>upload</button>
+              </div>
+            ) : (
               <div className="plus">
                 <p className="plus-header">upload an image</p>
                 <label htmlFor="addImage">
@@ -259,17 +275,12 @@ const EditItem = () => {
                   htmlFor="addImage"
                 />
               </div>
-            ) : (
-              <div className="file-present">
-                <p className="pic-name">{file.name}</p>
-                <button onClick={handleUpload}>upload</button>
-              </div>
             )}
           </article>
 
           <form className="edit-item-form">
             <label>
-              Name:
+              name:
               <br />
               <input
                 type="text"
@@ -279,7 +290,7 @@ const EditItem = () => {
             </label>
 
             <label>
-              First Unit Measure:
+              first unit measure:
               <br />
               <input
                 type="text"
@@ -288,7 +299,7 @@ const EditItem = () => {
               />
             </label>
             <label>
-              Second Unit Measure:
+              second unit measure:
               <br />
               <input
                 type="text"
@@ -297,7 +308,7 @@ const EditItem = () => {
               />
             </label>
             <label>
-              First Price:
+              first price:
               <br />
               <input
                 type="text"
@@ -306,12 +317,30 @@ const EditItem = () => {
               />
             </label>
             <label>
-              Second Price:
+              second price:
               <br />
               <input
                 type="text"
                 value={secondPrice}
                 onChange={(e) => setSecondPrice(e.target.value)}
+              />
+            </label>
+            <label>
+              in-stock:
+              <br />
+              <input
+                type="text"
+                value={qty}
+                onChange={(e) => setQty(e.target.value)}
+              />
+            </label>
+            <label>
+              category:
+              <br />
+              <input
+                type="text"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
               />
             </label>
             <label>
@@ -321,6 +350,15 @@ const EditItem = () => {
                 type="text"
                 value={denominator}
                 onChange={(e) => setDenominator(e.target.value)}
+              />
+            </label>
+            <label>
+              numerator:
+              <br />
+              <input
+                type="text"
+                value={numerator}
+                onChange={(e) => setNumerator(e.target.value)}
               />
             </label>
             <label>

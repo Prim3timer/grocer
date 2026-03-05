@@ -12,8 +12,12 @@ export const ItemProvider = ({ children }) => {
   const [items, setItems] = useState();
   const bizName = "Mawuhi Mart";
   const getItems = async () => {
-    const response = await axios.get(`/grocery-items`);
-    if (response.data) setItems(response.data);
+    try {
+      const response = await axios.get(`/grocery-items`);
+      if (response.data) setItems(response.data);
+    } catch (error) {
+      dispatch({ type: "errMsg", payload: error.message });
+    }
   };
 
   const getTransactions = async () => {

@@ -11,15 +11,15 @@ const CreateItem = () => {
   const [availableUnitMeasures, setAvailableUnitMeasures] = useState([]);
   const [firstPrice, setFirstPrice] = useState("");
   const [secondPrice, setSecondPrice] = useState("");
-  const [thirdPrice, setThirdPrice] = useState("");
-  const [fourthPrice, setFouthPrice] = useState("");
+  const [firstQty, setFirstQty] = useState(0);
+  const [secondQty, setSecondQty] = useState(0);
   const [errMsg, setErrMsg] = useState("");
   const [file, setFile] = useState("");
   const [showUpdate, setShowUpdate] = useState(false);
   const [success, setSuccess] = useState(false);
   const [isMatched, setIsMatched] = useState(false);
   const [ole, setOle] = useState("");
-  const [category, setCategory] = useState("Groceries");
+  const [category, setCategory] = useState("");
   const [denominator, setDenominator] = useState(0);
 
   const numaRef = useRef();
@@ -55,6 +55,7 @@ const CreateItem = () => {
       console.log(file);
       const prices = [Number(firstPrice), Number(secondPrice)];
       const measures = [unitMeasure, unitMeasure2];
+      const qtys = [firstQty, secondQty];
       const withPriceValue = prices.filter((item) => item !== 0);
       const withUnitValue = measures.filter((item) => item !== "");
       try {
@@ -70,7 +71,7 @@ const CreateItem = () => {
           now,
         };
 
-        console.log(newItem);
+        console.log(ole);
 
         const response = await axios.post(
           `http://localhost:3500/grocery-items`,
@@ -83,6 +84,16 @@ const CreateItem = () => {
         );
         if (response) {
           setIsMatched(`new item, ${newItem.name} created`);
+          setName("");
+          setUnitMeasure("");
+          setUnitMeasure2("");
+          setFirstPrice("");
+          setSecondPrice("");
+          setFirstQty("");
+          setSecondQty("");
+          setCategory("");
+          setDescription("");
+
           setTimeout(() => {
             setIsMatched(``);
             setShowUpdate(false);
@@ -122,7 +133,9 @@ const CreateItem = () => {
 
   const demSetter = (e) => {
     // unitMeasure2 && console.log(numaRef.current.value());
-    if (unitMeasure.toLowerCase() === "dozen".toLowerCase()) {
+    if (
+      unitMeasure.toLowerCase().toLocaleLowerCase() === "dozen".toLowerCase()
+    ) {
       setDenominator(12);
     } else {
       setDenominator(0);
@@ -208,21 +221,21 @@ const CreateItem = () => {
             </article>
           )}
         </div>
+        {unitMeasure2 && (
+          <div>
+            <label>
+              How many {unitMeasure2}s in a {unitMeasure}?
+              <br />
+              <input
+                type="text"
+                required
+                value={denominator}
+                onChange={(e) => setDenominator(e.target.value)}
+              />
+            </label>
+          </div>
+        )}
         <label>
-          {unitMeasure2 && (
-            <div>
-              <label>
-                How many {unitMeasure2}s in a {unitMeasure}?
-                <br />
-                <input
-                  type="text"
-                  required
-                  value={denominator}
-                  onChange={(e) => setDenominator(e.target.value)}
-                />
-              </label>
-            </div>
-          )}
           in stock: <br />
           <input
             type="text"
@@ -237,18 +250,11 @@ const CreateItem = () => {
           <br />
           <input
             type="text"
-            //   id="catogory"
-            list="category"
             required
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           />
         </label>
-        <datalist id="category">
-          {catArray.map((cat) => {
-            return <option value={cat}>{cat}</option>;
-          })}
-        </datalist>
         <label>
           Description: <br />
           <textarea

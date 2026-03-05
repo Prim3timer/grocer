@@ -2,17 +2,20 @@ import { use, useContext, useEffect, useReducer, useState } from "react";
 import ItemContext from "../context/itemProvider";
 import initialState from "../store";
 import reducer from "../reducer";
+import axios from "../app/api/axios";
 const { v4: uuid } = require("uuid");
 const Inventory = () => {
-  const { items } = useContext(ItemContext);
+  // const { items } = useContext(ItemContext);
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [inventItems, setInventItems] = useState();
+  const [unitMeasure, setUnitMeasure] = useState("");
+  const [inventItems, setInventItems] = useState("");
+  const [index, setIndex] = useState(0);
 
   const getTrans = async () => {
     try {
-      //   const graw = await axiosPrivate.get('/items')
-
-      const filterate = items.items.filter((inner) =>
+      const graw = await axios.get("/grocery-items");
+      console.log(graw);
+      const filterate = graw.data.items.filter((inner) =>
         inner.name.toLowerCase().includes(state.search.toLowerCase()),
       );
       if (state.search2) {
@@ -25,7 +28,14 @@ const Inventory = () => {
       dispatch({ type: "errMsg", payload: error.Message });
     }
   };
-  console.log(inventItems);
+  const onUnitMeasureChange = (e, id) => {
+    const currentItem = inventItems.find((item) => item._id === id);
+    const measureIndex = currentItem.availableUnitMeasures.indexOf(
+      e.target.value,
+    );
+    setUnitMeasure(currentItem.availableUnitMeasures[measureIndex]);
+    setIndex(measureIndex);
+  };
 
   useEffect(() => {
     getTrans();
@@ -98,20 +108,36 @@ const Inventory = () => {
                     className="sales-items"
                     style={{ color: inv.qty < 20 ? "red" : "" }}
                   >
-                    {inv.unitMeasure === "Kilogram (kg)" ||
-                    inv.unitMeasure === "Kilowatthour (kWh)" ||
-                    inv.unitMeasure === "Kilowatt (kW)" ||
-                    inv.unitMeasure === "Pound (lbs)" ||
-                    inv.unitMeasure === "Litre (L)"
-                      ? parseFloat(invReg).toFixed(2)
-                      : invReg}{" "}
-                    {/* {inv.unitMeasure.split(" ")[1].slice(1, -1)} */}
+                    {parseFloat(inv.qty).toFixed(2)}{" "}
+                    <select
+                      className="measure-inventory"
+                      size={"1"}
+                      value={unitMeasure}
+                      onChange={(e) => onUnitMeasureChange(e, inv._id)}
+                    >
+                      {inv.availableUnitMeasures.map((measure, i) => {
+                        return (
+                          <option className="update-form-unit-measure" key={i}>
+                            {measure}
+                          </option>
+                        );
+                      })}
+                    </select>
                   </th>
                   <td className="sales-items">
-                    {new Date(inv.date).toLocaleString("en-us", {
+                    {/* {new Date(inv.date).toLocaleString("en-us", {
                       day: "numeric",
                       month: "long",
                       year: "numeric",
+                    })} */}
+
+                    {new Date(inv.date).toLocaleString("en-US", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                      hour: "numeric",
+                      minute: "numeric",
+                      second: "numeric",
                     })}
                   </td>
                   {/* <td 

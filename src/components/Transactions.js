@@ -23,7 +23,7 @@ const Transactions = () => {
   const [transArrayChangeLiu, setTransArrayChangeLiu] = useState(0);
   const [cash, setCash] = useState(false);
 
-  const [currentTransArray, setCurrentTransArray] = useState([]);
+  const [measureIndex, setMeasureIndex] = useState(0);
 
   const trueCash = () => {
     const emptyQty = state.transArray.filter((item) => item.qty === "");
@@ -41,7 +41,10 @@ const Transactions = () => {
   };
 
   const onUnitMeasureChange = (e, id) => {
-    dispatch({ type: "unitMeasure", payload: e.target.value, id });
+    const currentItem = state.transArray.find((item) => item._id === id);
+    const index = currentItem.availableUnitMeasures.indexOf(e.target.value);
+    setMeasureIndex(index);
+    dispatch({ type: "unitMeasure", payload: e.target.value, id, index });
   };
 
   const handleAdd = (e, i) => {
@@ -62,6 +65,7 @@ const Transactions = () => {
           qty: 1,
           price: currentItem.availablePrices[0],
           unitMeasure: currentItem.availableUnitMeasures[0],
+          index: measureIndex,
         };
         const match = state.transArray.find(
           (item) => item.name === acutalItem.name,
@@ -131,18 +135,22 @@ const Transactions = () => {
 
         // transItems.goods.map((good) => {
         //   const invs = items.items.map(async (inv) => {
-        //     if (inv.name === good.name) {
+        //     if (inv._id === good._id) {
         //       const goodObj = {
         //         name: inv.name,
         //         qty: inv.qty - good.qty < 1 ? 0 : inv.qty - good.qty,
-        //         // date: now
+        //         date: now,
         //       };
 
-        //       await axios.put(`grocery-items/inventory-update${}`, goodObj);
+        //       await axios.put(`grocery-items/inventory-update`, goodObj);
         //     }
         //   });
         // });
-        console.log(transItems);
+
+        const arabic = transItems.goods.map((good) => {
+          return good;
+        });
+        console.log(arabic);
 
         setSuccess(true);
         setTimeout(() => {
@@ -188,41 +196,7 @@ const Transactions = () => {
   return (
     <div className="trans-cont">
       <h3 className="header">Transactions</h3>
-      <section>
-        <fieldset className="field">
-          <form className="tran-form">
-            <article className="trans-add">
-              <input
-                type="text"
-                className="trans-search"
-                placeholder="select item"
-                ref={inputRef}
-                onChange={(e) => handleAdd(e)}
-                list="edulevel"
-              />
-            </article>
 
-            <datalist id="edulevel">
-              {items &&
-                items.items.map((user) => {
-                  return (
-                    <option
-                      key={user._id}
-                      value={`${user.name}`}
-                      className="transaction-items-list"
-                    ></option>
-                  );
-                })}
-            </datalist>
-          </form>
-
-          <fieldset className="field2">
-            <legend>Checkout</legend>
-            <button onClick={trueCash}>Cash</button>
-            <button onClick={cardCheckout}>Card</button>
-          </fieldset>
-        </fieldset>
-      </section>
       {state.transArray.length ? (
         <h3 className="item-counter">
           {state.transArray.length} item
@@ -237,7 +211,7 @@ const Transactions = () => {
       </h3>
       <div className="trans-item-cont">
         {!state.transArray.length ? (
-          <p>empty cart</p>
+          <p className="empty-cart">empty cart</p>
         ) : (
           state.transArray.map((item, index) => {
             //  console.log(item.unitMeasure)
@@ -317,6 +291,41 @@ const Transactions = () => {
             );
           })
         )}
+        <section>
+          <fieldset className="field">
+            <form className="tran-form">
+              <article className="trans-add">
+                <input
+                  type="text"
+                  className="trans-search"
+                  placeholder="select item"
+                  ref={inputRef}
+                  onChange={(e) => handleAdd(e)}
+                  list="edulevel"
+                />
+              </article>
+
+              <datalist id="edulevel">
+                {items &&
+                  items.items.map((user) => {
+                    return (
+                      <option
+                        key={user._id}
+                        value={`${user.name}`}
+                        className="transaction-items-list"
+                      ></option>
+                    );
+                  })}
+              </datalist>
+            </form>
+
+            <fieldset className="field2">
+              <legend>Checkout</legend>
+              <button onClick={trueCash}>Cash</button>
+              <button onClick={cardCheckout}>Card</button>
+            </fieldset>
+          </fieldset>
+        </section>
       </div>
 
       {state.cash === true && (
