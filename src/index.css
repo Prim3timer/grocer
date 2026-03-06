@@ -299,6 +299,12 @@ code {
   height: 200px;
  }
 
+ .list-item-texts >* {
+    text-align: left;
+  /* background-color: red; */
+  width: 200px;
+}
+
 #create-item-form {
   font-size: 1.5rem;
   display: flex;

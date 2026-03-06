@@ -36,9 +36,38 @@ const Transactions = () => {
     dispatch({ type: "CASH", payload: false });
   };
 
-  const cardCheckout = () => {
-    // console.log("done sales");
+  const cardCheckout = async () => {
+    try {
+      if (state.transArray.length) {
+        const transItems = {
+          // cashier: auth.user,
+          // cashierID: auth.picker,
+          goods: state.transArray,
+          grandTotal: state.total,
+          date: now,
+        };
+        const response = await axios.post(
+          `/grocery-transactions/create-checkout-session`,
+          transItems,
+        );
+        if (response) {
+          window.location = response.data.session.url;
+          console.log(response.data);
+        } else console.log("no checkout");
+        console.log(response.data);
+      }
+    } catch (error) {
+      console.log(error.meassage);
+    }
   };
+
+  const getReceit = () => {
+    console.log("receipt got");
+  };
+
+  useEffect(() => {
+    getReceit();
+  }, []);
 
   const onUnitMeasureChange = (e, id) => {
     const currentItem = state.transArray.find((item) => item._id === id);
@@ -133,20 +162,6 @@ const Transactions = () => {
         //   dispatch({ type: "transArray", payload: [] });
         // }
 
-        // transItems.goods.map((good) => {
-        //   const invs = items.items.map(async (inv) => {
-        //     if (inv._id === good._id) {
-        //       const goodObj = {
-        //         name: inv.name,
-        //         qty: inv.qty - good.qty < 1 ? 0 : inv.qty - good.qty,
-        //         date: now,
-        //       };
-
-        //       await axios.put(`grocery-items/inventory-update`, goodObj);
-        //     }
-        //   });
-        // });
-
         const arabic = transItems.goods.map((good) => {
           return good;
         });
@@ -161,7 +176,6 @@ const Transactions = () => {
         //   dispatch({ type: "errMsg", payload: "" });
         // }, 1000);
       } else {
-        // console.log(state.transArray)
         throw Error("no item purchased");
         // dispatch({type: 'qtyArray', payload: []})
       }
@@ -251,9 +265,12 @@ const Transactions = () => {
                       value={item.unitMeasure}
                       onChange={(e) => onUnitMeasureChange(e, item._id)}
                     >
-                      {item.availableUnitMeasures.map((measure) => {
+                      {item.availableUnitMeasures.map((measure, index) => {
                         return (
-                          <option className="update-form-unit-measure">
+                          <option
+                            className="update-form-unit-measure"
+                            key={index}
+                          >
                             {measure}
                           </option>
                         );

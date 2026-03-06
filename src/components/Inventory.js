@@ -9,12 +9,11 @@ const Inventory = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [unitMeasure, setUnitMeasure] = useState("");
   const [inventItems, setInventItems] = useState("");
-  const [index, setIndex] = useState(0);
+  const [measureIdex, setMeasureIndex] = useState(0);
 
   const getTrans = async () => {
     try {
       const graw = await axios.get("/grocery-items");
-      console.log(graw);
       const filterate = graw.data.items.filter((inner) =>
         inner.name.toLowerCase().includes(state.search.toLowerCase()),
       );
@@ -22,19 +21,27 @@ const Inventory = () => {
         const stockFilter =
           filterate && filterate.filter((item) => item.qty <= state.search2);
         // dispatch({ type: "items", payload: stockFilter && stockFilter });
-        setInventItems(stockFilter);
-      } else setInventItems(filterate);
+        dispatch({ type: "inventItems", payload: stockFilter });
+      } else dispatch({ type: "inventItems", payload: filterate });
     } catch (error) {
       dispatch({ type: "errMsg", payload: error.Message });
     }
   };
   const onUnitMeasureChange = (e, id) => {
-    const currentItem = inventItems.find((item) => item._id === id);
+    console.log("changed");
+    const currentItem = state.inventItems.find((item) => item._id === id);
     const measureIndex = currentItem.availableUnitMeasures.indexOf(
       e.target.value,
     );
-    setUnitMeasure(currentItem.availableUnitMeasures[measureIndex]);
-    setIndex(measureIndex);
+    dispatch({
+      type: "inventMeasure",
+      payload: e.target.value,
+      id,
+      measureIndex,
+    });
+    // setUnitMeasure(currentItem.availableUnitMeasures[measureIndex]);
+    setMeasureIndex(measureIndex);
+    setUnitMeasure(e.target.value);
   };
 
   useEffect(() => {
@@ -88,9 +95,8 @@ const Inventory = () => {
             <th> Last Udated</th>
             {/* <th>ACTION</th> */}
           </tr>
-          {inventItems &&
-            inventItems.map((inv, index) => {
-              console.log(inv.date);
+          {state.inventItems &&
+            state.inventItems.map((inv, index) => {
               const invReg = inv.qty < 1 ? (inv.qty = 0) : inv.qty;
               // console.log(correctFormat)
               // const theDay = new Date(inv.date).getDate()
@@ -108,7 +114,8 @@ const Inventory = () => {
                     className="sales-items"
                     style={{ color: inv.qty < 20 ? "red" : "" }}
                   >
-                    {parseFloat(inv.qty).toFixed(2)}{" "}
+                    {parseFloat(inv.qty).toFixed(2)}
+
                     <select
                       className="measure-inventory"
                       size={"1"}

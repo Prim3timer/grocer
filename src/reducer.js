@@ -115,8 +115,31 @@ const reducer = (state, action) => {
       return { ...state, search2: action.payload };
     case "success":
       return { ...state, success: action.payload };
+    case "inventItems":
+      return { ...state, inventItems: action.payload };
     case "inventMeasure":
-      return { ...state };
+      const newInventory = state.inventItems.map((item) => {
+        if (item._id === action.id) {
+          // console.log(item);
+          const measureIndex = action.measureIndex;
+          const itemNum = item.numerator;
+          const itemQty = item.qty;
+          const qtyArray = [itemNum, itemQty];
+          console.log(measureIndex);
+          return {
+            ...item,
+            qty:
+              measureIndex === 1
+                ? item.numerator
+                : measureIndex === 0
+                  ? item.qty
+                  : "",
+          };
+        }
+        return item;
+      });
+      // console.log(newInventory);
+      return { ...state, inventItems: newInventory };
     default:
       throw new Error();
   }

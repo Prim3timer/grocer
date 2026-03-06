@@ -31,6 +31,7 @@ const initialState = {
   search2: "",
   cashPaid: "",
   success: false,
+  inventItems: [],
 };
 
 export default initialState;
