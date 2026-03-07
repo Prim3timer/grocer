@@ -53,6 +53,12 @@ const Receipts = () => {
     }
   };
 
+  const oneShow = (id) => {
+    localStorage.setItem("grocTransId", id);
+    // auth.picker2 = id;
+    // console.log(auth);
+  };
+
   useEffect(() => {
     getTransactions();
   }, [state.transactions.length]);
@@ -73,20 +79,29 @@ const Receipts = () => {
                   console.log(good);
                   return (
                     <div className="goods-container" key={good._id}>
-                      <h4>{good.name}</h4>
-                      <p>
-                        Qty: {parseFloat(good.qty).toFixed(2)}{" "}
-                        {good.unitMeasure}
-                        {good.qty > 1 ? "s" : ""}
-                      </p>
-                      <p>
-                        Unit Price: {currency}
-                        {numberWithCommas(parseFloat(good.price).toFixed(2))}
-                      </p>
-                      <p>
-                        Sub Total: {currency}
-                        {numberWithCommas(parseFloat(good.total).toFixed(2))}
-                      </p>
+                      <Link
+                        to="/one-receipt"
+                        style={{
+                          textDecoration: "none",
+                        }}
+                        onClick={() => oneShow(transaction._id)}
+                      >
+                        {/* <h4>{good._id}</h4> */}
+                        <h4>{good.name}</h4>
+                        <p>
+                          Qty: {parseFloat(good.qty).toFixed(2)}{" "}
+                          {good.unitMeasure}
+                          {good.qty > 1 ? "s" : ""}
+                        </p>
+                        <p>
+                          Unit Price: {currency}
+                          {numberWithCommas(parseFloat(good.price).toFixed(2))}
+                        </p>
+                        <p>
+                          Sub Total: {currency}
+                          {numberWithCommas(parseFloat(good.total).toFixed(2))}
+                        </p>
+                      </Link>
                     </div>
                   );
                 })}

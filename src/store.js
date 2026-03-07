@@ -32,6 +32,7 @@ const initialState = {
   cashPaid: "",
   success: false,
   inventItems: [],
+  invent: 0,
 };
 
 export default initialState;

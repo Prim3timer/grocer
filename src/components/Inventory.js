@@ -28,18 +28,13 @@ const Inventory = () => {
     }
   };
   const onUnitMeasureChange = (e, id) => {
-    console.log("changed");
     const currentItem = state.inventItems.find((item) => item._id === id);
     const measureIndex = currentItem.availableUnitMeasures.indexOf(
       e.target.value,
     );
-    dispatch({
-      type: "inventMeasure",
-      payload: e.target.value,
-      id,
-      measureIndex,
-    });
-    // setUnitMeasure(currentItem.availableUnitMeasures[measureIndex]);
+
+    console.log(measureIndex);
+
     setMeasureIndex(measureIndex);
     setUnitMeasure(e.target.value);
   };
@@ -114,7 +109,9 @@ const Inventory = () => {
                     className="sales-items"
                     style={{ color: inv.qty < 20 ? "red" : "" }}
                   >
-                    {parseFloat(inv.qty).toFixed(2)}
+                    {parseFloat(inv.availableQuantities[measureIdex]).toFixed(
+                      2,
+                    )}
 
                     <select
                       className="measure-inventory"

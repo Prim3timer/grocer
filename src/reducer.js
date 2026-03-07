@@ -1,3 +1,5 @@
+import axios from "./app/api/axios";
+
 const reducer = (state, action) => {
   switch (action.type) {
     case "user":
@@ -95,6 +97,14 @@ const reducer = (state, action) => {
         unitMeasure: action.payload,
         transArray: currentArray,
       };
+    //  case 'measureChange':
+    // const currentArra2 = state.inventItems.map((item) => {
+    //   if (item._id === action.id) {
+    //     const currentIndex = item.availableUnitMeasures.indexOf(action.payload)
+    //     return {...item, }
+    //   }
+    // })
+    //   return {...state,}
     case "difference":
       state.paidAmount = action.payload;
       const newBalance = state.paidAmount - state.total;
@@ -117,29 +127,7 @@ const reducer = (state, action) => {
       return { ...state, success: action.payload };
     case "inventItems":
       return { ...state, inventItems: action.payload };
-    case "inventMeasure":
-      const newInventory = state.inventItems.map((item) => {
-        if (item._id === action.id) {
-          // console.log(item);
-          const measureIndex = action.measureIndex;
-          const itemNum = item.numerator;
-          const itemQty = item.qty;
-          const qtyArray = [itemNum, itemQty];
-          console.log(measureIndex);
-          return {
-            ...item,
-            qty:
-              measureIndex === 1
-                ? item.numerator
-                : measureIndex === 0
-                  ? item.qty
-                  : "",
-          };
-        }
-        return item;
-      });
-      // console.log(newInventory);
-      return { ...state, inventItems: newInventory };
+
     default:
       throw new Error();
   }

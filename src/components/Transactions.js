@@ -61,8 +61,14 @@ const Transactions = () => {
     }
   };
 
-  const getReceit = () => {
-    console.log("receipt got");
+  const getReceit = async () => {
+    const transactions = await axios.get("/grocery-transactions");
+    const reverse = transactions.data.reverse()[0];
+    localStorage.setItem("groceryTransactions", reverse._id);
+    let sessionId = window.location.href.split(" ")[1];
+    // const cusomer = queryParams.get("customer")
+    const res = await axios.post(`/grocery-transactions/thanks/${sessionId}`);
+    console.log({ sessionId });
   };
 
   useEffect(() => {

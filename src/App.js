@@ -16,6 +16,7 @@ import Receipts from "./components/Receipts";
 import EditItem from "./components/EditItem";
 import Missing from "./components/Missing";
 import AuthContext from "./context/authProvider";
+import OneReceipt from "./components/OneReceipt";
 
 function App() {
   const year = new Date().getFullYear();
@@ -30,7 +31,7 @@ function App() {
             <Route path="/login" index element={<Login />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-
+            <Route path="one-receipt" element={<OneReceipt />} />
             <Route path="transactions" element={<Transactions />} />
             <Route path="create-item" element={<CreateItem />} />
             <Route path="item-list" element={<ItemList />} />
