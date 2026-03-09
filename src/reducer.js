@@ -127,7 +127,21 @@ const reducer = (state, action) => {
       return { ...state, success: action.payload };
     case "inventItems":
       return { ...state, inventItems: action.payload };
-
+    case "inventMeasure":
+      const newArray2 = state.inventItems.map((item) => {
+        if (item._id === action.id) {
+          const currentIndex = item.availableUnitMeasures.indexOf(
+            action.payload,
+          );
+          return {
+            ...item,
+            unitMeasure: item.availableUnitMeasures[currentIndex],
+            qty: item.availableQuantities[currentIndex],
+          };
+        }
+        return item;
+      });
+      return { ...state, inventItems: newArray2 };
     default:
       throw new Error();
   }

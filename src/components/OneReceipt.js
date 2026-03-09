@@ -2,7 +2,8 @@ import { useEffect, useContext } from "react";
 import ItemContext from "../context/itemProvider";
 
 const OneReceipt = () => {
-  const { transactions, currency, getTransactions } = useContext(ItemContext);
+  const { transactions, currency, getTransactions, bizName } =
+    useContext(ItemContext);
   console.log(transactions);
   const transId = localStorage.getItem("grocTransId");
   const currentTrans = transactions.find(
@@ -20,7 +21,7 @@ const OneReceipt = () => {
   return (
     currentTrans && (
       <div className="one-receipt">
-        <h3>Mawuhi Mart</h3>
+        <h3>{bizName}</h3>
         <p className="receipts-date">{currentTrans.date}</p>
         <section className="inner-one-receipt">
           {currentTrans.goods.map((good) => {

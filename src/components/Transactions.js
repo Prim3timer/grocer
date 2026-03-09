@@ -65,7 +65,7 @@ const Transactions = () => {
   const falseSuccess = () => {
     setSuccess(false);
   };
-
+  console.log(items);
   const getReceit = async () => {
     const transactions = await axios.get("/grocery-transactions");
     const reverse = transactions.data.reverse()[0];

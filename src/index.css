@@ -194,17 +194,14 @@ code {
 
 .username-form>*:nth-child(2) {
   align-self: flex-start;
-  /* background-color: red; */
 }
 
 .username-form>*:nth-child(5) {
   align-self: flex-start;
-  /* background-color: red; */
 }
 
 .username-form>*:nth-child(3) {
   align-self: flex-start;
-  /* background-color: red; */
 }
 
 
@@ -642,8 +639,19 @@ display: flex;
 
 }
 
-.searcher {}
-
+.searcher {
+  display: flex;
+  top: 10px;
+  left: 10px;
+  position: fixed;
+  font-size: 1rem;
+  z-index: 100;
+  column-gap: 1rem;
+  /* background-color: red; */
+  /* width: 100%; */
+  /* width: 60vw; */
+  
+}
 .invent-header-trow {
   text-align: left;
 }
@@ -666,6 +674,7 @@ display: flex;
 
 .inventory-table th, td {
   padding: .5rem;
+  text-align: left;
 }
 
 .invent-header-trow th {
@@ -745,13 +754,13 @@ display: flex;
   width: 30%;
   
 }
-
+/* 
 .searcher {
   display: flex;
   flex-direction: column;
   row-gap: .5rem;
   margin: 1rem 0;
-}
+} */
 
 .searcher input {
   font-size: 1.5rem;

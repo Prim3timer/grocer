@@ -10,7 +10,7 @@ export const ItemProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const picUrl = process.env.REACT_APP_URL;
   const [items, setItems] = useState();
-  const bizName = "Mawuhi Mart";
+  const bizName = "Retail Solutions";
   const getItems = async () => {
     try {
       const response = await axios.get(`/grocery-items`);

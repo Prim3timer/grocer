@@ -11,10 +11,14 @@ const Inventory = () => {
   const [inventItems, setInventItems] = useState("");
   const [measureIdex, setMeasureIndex] = useState(0);
 
-  const getTrans = async () => {
+  const getItems = async () => {
     try {
       const graw = await axios.get("/grocery-items");
-      const filterate = graw.data.items.filter((inner) =>
+      console.log(graw.data.items);
+      const newItems = graw.data.items.map((item) => {
+        return { ...item, unitMeasure: item.availableUnitMeasures[0] };
+      });
+      const filterate = newItems.filter((inner) =>
         inner.name.toLowerCase().includes(state.search.toLowerCase()),
       );
       if (state.search2) {
@@ -32,21 +36,25 @@ const Inventory = () => {
     const measureIndex = currentItem.availableUnitMeasures.indexOf(
       e.target.value,
     );
-
+    console.log(e.target.value);
     console.log(measureIndex);
 
-    setMeasureIndex(measureIndex);
-    setUnitMeasure(e.target.value);
+    // setUnitMeasure(e.target.value);
+    dispatch({
+      type: "inventMeasure",
+      payload: e.target.value,
+      id,
+    });
   };
 
   useEffect(() => {
-    getTrans();
+    getItems();
   }, [state.search, state.search2]);
 
   return (
     <div className="inventory">
       <h3 className="header">
-        Inventory ({inventItems && inventItems.length} items)
+        Inventory ({state.inventItems && state.inventItems.length} items)
       </h3>
       <form
         className="searcher"
@@ -65,22 +73,17 @@ const Inventory = () => {
 
           // https://www.npmjs.com/package/@react-google-maps/api
         />
-        {/* <article> */}
-        {/* <h3><label>Search by stock level</label></h3> */}
-        <div>
-          <span>under or equal to</span>{" "}
-          <input
-            //  id="invent-search"
 
-            placeholder="pick a number"
-            role="searchbox"
-            value={state.search2}
-            onChange={(e) =>
-              dispatch({ type: "search2", payload: e.target.value })
-            }
-          />
-        </div>
-        {/* </article> */}
+        <input
+          //  id="invent-search"
+
+          placeholder="pick a number"
+          role="searchbox"
+          value={state.search2}
+          onChange={(e) =>
+            dispatch({ type: "search2", payload: e.target.value })
+          }
+        />
       </form>
       <table className="inventory-table">
         <tbody>
@@ -111,14 +114,11 @@ const Inventory = () => {
                       color: inv.availableQuantities[0] < 20 ? "red" : "",
                     }}
                   >
-                    {parseFloat(inv.availableQuantities[measureIdex]).toFixed(
-                      2,
-                    )}
-
+                    {parseFloat(inv.qty).toFixed(2)}{" "}
                     <select
                       className="measure-inventory"
                       size={"1"}
-                      value={unitMeasure}
+                      value={inv.unitMeasure}
                       onChange={(e) => onUnitMeasureChange(e, inv._id)}
                     >
                       {inv.availableUnitMeasures.map((measure, i) => {

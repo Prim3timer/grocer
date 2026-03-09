@@ -1,17 +1,51 @@
-import { useContext } from "react";
+import { useContext, useEffect, useReducer, useState } from "react";
 import ItemContext from "../context/itemProvider";
 import { Link } from "react-router-dom";
+import initialState from "../store";
+import reducer from "../reducer";
+import axios from "../app/api/axios";
 
 const ItemList = () => {
   const { items, picUrl, oneItem, currency } = useContext(ItemContext);
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const [shopItems, setShopItems] = useState("");
   console.log(items);
+
+  const getItems = async () => {
+    const response = await axios.get("/grocery-items");
+    try {
+      const filterItems =
+        response &&
+        response.data.items.filter((item) =>
+          item.name.toLowerCase().includes(state.search.toLowerCase()),
+        );
+      console.log(filterItems);
+
+      setShopItems(filterItems);
+    } catch (error) {
+      dispatch({ type: "errMsg", payload: error.message });
+    }
+  };
+
+  useEffect(() => {
+    getItems();
+  }, [state.search]);
   return (
-    <Link to="/edit-item" className="items-link">
-      <div className="items-list">
-        <h3 className="header">Item List</h3>
+    <div className="items-list">
+      <h3 className="header">Item List</h3>
+      <form className="searcher">
+        <input
+          placeholder="filter items"
+          value={state.search}
+          onChange={(e) =>
+            dispatch({ type: "search", payload: e.target.value })
+          }
+        />
+      </form>
+      <Link to="/edit-item" className="items-link">
         <article className="items-container">
-          {items &&
-            items.items.map((item) => {
+          {shopItems &&
+            shopItems.map((item) => {
               return (
                 <div
                   key={item._id}
@@ -53,8 +87,8 @@ const ItemList = () => {
               );
             })}
         </article>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 };
 
