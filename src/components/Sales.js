@@ -50,7 +50,7 @@ const Sales = () => {
           // id="invent-search"
           type="text"
           role="searchbox"
-          placeholder="Search by name"
+          placeholder="filter by name"
           value={state.search}
           onChange={(e) =>
             dispatch({ type: "search", payload: e.target.value })
@@ -63,7 +63,7 @@ const Sales = () => {
           //   id="invent-search"
           type="text"
           role="searchbox"
-          placeholder="Search by date"
+          placeholder="filter by date yyyy-mm-dd"
           value={state.search2}
           onChange={(e) =>
             dispatch({ type: "search2", payload: e.target.value })

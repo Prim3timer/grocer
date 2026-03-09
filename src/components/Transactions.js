@@ -5,6 +5,7 @@ import initialState from "../store";
 import reducer from "../reducer";
 import { FaTrashAlt, FaPlus } from "react-icons/fa";
 import axios from "../app/api/axios";
+import { Link } from "react-router-dom";
 
 const Transactions = () => {
   const { items, picUrl, numberWithCommas, currency } = useContext(ItemContext);
@@ -61,6 +62,10 @@ const Transactions = () => {
     }
   };
 
+  const falseSuccess = () => {
+    setSuccess(false);
+  };
+
   const getReceit = async () => {
     const transactions = await axios.get("/grocery-transactions");
     const reverse = transactions.data.reverse()[0];
@@ -73,7 +78,7 @@ const Transactions = () => {
 
   useEffect(() => {
     getReceit();
-  }, []);
+  }, [success]);
 
   const onUnitMeasureChange = (e, id) => {
     const currentItem = state.transArray.find((item) => item._id === id);
@@ -159,24 +164,20 @@ const Transactions = () => {
         const response = await axios.post("/grocery-transactions", transItems);
 
         dispatch({ type: "CASH", payload: false });
-        // if (response) {
-        //   dispatch({ type: "cancel", payload: false });
-        //   // so i can effect change in color of the errMsg
-        //   dispatch({ type: "qty", payload: response });
-        //   dispatch({ type: "clear" });
-        //   dispatch({ type: "ALERTMSG", payload: response.data.message });
-        //   dispatch({ type: "transArray", payload: [] });
-        // }
+        if (response) {
+          dispatch({ type: "cancel", payload: false });
+          //   // so i can effect change in color of the errMsg
+          //   dispatch({ type: "qty", payload: response });
+          //   dispatch({ type: "clear" });
+          dispatch({ type: "ALERTMSG", payload: response.data.message });
+          // dispatch({ type: "transArray", payload: [] });
+          setSuccess(true);
 
-        const arabic = transItems.goods.map((good) => {
-          return good;
-        });
-        console.log(arabic);
+          setTimeout(() => {
+            setSuccess(false);
+          }, 5000);
+        }
 
-        setSuccess(true);
-        setTimeout(() => {
-          setSuccess(false);
-        }, 5000);
         // dispatch({ type: "qtyArray", payload: [] });
         // setTimeout(() => {
         //   dispatch({ type: "errMsg", payload: "" });
@@ -188,9 +189,61 @@ const Transactions = () => {
       // state.paidAmount = 0
       state.balance = 0;
     } catch (error) {
-      // dispatch({ type: "errMsg", payload: error.message });
+      dispatch({ type: "errMsg", payload: error.message });
     } finally {
-      //    dispatch({type: 'transArray', payload: []})
+      // dispatch({ type: "transArray", payload: [] });
+    }
+  };
+  console.log(success);
+  const getRecipt = async () => {
+    try {
+      const transes = await axios.get(`/grocery-transactions`);
+      console.log(transes.data);
+      const reverseTranses = transes.data.reverse();
+      // localStorage.setItem("grocMemTransaction", reverseTranses[0]._id);
+      localStorage.setItem("grocTransId", reverseTranses[0]._id);
+      // dispatch({ type: "transArray", payload: [] });
+      // const queryParams = new URLSearchParams(window.location.search)
+      // let sessionId = queryParams.get("session_id")
+      let sessionId = window.location.href.split("=")[1];
+      // const cusomer = queryParams.get("customer")
+      console.log({ sessionId });
+
+      const date = new Date();
+      // const date = format(now, 'dd/MM/yyyy HH:mm:ss')
+      const dateOjb = { date };
+      // console.log({date})
+      if (sessionId) {
+        const res = await axios.get(
+          `/sessions/thanks/old-session/${sessionId}`,
+        );
+        const oldSession = res.data ? res.data : "";
+
+        if (oldSession === sessionId) {
+          return;
+        } else if (!oldSession || oldSession !== sessionId) {
+          const response = await axios.post(
+            `/transactions/sessions/${sessionId}`,
+            dateOjb,
+          );
+
+          if (response) {
+            setSuccess(true);
+            // dispatch({ type: "ALERTMSG", payload: response.data.message });
+            setTimeout(() => {
+              setSuccess(false);
+            }, 5000);
+            // setAuth((prev) => {
+            //   return {
+            //     ...prev,
+            //     users: response.data.users,
+            //   };
+            // });
+          }
+        }
+      }
+    } catch (error) {
+      // console.error(error)
     }
   };
 
@@ -210,6 +263,10 @@ const Transactions = () => {
   // }, []);
 
   useEffect(() => {
+    getRecipt();
+  }, [success]);
+
+  useEffect(() => {
     // console.log(`cashpaidref is: ${cashPaidRef.current.value}`);
   }, []);
 
@@ -219,16 +276,16 @@ const Transactions = () => {
 
       {state.transArray.length ? (
         <h3 className="item-counter">
-          {state.transArray.length} item
+          {state.transArray.length} product
           {state.transArray.length === 1 ? "" : "s"}
         </h3>
       ) : (
         ""
       )}
 
-      <h3 className={state.alertMsg ? "delete" : "no-delete"}>
+      {/* <h3 className={state.alertMsg ? "delete" : "no-delete"}>
         {state.alertMsg}
-      </h3>
+      </h3> */}
       <div className="trans-item-cont">
         {!state.transArray.length ? (
           <p className="empty-cart">empty cart</p>
@@ -353,7 +410,7 @@ const Transactions = () => {
 
       {state.cash === true && (
         <section
-          className="cash-payment"
+          className="delete"
           // style={{
           //   display: "none",
           //   columnGap: "1rem",
@@ -390,8 +447,25 @@ const Transactions = () => {
             <button onClick={closeCashWindow}>Cancel</button>
             <button onClick={doneSales}>Done</button>
           </article>
+          {console.log(success)}
         </section>
       )}
+      <article className={success ? "success" : "non-success"}>
+        <h3>{state.alertMsg}</h3>
+        {
+          <div>
+            <h4>Receipt?</h4>
+            <div className="cash-confirm">
+              <button onClick={falseSuccess}>No</button>
+              <button>
+                <Link to="/one-receipt" className="cash-confirm-link">
+                  Yes
+                </Link>
+              </button>
+            </div>
+          </div>
+        }
+      </article>
     </div>
   );
 };

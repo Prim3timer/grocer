@@ -107,7 +107,9 @@ const Inventory = () => {
                   <td className="sales-items">{`${inv.name}`}</td>
                   <th
                     className="sales-items"
-                    style={{ color: inv.qty < 20 ? "red" : "" }}
+                    style={{
+                      color: inv.availableQuantities[0] < 20 ? "red" : "",
+                    }}
                   >
                     {parseFloat(inv.availableQuantities[measureIdex]).toFixed(
                       2,

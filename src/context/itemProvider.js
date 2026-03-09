@@ -24,7 +24,8 @@ export const ItemProvider = ({ children }) => {
     try {
       const response = await axios.get("/grocery-transactions");
       if (response) {
-        dispatch({ type: "transactions", payload: response.data });
+        const straightTransactions = response.data.reverse();
+        dispatch({ type: "transactions", payload: straightTransactions });
       }
     } catch (error) {
       console.log(error);

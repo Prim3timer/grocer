@@ -10,7 +10,7 @@ import { FaTrashAlt } from "react-icons/fa";
 const Receipts = () => {
   const { transactions, bizName, numberWithCommas, currency, getTransactions } =
     useContext(ItemContext);
-
+  const [success, setSuccess] = useState(false);
   const { auth } = useContext(AuthContext);
   console.log(transactions);
 
@@ -59,14 +59,18 @@ const Receipts = () => {
     // console.log(auth);
   };
 
-  useEffect(() => {
-    getTransactions();
-  }, [state.transactions.length]);
+  const falseSuccess = () => {
+    setSuccess(false);
+  };
+
+  // useEffect(() => {
+  //   getTransactions();
+  // }, [state.transactions.length]);
 
   return (
     <div>
       <h3 className="header">Receipts ({transactions.length})</h3>
-      {transactions.map((transaction) => {
+      {transactions.reverse().map((transaction) => {
         const theDay = new Date(transaction.date).toString().substring(4, 25);
         return (
           <section key={transaction._id} className="receipt-main-cont">
@@ -153,6 +157,24 @@ const Receipts = () => {
           </button>
         </article>
       </div>
+      <article className={success ? "success" : "non-success"}>
+        <h3>{state.alertMsg}</h3>
+        {state.alertMsg ? (
+          <div>
+            <h4>Receipt?</h4>
+            <div className="cash-confirm">
+              <button onClick={falseSuccess}>No</button>
+              <button>
+                <Link to="/one-receipt" className="cash-confirm-link">
+                  Yes
+                </Link>
+              </button>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
+      </article>
     </div>
   );
 };

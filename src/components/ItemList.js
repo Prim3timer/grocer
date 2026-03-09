@@ -25,7 +25,7 @@ const ItemList = () => {
                   <section className="list-item-texts">
                     <h3>
                       {currency}
-                      {item.availablePrices[0]}
+                      {item.availablePrices[0]}/{item.availableUnitMeasures[0]}
                     </h3>
                     <h4>{item.name}</h4>
                     <h4>
