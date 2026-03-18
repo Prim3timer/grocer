@@ -35,10 +35,6 @@ const Inventory = () => {
     const measureIndex = currentItem.availableUnitMeasures.indexOf(
       e.target.value,
     );
-    console.log(e.target.value);
-    console.log(measureIndex);
-
-    // setUnitMeasure(e.target.value);
     dispatch({
       type: "inventMeasure",
       payload: e.target.value,
@@ -89,7 +85,7 @@ const Inventory = () => {
           <tr className="invent-header-trow">
             <th>Name</th>
             <th>In-Stock</th>
-            <th></th>
+            <th> </th>
             <th> Last Udated</th>
             {/* <th>ACTION</th> */}
           </tr>
