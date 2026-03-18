@@ -73,10 +73,10 @@ const CreateItem = () => {
 
         console.log(ole);
 
-        const response = await axios.post(`http://grocery-items`, newItem);
+        const response = await axios.post(`/grocery-items`, newItem);
         console.log(response.data);
         const response2 = await axios.post(
-          `http://grocery-items/pic/${newItem.name}`,
+          `/grocery-items/pic/${newItem.name}`,
           formData,
         );
         if (response) {
