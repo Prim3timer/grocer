@@ -34,7 +34,7 @@ const CreateItem = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (file.size > 2000000) {
+    if (file?.size > 2000000) {
       setSuccess(true);
 
       setErrMsg("Please limit file sizes to 2MB. Thank you.");
@@ -122,10 +122,6 @@ const CreateItem = () => {
   };
   const handleSecondPrice = (e) => {
     setSecondPrice(e.target.value);
-  };
-
-  const showUnits = () => {
-    console.log(availableUnitMeasures);
   };
 
   const demSetter = (e) => {
