@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/grocer/static/css/main.1ac57bfb.css",
-    "main.js": "/grocer/static/js/main.fab5cff2.js",
+    "main.css": "/grocer/static/css/main.e8c33cd2.css",
+    "main.js": "/grocer/static/js/main.6e851339.js",
     "static/media/logo.svg": "/grocer/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/grocer/index.html",
-    "main.1ac57bfb.css.map": "/grocer/static/css/main.1ac57bfb.css.map",
-    "main.fab5cff2.js.map": "/grocer/static/js/main.fab5cff2.js.map"
+    "main.e8c33cd2.css.map": "/grocer/static/css/main.e8c33cd2.css.map",
+    "main.6e851339.js.map": "/grocer/static/js/main.6e851339.js.map"
   },
   "entrypoints": [
-    "static/css/main.1ac57bfb.css",
-    "static/js/main.fab5cff2.js"
+    "static/css/main.e8c33cd2.css",
+    "static/js/main.6e851339.js"
   ]
 }
