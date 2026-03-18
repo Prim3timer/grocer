@@ -114,6 +114,8 @@ const Inventory = () => {
                     }}
                   >
                     {parseFloat(inv.qty).toFixed(2)}{" "}
+                  </th>
+                  <td>
                     <select
                       className="measure-inventory"
                       size={"1"}
@@ -128,7 +130,7 @@ const Inventory = () => {
                         );
                       })}
                     </select>
-                  </th>
+                  </td>
                   <td className="sales-items">
                     {/* {new Date(inv.date).toLocaleString("en-us", {
                       day: "numeric",

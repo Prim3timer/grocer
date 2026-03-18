@@ -684,16 +684,22 @@ display: flex;
 
 .inventory h3, .sales-cont h3 {
   width: 100%;
-  /* background-color: red; */
-
-
+  
+  
 }
+
+/* .sales-table th {
+  background-color: red;
+  text-align: left;
+
+} */
 
 .inventory-table {
   width: 60vw;
 }
 
-.inventory-table th, td {
+.inventory-table, th, td .sales-table th, td {
+  /* background-color: red; */
   padding: .5rem;
   text-align: left;
 }
