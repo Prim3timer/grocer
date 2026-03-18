@@ -8,7 +8,8 @@ const ItemContext = createContext({});
 const currency = "$";
 export const ItemProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const picUrl = process.env.REACT_APP_URL;
+  // const picUrl = process.env.REACT_APP_URL;
+  const picUrl = "https://ukuta.onrender.com";
   const [items, setItems] = useState();
   const bizName = "Retail Solutions";
   const getItems = async () => {
