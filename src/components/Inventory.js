@@ -89,6 +89,7 @@ const Inventory = () => {
           <tr className="invent-header-trow">
             <th>Name</th>
             <th>In-Stock</th>
+            <th></th>
             <th> Last Udated</th>
             {/* <th>ACTION</th> */}
           </tr>

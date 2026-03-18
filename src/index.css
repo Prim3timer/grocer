@@ -704,6 +704,10 @@ display: flex;
   text-align: left;
 }
 
+.invent-header-trow {
+  /* width: 150vw */
+}
+
 .invent-header-trow th {
   border-bottom: 2px solid brown;
 }
