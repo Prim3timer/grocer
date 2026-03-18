@@ -1046,6 +1046,19 @@ position: relative;
   padding: .5rem; */
 
 }
+
+.searcher input {
+  max-width: 12rem;
+  overflow-y: auto;
+  /* background-color: pink; */
+}
+
+ .items-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* column-gap: .5rem; */
+  /* background-color: red; */
+}
   }
 
 /* SMALL */
@@ -1059,6 +1072,8 @@ position: relative;
   /* column-gap: .5rem; */
   /* background-color: red; */
 }
+
+
 
 .inventory, .sales-cont {
   align-items: flex-start;
