@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import axios from "axios";
+import axios from "../app/api/axios";
 
 const CreateItem = () => {
   const itemRef = useRef();
@@ -73,13 +73,10 @@ const CreateItem = () => {
 
         console.log(ole);
 
-        const response = await axios.post(
-          `http://localhost:3500/grocery-items`,
-          newItem,
-        );
+        const response = await axios.post(`http://grocery-items`, newItem);
         console.log(response.data);
         const response2 = await axios.post(
-          `http://localhost:3500/grocery-items/pic/${newItem.name}`,
+          `http://grocery-items/pic/${newItem.name}`,
           formData,
         );
         if (response) {

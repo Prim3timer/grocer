@@ -1127,6 +1127,7 @@ position: relative;
   grid-template-columns: repeat(5, 1fr);
   /* column-gap: .5rem; */
   /* background-color: red; */
+  
 }
 
 }
