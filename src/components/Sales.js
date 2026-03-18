@@ -1,4 +1,4 @@
-import { useContext, useEffect, useReducer, useState } from "react";
+import { use, useContext, useEffect, useReducer, useState } from "react";
 import initialState from "../store";
 import reducer from "../reducer";
 import ItemContext from "../context/itemProvider";
@@ -8,6 +8,7 @@ const Sales = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { transactions } = useContext(ItemContext);
   const [transactionArray, setTransactionArray] = useState([]);
+
   const getTrans = () => {
     let innerArray = [];
     transactions.map((transaction) => {
@@ -39,12 +40,20 @@ const Sales = () => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
+  const changeUnitMesure = () => {
+    console.log("wink");
+  };
+
   useEffect(() => {
     getTrans();
   }, [state.search, state.search2]);
   return (
     <div className="sales-cont">
       <h3 className="header">Sales</h3>
+      {/* <article className="measure-select-cont">
+        <button onClick={changeUnitMesure}>primary</button>
+        <button onClick={changeUnitMesure}>secondary</button>
+      </article> */}
       <form className="searcher" onSubmit={(e) => e.preventDefault()}>
         <input
           // id="invent-search"
