@@ -710,6 +710,7 @@ display: flex;
 
 .invent-header-trow th {
   border-bottom: 2px solid brown;
+  white-space: nowrap;
 }
 
 .measure-inventory {
