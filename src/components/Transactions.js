@@ -272,16 +272,18 @@ const Transactions = () => {
 
   return (
     <div className="trans-cont">
-      <h3 className="header">Transactions</h3>
+      <sections className="title">
+        <h3 className="header">Transactions</h3>
 
-      {state.transArray.length ? (
-        <h3 className="item-counter">
-          {state.transArray.length} product
-          {state.transArray.length === 1 ? "" : "s"}
-        </h3>
-      ) : (
-        ""
-      )}
+        {state.transArray.length ? (
+          <h3 className="item-counter">
+            {state.transArray.length} product
+            {state.transArray.length === 1 ? "" : "s"}
+          </h3>
+        ) : (
+          ""
+        )}
+      </sections>
 
       {/* <h3 className={state.alertMsg ? "delete" : "no-delete"}>
         {state.alertMsg}
@@ -371,42 +373,42 @@ const Transactions = () => {
             );
           })
         )}
-        <section>
-          <fieldset className="field">
-            <form className="tran-form">
-              <article className="trans-add">
-                <input
-                  type="text"
-                  className="trans-search"
-                  placeholder="select item"
-                  ref={inputRef}
-                  onChange={(e) => handleAdd(e)}
-                  list="edulevel"
-                />
-              </article>
-
-              <datalist id="edulevel">
-                {items &&
-                  items.items.map((user) => {
-                    return (
-                      <option
-                        key={user._id}
-                        value={`${user.name}`}
-                        className="transaction-items-list"
-                      ></option>
-                    );
-                  })}
-              </datalist>
-            </form>
-
-            <fieldset className="field2">
-              <legend>Checkout</legend>
-              <button onClick={trueCash}>Cash</button>
-              <button onClick={cardCheckout}>Card</button>
-            </fieldset>
-          </fieldset>
-        </section>
       </div>
+      <section>
+        <fieldset className="field">
+          <form className="tran-form">
+            <article className="trans-add">
+              <input
+                type="text"
+                className="trans-search"
+                placeholder="select item"
+                ref={inputRef}
+                onChange={(e) => handleAdd(e)}
+                list="edulevel"
+              />
+            </article>
+
+            <datalist id="edulevel">
+              {items &&
+                items.items.map((user) => {
+                  return (
+                    <option
+                      key={user._id}
+                      value={`${user.name}`}
+                      className="transaction-items-list"
+                    ></option>
+                  );
+                })}
+            </datalist>
+          </form>
+
+          <fieldset className="field2">
+            <legend>Checkout</legend>
+            <button onClick={trueCash}>Cash</button>
+            <button onClick={cardCheckout}>Card</button>
+          </fieldset>
+        </fieldset>
+      </section>
 
       {state.cash === true && (
         <section

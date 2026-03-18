@@ -72,7 +72,7 @@ const Sales = () => {
           // https://www.npmjs.com/package/@react-google-maps/api
         />
       </form>
-      <table className="sales">
+      <table className="sales-table">
         <tbody>
           <tr className="theader-row">
             <th className="gen-sales-theader">NAME</th>

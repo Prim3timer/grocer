@@ -11,7 +11,6 @@ import initialState from "../store";
 import reducer from "../reducer";
 import axios from "../app/api/axios";
 import { useNavigate } from "react-router-dom";
-import { type } from "@testing-library/user-event/dist/type";
 
 const EditItem = () => {
   const [state, dispatch] = useReducer(reducer, initialState);

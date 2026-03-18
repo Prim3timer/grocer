@@ -7,7 +7,6 @@ const { v4: uuid } = require("uuid");
 const Inventory = () => {
   // const { items } = useContext(ItemContext);
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [unitMeasure, setUnitMeasure] = useState("");
   const [inventItems, setInventItems] = useState("");
   const [measureIdex, setMeasureIndex] = useState(0);
 

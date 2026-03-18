@@ -252,8 +252,7 @@ code {
 .items-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  /* column-gap: .5rem; */
-  /* background-color: red; */
+  gap: 1rem .5rem;
 }
 
 .items-link {
@@ -282,6 +281,18 @@ code {
   
 }
 
+.trans-cont {
+  /* height: 100vh; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* margin: 1rem 0; */
+  row-gap: 1rem;
+  /* background-color: red; */
+
+
+}
+
 .item-dets-cont {
   display: flex;
   align-items: center;
@@ -294,6 +305,7 @@ code {
  .item-dets-cont img {
   width:200px;
   height: 200px;
+  object-fit: cover;
  }
 
  .list-item-texts >* {
@@ -354,7 +366,7 @@ textarea {
 }
 
 .empty-cart {
-  margin: 2rem 0;
+  width: 90vw;
 }
 
 
@@ -366,6 +378,23 @@ textarea {
   align-items: center;
   /* background-color: yellow; */
 }
+
+
+.trans-item-cont {
+
+  border-top: 2px solid brown;
+  border-bottom: 2px solid brown;
+  padding: .5rem;
+  display: grid;
+  /* min-height: 100px; */
+  max-width: 95vw;
+  place-content: center;
+  row-gap: .5rem;
+  min-height: 10rem;
+  /* background-color: red; */
+}
+
+
 
 .trans-cont section {
   /* background-color: green; */
@@ -476,7 +505,7 @@ button {
   row-gap: 1rem;
   align-items: center;
   /* justify-content: flex-start; */
-  justify-content: space-evenly;
+  /* justify-content: start; */
   /* background-color: #00BFFF; */
   padding: 1rem;
   border-radius: 5px;
@@ -515,7 +544,7 @@ button {
   row-gap: .5rem;
   min-height: 10rem;
   /* background-color: red; */
- justify-content: center;
+ justify-content: start;
 }
 
 .tran-form {
@@ -635,9 +664,6 @@ display: flex;
   text-align: center;
 }
 
-.sales {
-
-}
 
 .searcher {
   display: flex;
@@ -656,15 +682,10 @@ display: flex;
   text-align: left;
 }
 
-.inventory {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.inventory h3 {
+.inventory h3, .sales-cont h3 {
   width: 100%;
   /* background-color: red; */
+
 
 }
 
@@ -686,19 +707,19 @@ display: flex;
   width: 6rem;
 }
 
-.sales-cont {
+.sales-cont, .inventory {
   display: flex;
   flex-direction: column;
   align-items: center;
   /* max-width: 800px; */
 }
 
-.sales {
+/* .sales-table {
   text-align: left;
   width: 80%;
-}
+} */
 
-.sales  tr>* {
+.sales-table  tr>* {
   padding:  .5rem;
 
 }
@@ -764,7 +785,7 @@ display: flex;
 
 .searcher input {
   font-size: 1.5rem;
-  padding: .2rem;
+  padding: .5rem .2rem;
 
 }
 
@@ -930,6 +951,130 @@ position: relative;
 .cash-confirm-link {
   text-decoration: none;
   color: white;
+}
+
+  @media screen and (max-width: 575px) {
+    .inventory, .sales-cont {
+      align-items: flex-start;
+    }
+
+    .trans-cont section {
+  justify-content: flex-start;
+}
+
+
+    .inventory-table, .sales-table   {
+      width: 160vw;
+    }
+
+    .trans-cont {
+      align-items: start;
+      /* overflow-y: auto; */
+    }
+
+
+    .trans-item-cont{
+      overflow-y: auto;
+      width: 110vw;
+      justify-content: flex-start;
+      /* background-color: red; */
+      align-items: flex-start;
+    }
+
+    .title {
+      width: 100vw;
+    }
+    
+    .trans-item {
+      /* padding-right: 1rem; */
+  min-width: 170vw;
+}
+  }
+
+/* SMALL */
+@media screen and (min-width: 576px){
+ .items-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* column-gap: .5rem; */
+  /* background-color: red; */
+}
+
+.inventory, .sales-cont {
+  align-items: flex-start;
+}
+
+.inventory-table, .sales-table {
+  width: 140vw;
+
+}
+
+
+}
+/* MEDIUM */
+@media screen and (min-width: 768px){
+ .items-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* column-gap: .5rem; */
+  /* background-color: red; */
+}
+
+.inventory-table {
+  width: 100vw;
+}
+
+}
+
+/* LARGE */
+@media screen and (min-width: 992px){
+ .items-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  /* column-gap: .5rem; */
+  /* background-color: red; */
+}
+
+.inventory, .sales-cont {
+  align-items: center;
+}
+
+.inventory-table, .sales-table {
+  max-width: 800px;
+}
+
+}
+
+/* XL */
+@media screen and (min-width: 1200px){
+ .items-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  /* column-gap: .5rem; */
+  /* background-color: red; */
+}
+
+}
+
+/* MOBILE DEVICE LANDSCAPE */
+@media screen and (min-height: 425px) and (min-aspect-ratio: 7/4){
+ .items-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* column-gap: .5rem; */
+  /* background-color: red; */
+
+}
+
+ .inventory, .sales-table {
+  align-items: flex-start;
+}
+
+.inventory-table, .sales-table {
+  width: 140vw;
+
+}
+
 }
 
 
