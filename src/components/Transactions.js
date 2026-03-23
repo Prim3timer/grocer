@@ -412,7 +412,7 @@ const Transactions = () => {
 
       {state.cash === true && (
         <section
-          className="delete"
+          className="cash-window"
           // style={{
           //   display: "none",
           //   columnGap: "1rem",
