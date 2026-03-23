@@ -1017,7 +1017,9 @@ position: relative;
   left: 2%;
 }
 
-
+.delete {
+ left: 2.5%;
+}
 
     .inventory-table, .sales-table   {
       width: 160vw;
