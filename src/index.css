@@ -253,8 +253,10 @@ code {
 
 .items-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem .5rem;
+  justify-content: center;
+  grid-template-columns: repeat(2, 220px);
+  column-gap: .5rem; 
+  margin: 1rem 0;
 }
 
 .items-link {
@@ -708,20 +710,10 @@ display: flex;
 }
 
 .inventory h3, .sales-cont h3 {
-  width: 100%;
+  width: 60%;
   
   
 }
-
-/* .sales-table th {
-  background-color: red;
-  text-align: left;
-
-} */
-
-.inventory-table {
-  width: 60vw;
-} 
 
 .inventory-table, th, td .sales-table th, td {
   /* background-color: red; */
@@ -747,8 +739,7 @@ display: flex;
 .sales-cont, .inventory {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  /* max-width: 800px; */
+  width: 160vw;
 }
 
 /* .sales-table {
@@ -806,24 +797,28 @@ display: flex;
   flex-direction: column;
   align-items: center;
   padding: 2rem;
+}
+
+.outer-one-receipt {
   /* background-color: yellow; */
+  width: 90%;
 }
 
 .one-receipt h3{
   text-align: left;
-  width: 30%;
+  /* width: 30%; */
 }
 
 .receipts-date {
   text-align: left;
   /* background-color: red; */
-  width: 30%;
+  /* width: 30%; */
 }
 
-.inner-one-receipt {
+.inner-one-receipt, .receipts-date {
   /* background-color: red; */
   text-align: left;
-  width: 30%;
+  /* width: 50%; */
   
 }
 /* 
@@ -1004,93 +999,6 @@ position: relative;
   color: white;
 }
 
-  @media screen and (max-width: 575px) {
-    .inventory, .sales-cont {
-      align-items: flex-start;
-    }
-
-    .trans-cont section {
-  justify-content: flex-start;
-}
-
-.cash-window {
-  left: 2%;
-}
-
-.delete {
- left: 2.5%;
-}
-
-    .inventory-table, .sales-table   {
-      width: 160vw;
-    }
-
-    .trans-cont {
-      align-items: start;
-      /* overflow-y: auto; */
-    }
-
-    .one-receipt h3 {
-      width: 90%;
-    }
-      .receipts-date, .inner-one-receipt {
-        width: 90%;
-      }
-
-
-    .trans-item-cont{
-      overflow-y: auto;
-      width: 100vw;
-      justify-content: flex-start;
-      /* background-color: red; */
-      align-items: flex-start;
-    }
-
-    .title {
-      width: 100vw;
-    }
-    
-    .trans-item {
-      /* padding-right: 1rem; */
-  min-width: 170vw;
-}
-
-.sales-total {
-  margin-left: 0;
-  min-width: 140vw;
-  /* background-color: pink; */
-}
-
-.sales-total>*:nth-child(1) {
-  grid-column: 1/1;
-}
-
-.sales-total>*:nth-child(2) {
-  grid-column: 3/5;
-}
-
-.sales-total>*:nth-child(3) {
-  grid-column: 7/12
-  /* overflow: auto;
-  border: 2px solid brown;
-  padding: .5rem; */
-
-}
-
-.searcher input {
-  max-width: 12rem;
-  overflow-y: auto;
-  /* background-color: pink; */
-}
-
- .items-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  /* column-gap: .5rem; */
-  /* background-color: red; */
-}
-  }
-
 /* SMALL */
 @media screen and (min-width: 576px){
   .sales-total>*:nth-child(3) {
@@ -1100,11 +1008,12 @@ position: relative;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   /* column-gap: .5rem; */
-  /* background-color: red; */
 }
 
-
-
+.outer-one-receipt {
+  /* background-color: red; */
+  width: 50%;
+}
 .inventory, .sales-cont {
   align-items: flex-start;
 }
@@ -1137,21 +1046,31 @@ position: relative;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   /* column-gap: .5rem; */
-  /* background-color: red; */
 }
+
+.outer-one-receipt {
+  /* background-color: red; */
+  width: 40%;
+}
+
+
 
 .inventory, .sales-cont {
-  align-items: center;
-}
-
-.inventory-table, .sales-table {
-  max-width: 800px;
+  align-items: center;  
+  width: 100vw;
+  /* background-color: yellow; */
 }
 
 }
 
 /* XL */
 @media screen and (min-width: 1200px){
+
+
+
+.sales-table, .inventory-table {
+  max-width: 800px;
+}
  .items-container {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -1169,15 +1088,6 @@ position: relative;
   grid-template-columns: repeat(2, 1fr);
   /* column-gap: .5rem; */
   /* background-color: red; */
-
-}
-
- .inventory, .sales-table {
-  align-items: flex-start;
-}
-
-.inventory-table, .sales-table {
-  width: 140vw;
 
 }
 

@@ -66,7 +66,7 @@ const Transactions = () => {
     setSuccess(false);
   };
   console.log(items);
-  const getReceit = async () => {
+  const getReceipt = async () => {
     const transactions = await axios.get("/grocery-transactions");
     const reverse = transactions.data.reverse()[0];
     localStorage.setItem("groceryTransactions", reverse._id);
@@ -77,7 +77,7 @@ const Transactions = () => {
   };
 
   useEffect(() => {
-    getReceit();
+    getReceipt();
   }, [success]);
 
   const onUnitMeasureChange = (e, id) => {
