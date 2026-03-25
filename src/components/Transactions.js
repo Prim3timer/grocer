@@ -272,7 +272,7 @@ const Transactions = () => {
 
   return (
     <div className="trans-cont">
-      <sections className="title">
+      <article className="title">
         <h3 className="header">Transactions</h3>
 
         {state.transArray.length ? (
@@ -283,7 +283,7 @@ const Transactions = () => {
         ) : (
           ""
         )}
-      </sections>
+      </article>
 
       {/* <h3 className={state.alertMsg ? "delete" : "no-delete"}>
         {state.alertMsg}
