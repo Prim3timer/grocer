@@ -559,10 +559,10 @@ button {
   margin-left: .5rem;
   /* white-space: nowrap; */
   overflow: auto;
-  /* background-color: red; */
 }
 
 .flex-article {
+  /* background-color: red; */
   width: 20%;
   margin:  0 1rem 0 0;
 }
@@ -644,11 +644,11 @@ button {
   position: fixed;
   text-align: center;
   justify-self: center;
-  /* color: whitesmoke; */
+  align-items: center;
 
   row-gap: .5rem;
   top: 35%;
-  left: 25%;
+  /* left: 2.5%; */
   min-width: 50vw;
   padding: 1rem;
   background-color: gainsboro;
@@ -787,8 +787,11 @@ display: flex;
 }
 
 .outer-one-receipt {
-  /* background-color: yellow; */
-  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
 }
 
 .one-receipt h3{
@@ -797,12 +800,12 @@ display: flex;
 }
 
 .receipts-date {
-  text-align: left;
+  /* text-align: left; */
   /* background-color: red; */
-  /* width: 30%; */
+  /* width: 100%; */
 }
 
-.inner-one-receipt, .receipts-date {
+.inner-one-receipt{
   /* background-color: red; */
   text-align: left;
   /* width: 50%; */
@@ -841,6 +844,11 @@ display: flex;
 
 .edit-item-form input {
   font-size: 1.5rem;
+}
+
+.delete-buttons {
+  display: flex;
+  column-gap:2rem;
 }
 
 .edit-delete-text {
@@ -988,7 +996,6 @@ position: relative;
 
 /* SMALL */
 @media screen and (min-width: 576px){
-
   .trans-cont section {
   justify-content: center;
 }
@@ -1010,9 +1017,9 @@ position: relative;
   /* column-gap: .5rem; */
 }
 
-.outer-one-receipt {
-  /* background-color: red; */
-  width: 50%;
+.flex-article {
+  width: 35%;
+
 }
 .inventory, .sales-cont {
   align-items: flex-start;

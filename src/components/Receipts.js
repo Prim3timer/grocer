@@ -38,18 +38,22 @@ const Receipts = () => {
 
   const handleRemove = async () => {
     //   e.preventDefault()
-    dispatch({ type: "cancel", payload: false });
-    const response = await axios.delete(
-      `/grocery-transactions/${state.currentTransaction._id}`,
-    );
-
-    if (response) {
-      const newTransList = transactions.filter(
-        (item) => item._id !== state.currentTransaction._id,
+    try {
+      dispatch({ type: "cancel", payload: false });
+      const response = await axios.delete(
+        `/grocery-transactions/${state.currentTransaction._id}`,
       );
-      console.log(newTransList);
 
-      dispatch({ type: "transactions", payload: newTransList });
+      if (response) {
+        const newTransList = transactions.filter(
+          (item) => item._id !== state.currentTransaction._id,
+        );
+        console.log(newTransList);
+
+        dispatch({ type: "transactions", payload: newTransList });
+      }
+    } catch (error) {
+      console.error(error.message);
     }
   };
 
@@ -63,9 +67,9 @@ const Receipts = () => {
     setSuccess(false);
   };
 
-  // useEffect(() => {
-  //   getTransactions();
-  // }, [state.transactions.length]);
+  useEffect(() => {
+    getTransactions();
+  }, [state.transactions.length]);
 
   return (
     <div>
@@ -80,7 +84,6 @@ const Receipts = () => {
                 <p>{theDay}</p>
                 <p>{transaction._id}</p>
                 {transaction.goods.map((good) => {
-                  console.log(good);
                   return (
                     <div className="goods-container" key={good._id}>
                       <Link

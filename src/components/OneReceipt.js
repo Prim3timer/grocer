@@ -22,9 +22,10 @@ const OneReceipt = () => {
     currentTrans && (
       <div className="one-receipt">
         <article className="outer-one-receipt">
-          <h3>{bizName}</h3>
-          <p className="receipts-date">{currentTrans.date}</p>
           <section className="inner-one-receipt">
+            <h3>{bizName}</h3>
+            <p className="receipts-date">{currentTrans._id}</p>
+            <p className="receipts-date">{currentTrans.date}</p>
             {currentTrans.goods.map((good) => {
               return (
                 <div>

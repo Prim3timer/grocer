@@ -195,7 +195,7 @@ const Transactions = () => {
     }
   };
   console.log(success);
-  const getRecipt = async () => {
+  const getReciept = async () => {
     try {
       const transes = await axios.get(`/grocery-transactions`);
       console.log(transes.data);
@@ -263,7 +263,7 @@ const Transactions = () => {
   // }, []);
 
   useEffect(() => {
-    getRecipt();
+    getReciept();
   }, [success]);
 
   useEffect(() => {
