@@ -215,7 +215,7 @@ const Transactions = () => {
       // console.log({date})
       if (sessionId) {
         const res = await axios.get(
-          `/sessions/thanks/old-session/${sessionId}`,
+          `/grocery-transactions/thanks/old-session/${sessionId}`,
         );
         const oldSession = res.data ? res.data : "";
 
@@ -223,7 +223,7 @@ const Transactions = () => {
           return;
         } else if (!oldSession || oldSession !== sessionId) {
           const response = await axios.post(
-            `/transactions/sessions/${sessionId}`,
+            `/grocery-transactions/sessions/${sessionId}`,
             dateOjb,
           );
 

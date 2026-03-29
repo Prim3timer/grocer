@@ -25,7 +25,9 @@ const OneReceipt = () => {
           <section className="inner-one-receipt">
             <h3>{bizName}</h3>
             <p className="receipts-date">{currentTrans._id}</p>
-            <p className="receipts-date">{currentTrans.date}</p>
+            <p className="receipts-date">
+              {currentTrans.date.toString().substring(0, 19)}
+            </p>
             {currentTrans.goods.map((good) => {
               return (
                 <div>

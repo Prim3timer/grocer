@@ -628,7 +628,6 @@ button {
 
   row-gap: .5rem;
   top: 35%;
-  left: 25%;
   min-width: 50vw;
   padding: 1rem;
   background-color: gainsboro;
@@ -688,6 +687,7 @@ display: flex;
   column-gap: 1rem;
   /* width: 100%; */
   /* width: 60vw; */
+  /* background-color: red; */
   
 }
 .invent-header-trow th {
@@ -822,6 +822,7 @@ display: flex;
 .searcher input {
   font-size: 1.5rem;
   padding: .5rem .2rem;
+  width: 12.5rem;
 
 }
 
@@ -1028,9 +1029,10 @@ position: relative;
 .inventory-table, .sales-table {
   width: 140vw;
 
+}.searcher input {
+  width: 20rem
+
 }
-
-
 }
 /* MEDIUM */
 @media screen and (min-width: 768px){
@@ -1039,7 +1041,7 @@ position: relative;
   grid-template-columns: repeat(3, 1fr);
 }
 
-.inventory-table {
+.inventory-table, .sales-table {
   width: 100vw;
 }
 
@@ -1048,9 +1050,11 @@ position: relative;
 }
 .sales-total>*:nth-child(3) {
   grid-column: 11/21;
-  /* background-color: red;s */
 }
+.searcher input {
+  width: 25rem
 
+}
 
 }
 
