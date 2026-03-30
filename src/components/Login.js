@@ -66,8 +66,9 @@ const Login = () => {
       const picker = response?.data?.id;
 
       const authObj = { user, roles, accessToken, picker };
-
+      localStorage.setItem("GroceryUserId", response.data.id);
       setAuth({ user, roles, accessToken, picker });
+      console.log(auth);
       setUser("");
       setPwd("");
       // get the user to where they wanted to go before they were kicked out to

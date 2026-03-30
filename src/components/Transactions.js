@@ -39,10 +39,11 @@ const Transactions = () => {
 
   const cardCheckout = async () => {
     try {
+      const userId = localStorage.getItem("GroceryUserId");
       if (state.transArray.length) {
         const transItems = {
           // cashier: auth.user,
-          // cashierID: auth.picker,
+          cashierID: userId,
           goods: state.transArray,
           grandTotal: state.total,
           date: now,
@@ -72,7 +73,7 @@ const Transactions = () => {
     localStorage.setItem("groceryTransactions", reverse._id);
     let sessionId = window.location.href.split(" ")[1];
     // const cusomer = queryParams.get("customer")
-    const res = await axios.post(`/grocery-transactions/thanks/${sessionId}`);
+    // const res = await axios.post(`/grocery-transactions/thanks/${sessionId}`);
     console.log({ sessionId });
   };
 
@@ -215,7 +216,7 @@ const Transactions = () => {
       // console.log({date})
       if (sessionId) {
         const res = await axios.get(
-          `/grocery-transactions/thanks/old-session/${sessionId}`,
+          `/grocery-transactions/old-session/${sessionId}`,
         );
         const oldSession = res.data ? res.data : "";
 
@@ -223,7 +224,7 @@ const Transactions = () => {
           return;
         } else if (!oldSession || oldSession !== sessionId) {
           const response = await axios.post(
-            `/grocery-transactions/sessions/${sessionId}`,
+            `/grocery-transactions/thanks/${sessionId}`,
             dateOjb,
           );
 
@@ -264,7 +265,7 @@ const Transactions = () => {
 
   useEffect(() => {
     getReciept();
-  }, [success]);
+  }, []);
 
   useEffect(() => {
     // console.log(`cashpaidref is: ${cashPaidRef.current.value}`);
