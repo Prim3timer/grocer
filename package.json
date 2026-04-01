@@ -1,7 +1,7 @@
 {
   "name": "grocer",
   "version": "0.1.0",
-  "homepage": "https://prim3timer.github.io/grocer",
+  // "homepage": "https://prim3timer.github.io/grocer",
   "private": true,
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^7.2.0",
