@@ -28,11 +28,11 @@ function App() {
       <div className="grower">
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route path="/transactions" index element={<transactions />} />
+            <Route path="/transactions" index element={<Transactions />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="one-receipt" element={<OneReceipt />} />
-            {/* <Route path="transactions" element={<Transactions />} /> */}
+            {/* <Route path="transactions" element={<Transactions />} />   */}
             <Route path="create-item" element={<CreateItem />} />
             <Route path="item-list" element={<ItemList />} />
             <Route path="sales" element={<Sales />} />
