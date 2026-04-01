@@ -69,7 +69,7 @@ const Receipts = () => {
 
   useEffect(() => {
     getTransactions();
-  }, []);
+  }, [  ]);
 
   return (
     <div>

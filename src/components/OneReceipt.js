@@ -1,5 +1,6 @@
 import { useEffect, useContext } from "react";
 import ItemContext from "../context/itemProvider";
+import axios from "../app/api/axios";
 
 const OneReceipt = () => {
   const { transactions, currency, getTransactions, bizName } =
@@ -10,6 +11,19 @@ const OneReceipt = () => {
     (transaction) => transaction._id == transId,
   );
   console.log(currentTrans);
+
+  // const latestTrans = async () => {
+  //   const response = await axios.get("/grocery-transactions");
+  //   const transId = localStorage.getItem("grocTransId");
+  //   const currentTrans = response.data.find(
+  //     (transaction) => transaction._id == transId,
+  //   );
+  //   console.log(currentTrans);
+  // };
+
+  // useEffect(() => {
+  //   latestTrans();
+  // }, [transId]);
 
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
