@@ -219,6 +219,7 @@ const Transactions = () => {
           `/grocery-transactions/old-session/${sessionId}`,
         );
         const oldSession = res.data ? res.data : "";
+        console.log(oldSession, sessionId);
 
         if (oldSession === sessionId) {
           return;
@@ -297,7 +298,13 @@ const Transactions = () => {
             //  console.log(item.unitMeasure)
 
             return (
-              <section key={index} className="trans-item">
+              <section
+                key={index}
+                className="trans-item"
+                // style={{
+                //   backgroundColor: index % 2 === 0 ? "white" : "skyblue",
+                // }}
+              >
                 <section className="trans-name-and-img">
                   <img
                     className="trans-img"

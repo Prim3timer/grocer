@@ -385,8 +385,8 @@ textarea {
 
 .trans-item-cont {
 
-  border-top: 2px solid brown;
-  border-bottom: 2px solid brown;
+  /* border-top: 2px solid brown; */
+  /* border-bottom: 2px solid brown; */
   padding: 0 .5rem;
   display: grid;
   /* min-height: 100px; */
@@ -520,6 +520,7 @@ button {
   /* justify-content: start; */
   padding: 1rem 0;
   /* background-color: #00BFFF; */
+  border-bottom: 2px solid brown;
 }
 
 .trans-name-and-img {

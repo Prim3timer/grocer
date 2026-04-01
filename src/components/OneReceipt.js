@@ -14,6 +14,7 @@ const OneReceipt = () => {
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
+  const theDay = new Date(currentTrans.date).toString().substring(4, 25);
 
   useEffect(() => {
     getTransactions();
@@ -25,10 +26,9 @@ const OneReceipt = () => {
           <section className="inner-one-receipt">
             <h3>{bizName}</h3>
             <p className="receipts-date">{currentTrans._id}</p>
-            <p className="receipts-date">
-              {currentTrans.date.toString().substring(0, 19)}
-            </p>
+            <p className="receipts-date">{theDay}</p>
             {currentTrans.goods.map((good) => {
+              console.log(good);
               return (
                 <div>
                   <h4>{good.name}</h4>
