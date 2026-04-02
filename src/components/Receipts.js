@@ -38,7 +38,7 @@ const Receipts = () => {
 
   useEffect(() => {
     getReceipt();
-  }, []);
+  }, [transactions?.length]);
 
   const remainDelete = () => {
     // this condition statement is to enable the removal of the confirm window once any part of the
@@ -62,7 +62,7 @@ const Receipts = () => {
         );
         console.log(newTransList);
 
-        dispatch({ type: "transactions", payload: newTransList });
+        setTransactions(newTransList);
       }
     } catch (error) {
       console.error(error.message);
@@ -85,7 +85,7 @@ const Receipts = () => {
 
   return (
     <div>
-      {/* <h3 className="header">Receipts ({transactions.length})</h3> */}
+      <h3 className="header">Receipts ({transactions?.length})</h3>
       {transactions &&
         transactions.map((transaction) => {
           const theDay = new Date(transaction.date).toString().substring(4, 25);
