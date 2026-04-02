@@ -93,6 +93,7 @@ const Receipts = () => {
             <section key={transaction._id} className="receipt-main-cont">
               {transactions.length !== 0 ? (
                 <article className="receipts">
+                  <br />
                   <h4 className="biz-name">{bizName}</h4>
                   <p>{theDay}</p>
                   <p>{transaction._id}</p>
@@ -140,7 +141,6 @@ const Receipts = () => {
                     )}
                   </h4>
                   <h5>Cashier: {transaction.cashier}</h5>
-                  <br />
                   <h3
                     onClick={(e) => assertain(transaction._id, e)}
                     style={{
@@ -149,6 +149,7 @@ const Receipts = () => {
                   >
                     <FaTrashAlt role="button" />
                   </h3>
+                  <br />
                 </article>
               ) : (
                 <p>"empty list"</p>
