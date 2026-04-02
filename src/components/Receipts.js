@@ -70,7 +70,7 @@ const Receipts = () => {
   };
 
   const oneShow = (id) => {
-    localStorage.setItem("grocTransId", id);
+    localStorage.setItem("groceryTransactions", id);
     // auth.picker2 = id;
     // console.log(auth);
   };
