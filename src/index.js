@@ -17,9 +17,9 @@ root.render(
   <BrowserRouter>
     <AuthProvider>
       <ItemProvider>
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>
+        {/* <React.StrictMode> */}
+        <App />
+        {/* </React.StrictMode> */}
       </ItemProvider>
     </AuthProvider>
   </BrowserRouter>,
