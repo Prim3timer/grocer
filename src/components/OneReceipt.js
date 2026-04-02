@@ -1,4 +1,4 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import ItemContext from "../context/itemProvider";
 import axios from "../app/api/axios";
 
@@ -6,29 +6,33 @@ const OneReceipt = () => {
   const { transactions, currency, getTransactions, bizName } =
     useContext(ItemContext);
   console.log(transactions);
+  const [currentTrans, setCurrentTrans] = useState();
   const transId = localStorage.getItem("grocTransId");
-  const currentTrans = transactions.find(
-    (transaction) => transaction._id == transId,
-  );
-  console.log(currentTrans);
+  // const currentTrans = transactions.find(
+  //   (transaction) => transaction._id == transId,
+  // );
+  // console.log(currentTrans);
 
-  // const latestTrans = async () => {
-  //   const response = await axios.get("/grocery-transactions");
-  //   const transId = localStorage.getItem("grocTransId");
-  //   const currentTrans = response.data.find(
-  //     (transaction) => transaction._id == transId,
-  //   );
-  //   console.log(currentTrans);
-  // };
+  const latestTrans = async () => {
+    const response = await axios.get("/grocery-transactions");
+    const transId = localStorage.getItem("groceryTransactions");
+    const current = response.data.find(
+      (transaction) => transaction._id == transId,
+    );
+    console.log(current);
+    setCurrentTrans(current);
+  };
 
-  // useEffect(() => {
-  //   latestTrans();
-  // }, [transId]);
+  useEffect(() => {
+    latestTrans();
+  }, []);
 
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
-  const theDay = new Date(currentTrans.date).toString().substring(4, 25);
+  const theDay = new Date(currentTrans && currentTrans.date)
+    .toString()
+    .substring(4, 25);
 
   // useEffect(() => {
   //   getTransactions();
