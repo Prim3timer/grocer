@@ -6,34 +6,39 @@ import { useSearchParams } from "react-router-dom";
 
 const Sales = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { transactions } = useContext(ItemContext);
+  const { transactions, getTransactions } = useContext(ItemContext);
   const [transactionArray, setTransactionArray] = useState([]);
 
   const getTrans = () => {
-    let innerArray = [];
-    transactions.map((transaction) => {
-      return transaction.goods.map((good) => {
-        const elements = {
-          name: good.name,
-          qty: good.qty,
-          unitMeasure: good.unitMeasure,
-          total: good.total,
-          date: transaction.date,
-        };
-        innerArray.push(elements);
-        const filterate =
-          innerArray &&
-          innerArray.filter((inner) =>
-            inner.name.toLowerCase().includes(state.search.toLowerCase()),
-          );
-        console.log(filterate);
-        const filterate2 = filterate.filter((inner) =>
-          inner.date.substring(0, 10).includes(state.search2),
-        );
-        setTransactionArray(filterate2);
-        return innerArray;
-      });
-    });
+    try {
+      if (transactions) {
+        console.log(transactions);
+        let innerArray = [];
+        transactions.map((transaction) => {
+          return transaction.goods.map((good) => {
+            const elements = {
+              name: good.name,
+              qty: good.qty,
+              unitMeasure: good.unitMeasure,
+              total: good.total,
+              date: transaction.date,
+            };
+            innerArray.push(elements);
+            const filterate =
+              innerArray &&
+              innerArray.filter((inner) =>
+                inner.name.toLowerCase().includes(state.search.toLowerCase()),
+              );
+            console.log(filterate);
+            const filterate2 = filterate.filter((inner) =>
+              inner.date.substring(0, 10).includes(state.search2),
+            );
+            setTransactionArray(filterate2);
+            return innerArray;
+          });
+        });
+      }
+    } catch (error) {}
   };
 
   function numberWithCommas(x) {
@@ -43,6 +48,10 @@ const Sales = () => {
   const changeUnitMesure = () => {
     console.log("wink");
   };
+
+  useEffect(() => {
+    getTransactions();
+  }, []);
 
   useEffect(() => {
     getTrans();

@@ -67,9 +67,9 @@ const Receipts = () => {
     setSuccess(false);
   };
 
-  useEffect(() => {
-    getTransactions();
-  }, [  ]);
+  // useEffect(() => {
+  //   getTransactions();
+  // }, [  ]);
 
   return (
     <div>

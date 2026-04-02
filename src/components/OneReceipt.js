@@ -30,9 +30,9 @@ const OneReceipt = () => {
   }
   const theDay = new Date(currentTrans.date).toString().substring(4, 25);
 
-  useEffect(() => {
-    getTransactions();
-  }, []);
+  // useEffect(() => {
+  //   getTransactions();
+  // }, []);
   return (
     currentTrans && (
       <div className="one-receipt">
