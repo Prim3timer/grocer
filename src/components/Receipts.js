@@ -130,6 +130,7 @@ const Receipts = () => {
                       </div>
                     );
                   })}
+                  <p>card ending in....{transaction.last4}</p>
                   <p>
                     cash paid: {currency}
                     {transaction.cashPaid}
