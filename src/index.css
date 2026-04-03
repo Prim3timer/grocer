@@ -707,7 +707,7 @@ display: flex;
 }
 
 
-.searcher {
+.searcher, .tran-form{
   display: flex;
   top: 10px;
   left: 10px;
