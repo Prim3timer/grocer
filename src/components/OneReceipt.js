@@ -51,8 +51,8 @@ const OneReceipt = () => {
                 <div>
                   <h4>{good.name}</h4>
                   <p>
-                    Qty: {parseFloat(good.qty).toFixed(2)}
-                    {good.unitMeasure}
+                    Qty: {parseFloat(good.qty).toFixed(2)} {good.unitMeasure}
+                    {good.qty > 1 ? "s" : ""}
                   </p>
                   <p>
                     Unit Price: {currency}

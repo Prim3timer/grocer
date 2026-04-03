@@ -120,7 +120,7 @@ const Transactions = () => {
           setNoShow(true);
           dispatch({ type: "TRANSARRAY", payload: acutalItem });
 
-          // inputRef.current.value = "";
+          inputRef.current.value = "";
           dispatch({ type: "ALERTMSG", payload: `${acutalItem.name} added` });
 
           setTimeout(() => {
