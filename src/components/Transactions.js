@@ -120,7 +120,7 @@ const Transactions = () => {
           setNoShow(true);
           dispatch({ type: "TRANSARRAY", payload: acutalItem });
 
-          inputRef.current.value = "";
+          // inputRef.current.value = "";
           dispatch({ type: "ALERTMSG", payload: `${acutalItem.name} added` });
 
           setTimeout(() => {
@@ -129,7 +129,10 @@ const Transactions = () => {
           }, 3000);
         } else if (match) {
           setFirstRedChecker(match);
-          dispatch({ type: "ALERTMSG", payload: "item already in list" });
+          dispatch({
+            type: "ALERTMSG",
+            payload: `${acutalItem.name} already in list`,
+          });
           inputRef.current.value = "";
           setTimeout(() => {
             dispatch({ type: "ALERTMSG", payload: `` });
@@ -291,6 +294,7 @@ const Transactions = () => {
         {state.alertMsg}
       </h3> */}
       <div className="trans-item-cont">
+        <p>{state.alertMsg}</p>
         {!state.transArray.length ? (
           <p className="empty-cart">empty cart</p>
         ) : (
@@ -415,9 +419,8 @@ const Transactions = () => {
           <button onClick={trueCash}>Cash</button>
           <button onClick={cardCheckout}>Card</button>
         </fieldset>
-        {/* </fieldset> */}
+        {/* </fieldset>  */}
       </section>
-
       {state.cash === true && (
         <section
           className="cash-window"
