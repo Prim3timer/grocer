@@ -549,7 +549,7 @@ button {
   align-items: center;
   /* justify-content: flex-start; */
   /* justify-content: start; */
-  padding: 1rem 0;
+  padding: 1rem;
   /* background-color: #00BFFF; */
   border-bottom: 2px solid brown;
 }
