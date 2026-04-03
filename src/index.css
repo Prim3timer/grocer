@@ -108,8 +108,34 @@ code {
   height: 6rem;
 }
 
+.login {
+  color: darkslateblue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 1rem;
+
+  /* background-color: mediumaquamarine; */
+  padding: 1rem 4rem;
+  width: 95%;
+  justify-self: center;
+}
 
 
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+
+.login-form input {
+  padding: 5px 5px;
+  border-radius: 5px;
+  font-size: 1.5rem;
+}
 
 
 .register {
