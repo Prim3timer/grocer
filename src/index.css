@@ -1030,6 +1030,11 @@ position: relative;
   justify-content: center;
 }
 
+.trans-name-and-img h4 {
+  /* background-color: red; */
+ width: 12rem;
+}
+
   .item-counter {
     margin-top: 1rem;
   }
