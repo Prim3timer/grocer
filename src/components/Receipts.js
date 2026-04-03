@@ -130,11 +130,17 @@ const Receipts = () => {
                       </div>
                     );
                   })}
-                  <p>card ending in....{transaction.last4}</p>
-                  <p>
-                    cash paid: {currency}
-                    {transaction.cashPaid}
-                  </p>
+
+                  {transaction.last4 ? (
+                    <p>card ending in....{transaction.last4}</p>
+                  ) : transaction.cashPaid ? (
+                    <p>
+                      cash paid: {currency}
+                      {transaction.cashPaid}
+                    </p>
+                  ) : (
+                    ""
+                  )}
                   <h4 className="receipts-grand-total">
                     Grand Total: {currency}
                     {numberWithCommas(
