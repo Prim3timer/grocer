@@ -305,6 +305,7 @@ code {
 }
   .header {
     margin: 1rem 0 0 0;
+    justify-self: center;
   }
 
 .create-item {
@@ -753,10 +754,10 @@ display: flex;
   width: 6rem;
 }
 
-.sales-cont, .inventory {
+.sales-table, .inventory-table {
   display: flex;
   flex-direction: column;
-  width: 160vw;
+  width: 140vw;
 }
 
 /* .sales-table {
@@ -1060,10 +1061,7 @@ position: relative;
   align-items: flex-start;
 }
 
-.inventory-table, .sales-table {
-  width: 140vw;
-
-}.searcher input {
+.searcher input {
   width: 20rem
 
 }
@@ -1075,9 +1073,7 @@ position: relative;
   grid-template-columns: repeat(3, 1fr);
 }
 
-.inventory-table, .sales-table {
-  width: 100vw;
-}
+
 
 .sales-total>*:nth-child(2) {
   grid-column: 6/10;
@@ -1107,7 +1103,7 @@ position: relative;
 
 
 
-.inventory, .sales-cont {
+.inventory-table, .sales-table {
   align-items: center;  
   width: 100vw;
   /* background-color: yellow; */
@@ -1128,9 +1124,9 @@ position: relative;
 @media screen and (min-width: 1200px){
 
 
+.sales-cont, .inventory{
+  align-items: center;
 
-.sales-table, .inventory-table {
-  max-width: 800px;
 }
  .items-container {
   display: grid;
