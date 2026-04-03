@@ -1085,6 +1085,11 @@ position: relative;
   width: 25rem
 
 }
+.inventory-table, .sales-table {
+  align-items: center;  
+  width: 100vw;
+  /* background-color: yellow; */
+}
 
 }
 
@@ -1099,14 +1104,6 @@ position: relative;
 .outer-one-receipt {
   /* background-color: red; */
   width: 40%;
-}
-
-
-
-.inventory-table, .sales-table {
-  align-items: center;  
-  width: 100vw;
-  /* background-color: yellow; */
 }
 
 .sales-total>*:nth-child(2) {
