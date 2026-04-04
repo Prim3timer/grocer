@@ -345,6 +345,7 @@ code {
 
  .list-item-texts >* {
     text-align: left;
+    font-size: 1.2rem;
   /* background-color: red; */
   width: 180px;
 }
@@ -707,10 +708,6 @@ display: flex;
   /* background-color: yellow; */
   text-align: left;
   max-width: 80vw;
-}
-
-.biz-name {
-  text-align: center;
 }
 
 

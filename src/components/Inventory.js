@@ -48,10 +48,10 @@ const Inventory = () => {
 
   return (
     <div className="inventory">
-      <h3 className="header">
-        {" "}
-        Inventory ({state.inventItems && state.inventItems.length} items){" "}
-      </h3>
+        <h3 className="header">
+          {" "}
+          Inventory ({state.inventItems && state.inventItems.length} items){" "}
+        </h3>
 
       <form
         className="searcher"
