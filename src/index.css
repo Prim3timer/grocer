@@ -332,7 +332,7 @@ code {
   display: flex;
   align-items: center;
   justify-content: center;
-  row-gap: .2rem;
+  row-gap: 2rem;
   /* background-color: red; */
   flex-direction: column;
 }
