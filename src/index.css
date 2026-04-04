@@ -1058,7 +1058,7 @@ position: relative;
  .items-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  row-gap: 1rem;
+  row-gap: 2rem;
   /* column-gap: .5rem; */
 }
 
