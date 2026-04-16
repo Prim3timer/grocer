@@ -10,14 +10,15 @@ const useRefreshToken = () => {
   const { setAuth } = useContext(AuthProvider);
   const refresh = async () => {
     console.log("on refersh");
-    const response = await axios.get("/refresh", {
+    const response = await axios.get("/grocery-refresh", {
       // this allows us to send cookies with our request
       withCredentials: true,
     });
+    console.log(response);
     setAuth &&
       setAuth((prev) => {
         // console.log(JSON.stringify(prev))
-        // console.log(response.data.refreshToken)
+        console.log(response.data.refreshToken);
         return {
           ...prev,
           accessToken: response.data.accessToken,

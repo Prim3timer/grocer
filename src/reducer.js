@@ -87,7 +87,7 @@ const reducer = (state, action) => {
             price: item.availablePrices[currentIndex],
             qty: 1,
             index: action.index,
-            total: item.availablePrices[currentIndex] * item.qty,
+            total: item.availablePrices[currentIndex],
           };
         }
         return item;

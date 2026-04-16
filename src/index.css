@@ -183,7 +183,12 @@ code {
   overflow-y: auto;
 }
 
-
+.users {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
 
 .errmsg {
   /* background-color: lightpink; */

@@ -29,11 +29,11 @@ const multiLinks = [
     name: "receipts",
     path: "/receipts",
   },
-  //   {
-  //     id: 7,
-  //     name: "admin",
-  //     path: "/admin",
-  //   },
+  {
+    id: 7,
+    name: "admin",
+    path: "/admin",
+  },
 ];
 
 export default multiLinks;
