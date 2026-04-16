@@ -19,6 +19,10 @@ export const AuthProvider = ({ children }) => {
   //   dispatch({ type: "users", payload: users.data });
   // };
 
+  const userPage = (id) => {
+    localStorage.setItem("GroceryUserId", id);
+  };
+
   useEffect(() => {
     // console.log(auth)
     let isMounted = true;
@@ -78,6 +82,7 @@ export const AuthProvider = ({ children }) => {
         currentUsers,
         auth,
         setAuth,
+        userPage,
       }}
     >
       {children}

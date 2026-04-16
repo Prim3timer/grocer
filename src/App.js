@@ -18,6 +18,7 @@ import Missing from "./components/Missing";
 import AuthContext from "./context/authProvider";
 import OneReceipt from "./components/OneReceipt";
 import Admin from "./components/Admin";
+import UserSettings from "./components/UserSettings";
 
 function App() {
   const year = new Date().getFullYear();
@@ -41,6 +42,7 @@ function App() {
             <Route path="receipts" element={<Receipts />} />
             <Route path="edit-item" element={<EditItem />} />
             <Route path="admin" element={<Admin />} />
+            <Route path="user-settings" element={<UserSettings />} />
           </Route>
           <Route path="*" element={<Missing />} />
         </Routes>

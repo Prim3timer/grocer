@@ -4,8 +4,9 @@ import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaPenSquare } from "react-icons/fa";
 import { faPenSquare } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 const Users = () => {
-  const { users, currentUsers } = useContext(AuthContext);
+  const { users, currentUsers, userPage } = useContext(AuthContext);
   console.log(currentUsers);
   return (
     <div className="users">
@@ -29,7 +30,12 @@ const Users = () => {
                 <th>{user.username}</th>
                 <td>{Object.keys(user.roles).join(", ")}</td>
                 <td>
-                  <FontAwesomeIcon icon={faPenSquare} />
+                  <Link
+                    to={"/user-settings"}
+                    onClick={() => userPage(user._id)}
+                  >
+                    <FontAwesomeIcon icon={faPenSquare} />
+                  </Link>
                 </td>
               </tr>
             );
