@@ -19,7 +19,9 @@ export const AuthProvider = ({ children }) => {
   const dynamPersistence =
     JSON.parse(localStorage.getItem("persistence")) || false;
 
-  const [persistence, setPersistence] = useState(dynamPersistence);
+  const [persistence, setPersistence] = useState(
+    dynamPersistence && dynamPersistence,
+  );
   // const getUsers = async () => {
   //   const users = await axios.get("/groceryUsers");
 
