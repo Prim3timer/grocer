@@ -97,7 +97,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    localStorage.setItem("persistence", persistence);
+    localStorage.setItem("persistence", persistence && persistence);
   }, [persistence]);
 
   return (
