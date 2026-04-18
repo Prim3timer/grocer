@@ -16,9 +16,7 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [persistence, setPersistence] = useState(
-    JSON.parse(localStorage.getItem("persistence")) || false,
-  );
+  const [persistence, setPersistence] = useState(false);
   // const getUsers = async () => {
   //   const users = await axios.get("/groceryUsers");
 
