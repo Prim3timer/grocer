@@ -20,6 +20,7 @@ const LOGIN_URL = "/grocery-auth";
 const Login = () => {
   const { auth, setAuth, persistence, setPersistence } =
     useContext(AuthContext);
+  console.log(persistence);
   const [state, dispatch] = useReducer(reducer, initialState);
   const navigate = useNavigate();
   const location = useLocation();

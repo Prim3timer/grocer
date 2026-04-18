@@ -229,8 +229,8 @@ const EditItem = () => {
   }, []);
   return (
     <div className="edit-item">
-      <h3 className="header">Edit Item</h3>
-      <h4>{currentItem.name}</h4>
+      <h4 className="header">Edit Item</h4>
+      <h3>{currentItem.name}</h3>
       {currentItem && (
         <div>
           <article className="canvas">
