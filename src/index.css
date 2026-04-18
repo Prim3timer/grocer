@@ -40,9 +40,13 @@ code {
     margin-top: 2rem;
 }
 
+/* .persistCheck {
+  background-color: red;
+  width: 40VW;
+} */
+
 .persistCheck input {
   transform: scale(1.8);
-  width: 2rem
 }
 
 .greetings {
@@ -227,8 +231,7 @@ code {
 }
 
 input[type=checkbox] {
-  width: 100px;
-  background-color: red;
+  width: 40px;
 }
 
 .asinged-roles-cont {
