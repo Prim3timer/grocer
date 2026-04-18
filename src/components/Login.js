@@ -96,9 +96,9 @@ const Login = () => {
     setPersistence((prev) => !prev);
   };
 
-  // useEffect(() => {
-  //   localStorage.setItem("persistence", persistence);
-  // }, [persistence]);
+  useEffect(() => {
+    localStorage.setItem("persistence", persistence);
+  }, [persistence]);
 
   return (
     <div>
@@ -157,8 +157,8 @@ const Login = () => {
             <input
               type="checkbox"
               id="persist"
-              // onChange={togglePersist}
-              // checked={persistence}
+              onChange={togglePersist}
+              checked={persistence}
             />
             <label htmlFor="persist">trust this device</label>
           </div>
