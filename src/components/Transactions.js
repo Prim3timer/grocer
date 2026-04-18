@@ -54,9 +54,7 @@ const Transactions = () => {
         );
         if (response) {
           window.location = response.data.session.url;
-          console.log(response.data);
         } else console.log("no checkout");
-        console.log(response.data);
       }
     } catch (error) {
       console.log(error.meassage);
@@ -66,7 +64,6 @@ const Transactions = () => {
   const falseSuccess = () => {
     setSuccess(false);
   };
-  console.log(items);
   const getReceipt = async () => {
     const transactions = await axios.get("/grocery-transactions");
     const reverse = transactions.data.reverse()[0];
@@ -198,7 +195,7 @@ const Transactions = () => {
       // dispatch({ type: "transArray", payload: [] });
     }
   };
-  console.log(success);
+
   const getReciept = async () => {
     try {
       const transes = await axios.get(`/grocery-transactions`);
@@ -459,7 +456,6 @@ const Transactions = () => {
             <button onClick={closeCashWindow}>Cancel</button>
             <button onClick={doneSales}>Done</button>
           </article>
-          {console.log(success)}
         </section>
       )}
       <article className={success ? "success" : "non-success"}>

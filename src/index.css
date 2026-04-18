@@ -217,7 +217,7 @@ code {
   display: flex;
   flex-direction: column;
   align-items: center;
-  row-gap: .5rem;
+  row-gap: 1rem;
 }
 
 .usersetting-form input {
