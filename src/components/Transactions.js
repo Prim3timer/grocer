@@ -202,7 +202,6 @@ const Transactions = () => {
   const getReciept = async () => {
     try {
       const transes = await axios.get(`/grocery-transactions`);
-      console.log(transes.data);
       const reverseTranses = transes.data.reverse();
       // localStorage.setItem("grocMemTransaction", reverseTranses[0]._id);
       localStorage.setItem("grocTransId", reverseTranses[0]._id);

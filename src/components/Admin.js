@@ -3,8 +3,8 @@ import Users from "./Users";
 
 const Admin = () => {
   return (
-    <div>
-      <h3>Admin</h3>
+    <div className="admin">
+      <h4>Admin</h4>
       <Users />
     </div>
   );

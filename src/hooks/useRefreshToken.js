@@ -5,16 +5,13 @@ import AuthProvider from "../context/authProvider";
 import { useContext } from "react";
 
 const useRefreshToken = () => {
-  // const {setAuth}  = useAuth()
-  // const axiosPrivate = useAxiosPrivate()
-  const { setAuth } = useContext(AuthProvider);
+  const { setAuth, auth } = useContext(AuthProvider);
   const refresh = async () => {
-    console.log("on refersh");
+    console.log("on refresh");
     const response = await axios.get("/grocery-refresh", {
       // this allows us to send cookies with our request
       withCredentials: true,
     });
-    console.log(response);
     setAuth &&
       setAuth((prev) => {
         // console.log(JSON.stringify(prev))
@@ -26,11 +23,13 @@ const useRefreshToken = () => {
           user: response.data.username,
           picker: response.data.id,
           users: response.data.users,
-          // refresh: response.data.refreshToken
+          // refresh: response.data.refreshToken,
         };
       });
+    console.log(auth);
     return response.data.accessToken;
   };
+
   return refresh;
 };
 

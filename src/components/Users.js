@@ -1,45 +1,58 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import AuthContext from "../context/authProvider";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import axios from "../app/api/axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaPenSquare } from "react-icons/fa";
 import { faPenSquare } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+  useLocation,
+  useLoaderData,
+} from "react-router-dom";
 const Users = () => {
-  const { users, currentUsers, userPage } = useContext(AuthContext);
+  const { users, userPage, auth, setAuth, currentUsers } =
+    useContext(AuthContext);
+  // const [currentUsers, setCurrentUsers] = useState();
+  const axiosPrivate = useAxiosPrivate();
+  const navigate = useNavigate();
+  const location = useLocation();
+
   console.log(currentUsers);
   return (
     <div className="users">
       <h3>Users</h3>
       <table className="users-table">
         <tbody>
-          <tr>
+          <tr className="user-table-header-row">
             <th>Activity</th>
             <th>Roles</th>
             <th>Settings</th>
           </tr>
-          {currentUsers.map((user, index) => {
-            return (
-              <tr
-                key={user._id}
-                style={{
-                  backgroundColor: index % 2 === 0 ? "white" : "powderblue",
-                }}
-              >
-                {console.log(user.username)}
-                <th>{user.username}</th>
-                <td>{Object.keys(user.roles).join(", ")}</td>
-                <td>
-                  <Link
-                    to={"/user-settings"}
-                    onClick={() => userPage(user._id)}
-                  >
-                    <FontAwesomeIcon icon={faPenSquare} />
-                  </Link>
-                </td>
-              </tr>
-            );
-          })}
+          {currentUsers &&
+            currentUsers.map((user, index) => {
+              return (
+                <tr
+                  key={user._id}
+                  style={{
+                    backgroundColor: index % 2 === 0 ? "white" : "powderblue",
+                  }}
+                >
+                  {console.log(user.username)}
+                  <th>{user.username}</th>
+                  <td>{Object.keys(user.roles).join(", ")}</td>
+                  <td>
+                    <Link
+                      to={"/user-settings"}
+                      onClick={() => userPage(user._id)}
+                    >
+                      <FontAwesomeIcon icon={faPenSquare} />
+                    </Link>
+                  </td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </div>

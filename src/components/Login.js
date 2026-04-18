@@ -14,7 +14,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "../app/api/axios";
 import reducer from "../reducer";
-  
+
 const LOGIN_URL = "/grocery-auth";
 
 const Login = () => {
@@ -27,6 +27,8 @@ const Login = () => {
   const [isPassword, setisPassword] = useState("password");
   const [passwordCheck2, setPasswordCheck2] = useState(faEyeSlash);
   const [isPassword2, setisPassword2] = useState("password");
+
+  console.log({ auth });
 
   const userRef = useRef();
   const errRef = useRef();
@@ -67,7 +69,7 @@ const Login = () => {
 
       const authObj = { user, roles, accessToken, picker };
       localStorage.setItem("GroceryUserId", response.data.id);
-      setAuth({ user, roles, accessToken, picker });
+      setAuth(response?.data);
       console.log(auth);
       setUser("");
       setPwd("");

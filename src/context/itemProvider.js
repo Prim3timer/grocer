@@ -1,5 +1,5 @@
 import { createContext, useEffect, useReducer, useState } from "react";
-import axios from "../app/api/axios";
+import axios, { axiosPrivate } from "../app/api/axios";
 import initialState from "../store";
 import reducer from "../reducer";
 import Transactions from "../components/Transactions";
@@ -8,8 +8,8 @@ const ItemContext = createContext({});
 const currency = "$";
 export const ItemProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  // const picUrl = process.env.REACT_APP_URL;
-  const picUrl = "https://ukuta.onrender.com";
+  const picUrl = process.env.REACT_APP_URL;
+  // const picUrl = "https://ukuta.onrender.com";
   const [items, setItems] = useState();
   const bizName = "Retail Solutions";
   const getItems = async () => {
@@ -23,7 +23,7 @@ export const ItemProvider = ({ children }) => {
 
   const getTransactions = async () => {
     try {
-      const response = await axios.get("/grocery-transactions");
+      const response = await axiosPrivate.get("/grocery-transactions");
       if (response) {
         const straightTransactions = response.data.reverse();
         dispatch({ type: "transactions", payload: straightTransactions });

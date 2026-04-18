@@ -19,6 +19,9 @@ import AuthContext from "./context/authProvider";
 import OneReceipt from "./components/OneReceipt";
 import Admin from "./components/Admin";
 import UserSettings from "./components/UserSettings";
+import PersistLogin from "./components/PersistLogin";
+import RequiredAuth from "./components/RequiredAuth";
+import Unauthorized from "./components/Unauthorized";
 
 function App() {
   const year = new Date().getFullYear();
@@ -29,20 +32,29 @@ function App() {
       {/* <h5 className="greetings">Welcome, {auth.user}</h5> */}
       <div className="grower">
         <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route path="/transactions" index element={<Transactions />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="one-receipt" element={<OneReceipt />} />
-            {/* <Route path="transactions" element={<Transactions />} />   */}
-            <Route path="create-item" element={<CreateItem />} />
-            <Route path="item-list" element={<ItemList />} />
-            <Route path="sales" element={<Sales />} />
-            <Route path="inventory" element={<Inventory />} />
-            <Route path="receipts" element={<Receipts />} />
-            <Route path="edit-item" element={<EditItem />} />
-            <Route path="admin" element={<Admin />} />
-            <Route path="user-settings" element={<UserSettings />} />
+          <Route element={<PersistLogin />}>
+            <Route path="/" element={<Layout />}>
+              <Route path="/" index element={<Login />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/transactions" element={<Transactions />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="one-receipt" element={<OneReceipt />} />
+              {/* <Route path="transactions" element={<Transactions />} />   */}
+              <Route path="item-list" element={<ItemList />} />
+              <Route path="sales" element={<Sales />} />
+              <Route path="inventory" element={<Inventory />} />
+              <Route path="receipts" element={<Receipts />} />
+              <Route path="/unauthorized" element={<Unauthorized />}></Route>
+              <Route path="edit-item" element={<EditItem />} />
+              <Route path="create-item" element={<CreateItem />} />
+              <Route path="admin" element={<Admin />} />
+
+              <Route element={<RequiredAuth allowedRoles={[1984]} />}></Route>
+
+              <Route element={<RequiredAuth allowedRoles={[5150]} />}></Route>
+
+              <Route path="user-settings" element={<UserSettings />} />
+            </Route>
           </Route>
           <Route path="*" element={<Missing />} />
         </Routes>

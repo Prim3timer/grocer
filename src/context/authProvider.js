@@ -9,10 +9,16 @@ const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [auth, setAuth] = useState({});
+  const [users, setUsers] = useState({});
   const [currentUsers, setCurrentUsers] = useState([]);
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const [persistence, setPersistence] = useState(
+    JSON.parse(localStorage.getItem("persistence")) || false,
+  );
   // const getUsers = async () => {
   //   const users = await axios.get("/groceryUsers");
 
@@ -30,9 +36,6 @@ export const AuthProvider = ({ children }) => {
     const controller = new AbortController();
 
     const getUsers = async () => {
-      const cookieMap = {};
-      const allCookies = cookieMap["jwt"];
-      console.log(allCookies);
       try {
         const response = await axiosPrivate.get("/groceryUsers", {
           signal: controller.signal,
@@ -40,7 +43,7 @@ export const AuthProvider = ({ children }) => {
         console.log(response.data.users);
 
         isMounted && setCurrentUsers(response.data.users);
-        // setUsers(response.data.users);
+        setUsers(response.data.users);
 
         setAuth((prev) => {
           return { ...prev, users: response.data.users };
@@ -61,11 +64,9 @@ export const AuthProvider = ({ children }) => {
     };
   }, []);
 
-  console.log(currentUsers);
-
+  console.log(auth);
   // const user = {};
   // const users = [];
-  const [auth, setAuth] = useState();
 
   // useEffect(() => {
   //   getUsers();
@@ -77,7 +78,8 @@ export const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
-        // persistence,
+        persistence,
+        setPersistence,
         ...state,
         currentUsers,
         auth,
