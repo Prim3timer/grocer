@@ -92,9 +92,9 @@ const Login = () => {
     dispatch({ type: "user", payload: user });
   };
 
-  // const togglePersist = () => {
-  //   setPersistence((prev) => !prev);
-  // };
+  const togglePersist = () => {
+    setPersistence((prev) => !prev);
+  };
 
   // useEffect(() => {
   //   localStorage.setItem("persistence", persistence);
