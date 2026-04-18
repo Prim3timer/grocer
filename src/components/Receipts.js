@@ -139,7 +139,7 @@ const Receipts = () => {
                       {transaction.cashPaid}
                     </p>
                   ) : (
-                    ""  
+                    ""
                   )}
                   <h4 className="receipts-grand-total">
                     Grand Total: {currency}
