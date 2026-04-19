@@ -17,20 +17,26 @@ const Navbar = () => {
   const logout = useLogout();
   return (
     <div className="navbar">
-      {multiLinks.map((link) => {
-        const { id, name, path } = link;
-        return (
-          <div className="paths" key={id}>
-            <Link to={path} className="lining">
-              {name}
-            </Link>
-          </div>
-        );
-      })}
+      {auth.username ? (
+        multiLinks.map((link) => {
+          const { id, name, path } = link;
+          return (
+            <div className="paths" key={id}>
+              <Link to={path} className="lining">
+                {name}
+              </Link>
+            </div>
+          );
+        })
+      ) : (
+        <h3>Retail Daily</h3>
+      )}
 
-      <Link to="/login" className="lining" onClick={logout}>
-        logout
-      </Link>
+      {auth.username && (
+        <Link to="/login" className="lining" onClick={logout}>
+          logout
+        </Link>
+      )}
     </div>
   );
 };
