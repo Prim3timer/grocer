@@ -38,9 +38,18 @@ export const AuthProvider = ({ children }) => {
         const response = await axiosPrivate.get("/groceryUsers", {
           signal: controller.signal,
         });
+        console.log(response.data);
 
         isMounted && setCurrentUsers(response.data.users);
         setUsers(response.data.users);
+
+        // setAuth((prev) => {
+        //   return {
+        //     ...prev,
+        //     users: response.data.users,
+        //     accessToken: response.data.accessToken,
+        //   };
+        // });
       } catch (error) {
         console.error(error);
 

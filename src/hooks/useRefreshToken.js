@@ -14,20 +14,18 @@ const useRefreshToken = () => {
       // this allows us to send cookies with our request
       withCredentials: true,
     });
-    console.log(response.data);
-    setAuth &&
-      setAuth((prev) => {
-        // console.log(JSON.stringify(prev))
-        return {
-          ...prev,
-          accessToken: response.data.accessToken,
-          roles: response.data.roles,
-          user: response.data.username,
-          picker: response.data.id,
-          users: response.data.users,
-          // refresh: response.data.refreshToken,
-        };
-      });
+    setAuth((prev) => {
+      // console.log(JSON.stringify(prev))
+      return {
+        ...prev,
+        accessToken: response.data.accessToken,
+        roles: response.data.roles,
+        user: response.data.username,
+        picker: response.data.id,
+        users: response.data.users,
+        // refresh: response.data.refreshToken,
+      };
+    });
     return response.data.accessToken;
   };
 

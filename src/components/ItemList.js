@@ -1,5 +1,6 @@
 import { useContext, useEffect, useReducer, useState } from "react";
 import ItemContext from "../context/itemProvider";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { Link } from "react-router-dom";
 import initialState from "../store";
 import reducer from "../reducer";
@@ -8,11 +9,12 @@ import axios from "../app/api/axios";
 const ItemList = () => {
   const { items, picUrl, oneItem, currency } = useContext(ItemContext);
   const [state, dispatch] = useReducer(reducer, initialState);
+  const axiosPrivate = useAxiosPrivate();
   const [shopItems, setShopItems] = useState("");
   console.log(items);
 
   const getItems = async () => {
-    const response = await axios.get("/grocery-items");
+    const response = await axiosPrivate.get("/grocery-items");
     try {
       const filterItems =
         response &&

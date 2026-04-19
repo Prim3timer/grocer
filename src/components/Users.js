@@ -18,6 +18,7 @@ const Users = () => {
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const location = useLocation();
+  console.log(auth);
   return (
     <div className="users">
       <h3>Users</h3>

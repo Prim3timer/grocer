@@ -1,17 +1,29 @@
-import { createContext, useEffect, useReducer, useState } from "react";
-import axios, { axiosPrivate } from "../app/api/axios";
+import {
+  createContext,
+  use,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
+import axios from "../app/api/axios";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import initialState from "../store";
 import reducer from "../reducer";
 import Transactions from "../components/Transactions";
+import AuthContext from "./authProvider";
 
 const ItemContext = createContext({});
 const currency = "$";
 export const ItemProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const axiosPrivate = useAxiosPrivate();
   const picUrl = process.env.REACT_APP_URL;
   // const picUrl = "https://ukuta.onrender.com";
   const [items, setItems] = useState();
   const bizName = "Retail Solutions";
+  const { auth } = useContext(AuthContext);
+  console.log(auth);
   const getItems = async () => {
     try {
       const response = await axios.get(`/grocery-items`);

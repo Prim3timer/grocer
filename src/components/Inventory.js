@@ -1,18 +1,21 @@
 import { use, useContext, useEffect, useReducer, useState } from "react";
 import ItemContext from "../context/itemProvider";
+import AuthContext from "../context/authProvider";
 import initialState from "../store";
 import reducer from "../reducer";
-import axios from "../app/api/axios";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 const { v4: uuid } = require("uuid");
 const Inventory = () => {
   // const { items } = useContext(ItemContext);
   const [state, dispatch] = useReducer(reducer, initialState);
   const [inventItems, setInventItems] = useState("");
   const [measureIdex, setMeasureIndex] = useState(0);
+  const { auth } = useContext(AuthContext);
+  const axiosPrivate = useAxiosPrivate();
 
   const getItems = async () => {
     try {
-      const graw = await axios.get("/grocery-items");
+      const graw = await axiosPrivate.get("/grocery-items");
       console.log(graw.data.items);
       const newItems = graw.data.items.map((item) => {
         return { ...item, unitMeasure: item.availableUnitMeasures[0] };
@@ -48,10 +51,10 @@ const Inventory = () => {
 
   return (
     <div className="inventory">
-        <h3 className="header">
-          {" "}
-          Inventory ({state.inventItems && state.inventItems.length} items){" "}
-        </h3>
+      <h3 className="header">
+        {" "}
+        Inventory ({state.inventItems && state.inventItems.length} items){" "}
+      </h3>
 
       <form
         className="searcher"

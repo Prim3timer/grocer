@@ -15,12 +15,12 @@ import { AuthProvider } from "./context/authProvider";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <ItemProvider>
-      <AuthProvider>
+    <AuthProvider>
+      <ItemProvider>
         {/* <React.StrictMode> */}
         <App />
         {/* </React.StrictMode> */}
-      </AuthProvider>
-    </ItemProvider>
+      </ItemProvider>
+    </AuthProvider>
   </BrowserRouter>,
 );
