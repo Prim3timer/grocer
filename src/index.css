@@ -1158,6 +1158,12 @@ position: relative;
   align-items: flex-start;
 }
 
+.inventory-table, .sales-table {
+  align-items: center;  
+  width: 100vw;
+  /* background-color: yellow; */
+}
+
 .searcher input {
   width: 20rem
 
@@ -1181,11 +1187,6 @@ position: relative;
 .searcher input {
   width: 25rem
 
-}
-.inventory-table, .sales-table {
-  align-items: center;  
-  width: 100vw;
-  /* background-color: yellow; */
 }
 
 }

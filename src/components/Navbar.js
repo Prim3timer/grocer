@@ -29,7 +29,7 @@ const Navbar = () => {
           );
         })
       ) : (
-        <h3>Retail Daily</h3>
+        <h3>RetailDaily</h3>
       )}
 
       {auth.username && (
