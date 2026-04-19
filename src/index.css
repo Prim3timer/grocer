@@ -146,6 +146,13 @@ code {
   font-size: 1.5rem;
 }
 
+.sign-up-cont {
+  display: flex;
+  flex-direction: column;
+  row-gap: .5rem;
+
+}
+
 
 .register {
   display: flex;

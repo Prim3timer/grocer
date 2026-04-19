@@ -145,6 +145,11 @@ const Transactions = () => {
 
   const removeItem = async (id) => {
     dispatch({ type: "FILTERTRANSARRAY", payload: id });
+    dispatch({ type: "ALERTMSG", payload: "item removed" });
+    setNoShow(true);
+    setTimeout(() => {
+      setNoShow(false);
+    }, 3000);
   };
 
   const doneSales = async () => {
@@ -290,7 +295,16 @@ const Transactions = () => {
         {state.alertMsg}
       </h3> */}
       <div className="trans-item-cont">
-        <p>{state.alertMsg}</p>
+        <p
+          // style={{
+          //   position: "absolute",
+          //   top: "50rem",
+          //   left: "30rem",
+          // }}
+          className={noShow ? "delete" : "no-delete"}
+        >
+          {state.alertMsg}
+        </p>
         {!state.transArray.length ? (
           <p className="empty-cart">empty cart</p>
         ) : (
