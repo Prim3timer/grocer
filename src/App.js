@@ -28,7 +28,6 @@ function App() {
   const { auth } = useContext(AuthContext);
   return (
     <main className="App">
-      {console.log(auth)}
       <Navbar />
       {auth.user && <h5 className="greetings">Welcome, {auth.user}</h5>}
       <div className="grower">

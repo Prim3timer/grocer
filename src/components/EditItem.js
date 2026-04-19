@@ -32,12 +32,9 @@ const EditItem = () => {
   const now = new Date();
   const navigate = useNavigate();
 
-  console.log(file, state.success, currentPic);
   const getCurrentItem = () => {
     setFile("");
     const item = items && items.items.find((item) => item._id === itemId);
-    console.log(item);
-    console.log(picUrl);
     if (item) {
       setCurrentItem(item);
       setName(item.name);
@@ -213,7 +210,6 @@ const EditItem = () => {
       const response = await axios.get("/grocery-items");
 
       const backPic = response.data.items.find((item) => item._id === itemId);
-      console.log(backPic);
       setTimeout(() => {
         setCurrentPic(backPic.img);
       }, 100);

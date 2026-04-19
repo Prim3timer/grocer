@@ -66,7 +66,6 @@ export const AuthProvider = ({ children }) => {
     };
   }, []);
 
-  console.log(auth);
   // const user = {};
   // const users = [];
 

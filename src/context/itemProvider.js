@@ -23,7 +23,6 @@ export const ItemProvider = ({ children }) => {
   const [items, setItems] = useState();
   const bizName = "Retail Solutions";
   const { auth } = useContext(AuthContext);
-  console.log(auth);
   const getItems = async () => {
     try {
       const response = await axios.get(`/grocery-items`);

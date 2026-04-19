@@ -6,7 +6,6 @@ import { useContext, useEffect } from "react";
 
 const useRefreshToken = () => {
   const { setAuth, auth } = useContext(AuthProvider);
-  console.log(auth);
 
   const refresh = async () => {
     console.log("on refresh");

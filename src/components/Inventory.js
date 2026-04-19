@@ -16,7 +16,7 @@ const Inventory = () => {
   const getItems = async () => {
     try {
       const graw = await axiosPrivate.get("/grocery-items");
-      console.log(graw.data.items);
+
       const newItems = graw.data.items.map((item) => {
         return { ...item, unitMeasure: item.availableUnitMeasures[0] };
       });

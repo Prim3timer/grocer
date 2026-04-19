@@ -3,41 +3,44 @@ import initialState from "../store";
 import reducer from "../reducer";
 import ItemContext from "../context/itemProvider";
 import { useSearchParams } from "react-router-dom";
+import { axiosPrivate } from "../app/api/axios";
 
 const Sales = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { transactions, getTransactions } = useContext(ItemContext);
+  const { getTransactions, auth } = useContext(ItemContext);
   const [transactionArray, setTransactionArray] = useState([]);
+  const [transactions, setTransactions] = useState([]);
 
-  const getTrans = () => {
+  const getTrans = async () => {
     try {
-      if (transactions) {
-        console.log(transactions);
-        let innerArray = [];
-        transactions.map((transaction) => {
-          return transaction.goods.map((good) => {
-            const elements = {
-              name: good.name,
-              qty: good.qty,
-              unitMeasure: good.unitMeasure,
-              total: good.total,
-              date: transaction.date,
-            };
-            innerArray.push(elements);
-            const filterate =
-              innerArray &&
-              innerArray.filter((inner) =>
-                inner.name.toLowerCase().includes(state.search.toLowerCase()),
-              );
-            console.log(filterate);
-            const filterate2 = filterate.filter((inner) =>
-              inner.date.substring(0, 10).includes(state.search2),
+      // if (transactions) {
+      // }
+      const response = await axiosPrivate.get("/grocery-transactions");
+      console.log(response.data);
+      let innerArray = [];
+      response.data.map((transaction) => {
+        return transaction.goods.map((good) => {
+          const elements = {
+            name: good.name,
+            qty: good.qty,
+            unitMeasure: good.unitMeasure,
+            total: good.total,
+            date: transaction.date,
+          };
+          innerArray.push(elements);
+          const filterate =
+            innerArray &&
+            innerArray.filter((inner) =>
+              inner.name.toLowerCase().includes(state.search.toLowerCase()),
             );
-            setTransactionArray(filterate2);
-            return innerArray;
-          });
+          console.log(filterate);
+          const filterate2 = filterate.filter((inner) =>
+            inner.date.substring(0, 10).includes(state.search2),
+          );
+          setTransactionArray(filterate2);
+          return innerArray;
         });
-      }
+      });
     } catch (error) {}
   };
 
