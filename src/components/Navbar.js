@@ -17,7 +17,7 @@ const Navbar = () => {
   const logout = useLogout();
   return (
     <div className="navbar">
-      {auth.users ? (
+      {auth.user ? (
         multiLinks.map((link) => {
           const { id, name, path } = link;
           return (
@@ -32,7 +32,7 @@ const Navbar = () => {
         <h3>RetailDaily</h3>
       )}
 
-      {auth.users && (
+      {auth.user && (
         <Link to="/login" className="lining" onClick={logout}>
           logout
         </Link>

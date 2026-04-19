@@ -70,8 +70,15 @@ const Login = () => {
 
       const authObj = { user, roles, accessToken, picker };
       localStorage.setItem("GroceryUserId", response.data.id);
-      setAuth(response?.data);
-      console.log(auth);
+      setAuth((prev) => {
+        return {
+          accessToken: response.data.accessToken,
+          roles: response.data.roles,
+          user: response.data.username,
+          picker: response.data.id,
+        };
+      });
+
       setUser("");
       setPwd("");
       // get the user to where they wanted to go before they were kicked out to
@@ -96,7 +103,7 @@ const Login = () => {
   const togglePersist = () => {
     setPersistence((prev) => !prev);
   };
-
+  console.log(auth);
   useEffect(() => {
     localStorage.setItem("persistence", persistence);
   }, [persistence]);

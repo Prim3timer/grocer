@@ -18,8 +18,6 @@ const Users = () => {
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const location = useLocation();
-
-  console.log(currentUsers);
   return (
     <div className="users">
       <h3>Users</h3>
@@ -39,7 +37,6 @@ const Users = () => {
                     backgroundColor: index % 2 === 0 ? "white" : "powderblue",
                   }}
                 >
-                  {console.log(user.username)}
                   <th>{user.username}</th>
                   <td>{Object.keys(user.roles).join(", ")}</td>
                   <td>
