@@ -37,48 +37,49 @@ const OneReceipt = () => {
   // useEffect(() => {
   //   getTransactions();
   // }, []);
-  return (
-    currentTrans && (
-      <div className="one-receipt">
-        <article className="outer-one-receipt">
-          <section className="inner-one-receipt">
-            <h3>{bizName}</h3>
-            <p className="receipts-date">{currentTrans._id}</p>
-            <p className="receipts-date">{theDay}</p>
-            {currentTrans.goods.map((good) => {
-              console.log(good);
-              return (
-                <div>
-                  <h4>{good.name}</h4>
-                  <p>
-                    Qty: {parseFloat(good.qty).toFixed(2)} {good.unitMeasure}
-                    {good.qty > 1 ? "s" : ""}
-                  </p>
-                  <p>
-                    Unit Price: {currency}
-                    {numberWithCommas(parseFloat(good.price).toFixed(2))}
-                  </p>
-                  <p>
-                    Sub Total: {currency}
-                    {numberWithCommas(parseFloat(good.total).toFixed(2))}
-                  </p>
-                </div>
-              );
-            })}
-            <p>
-              cash paid:
-              {currentTrans.last4
-                ? `...${currentTrans.last4}`
-                : currentTrans.cashPaid}
-            </p>
-            <h4>
-              Grand Total: {currency}
-              {numberWithCommas(parseFloat(currentTrans.grandTotal).toFixed(2))}
-            </h4>
-          </section>
-        </article>
-      </div>
-    )
+  return currentTrans ? (
+    <div className="one-receipt">
+      <article className="outer-one-receipt">
+        <section className="inner-one-receipt">
+          <h3>{bizName}</h3>
+          <p className="receipts-date">{currentTrans._id}</p>
+          <p className="receipts-date">{theDay}</p>
+          {currentTrans.goods.map((good) => {
+            console.log(good);
+            return (
+              <div>
+                <h4>{good.name}</h4>
+                <p>
+                  Qty: {parseFloat(good.qty).toFixed(2)} {good.unitMeasure}
+                  {good.qty > 1 ? "s" : ""}
+                </p>
+                <p>
+                  Unit Price: {currency}
+                  {numberWithCommas(parseFloat(good.price).toFixed(2))}
+                </p>
+                <p>
+                  Sub Total: {currency}
+                  {numberWithCommas(parseFloat(good.total).toFixed(2))}
+                </p>
+              </div>
+            );
+          })}
+          <p>
+            cash paid:
+            {currentTrans.last4
+              ? `...${currentTrans.last4}`
+              : currentTrans.cashPaid}
+          </p>
+          <h4>
+            Grand Total: {currency}
+            {numberWithCommas(parseFloat(currentTrans.grandTotal).toFixed(2))}
+          </h4>
+          <h4>cashier: {currentTrans.cashier}</h4>
+        </section>
+      </article>
+    </div>
+  ) : (
+    <h3 className="loading">loading...</h3>
   );
 };
 

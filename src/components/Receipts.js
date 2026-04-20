@@ -31,8 +31,11 @@ const Receipts = () => {
 
   const getReceipt = async () => {
     const response = await axios.get("/grocery-transactions");
+    const userId = localStorage.getItem("GroceryUserId");
+    console.log(userId);
+    const filterate = response.data.filter((item) => item.cashierID === userId);
     const reverse = response.data.reverse();
-    setTransactions(reverse);
+    setTransactions(filterate.reverse());
     console.log(reverse);
   };
 
@@ -83,7 +86,7 @@ const Receipts = () => {
   //   getTransactions();
   // }, [  ]);
 
-  return (
+  return transactions?.length ? (
     <div>
       <h3 className="header">Receipts ({transactions?.length})</h3>
       {transactions &&
@@ -147,7 +150,7 @@ const Receipts = () => {
                       parseFloat(transaction.grandTotal).toFixed(2),
                     )}
                   </h4>
-                  <h5>Cashier: {transaction.cashier}</h5>
+                  {/* <h5>Cashier: {transaction.cashier}</h5> */}
                   <h3
                     onClick={(e) => assertain(transaction._id, e)}
                     style={{
@@ -204,6 +207,8 @@ const Receipts = () => {
         )}
       </article>
     </div>
+  ) : (
+    <h3 className="loading">loading...</h3>
   );
 };
 

@@ -32,7 +32,7 @@ const ItemList = () => {
   useEffect(() => {
     getItems();
   }, [state.search]);
-  return (
+  return shopItems?.length ? (
     <div className="items-list">
       <h3 className="header">Item List</h3>
       <form className="searcher">
@@ -91,6 +91,8 @@ const ItemList = () => {
         </article>
       </Link>
     </div>
+  ) : (
+    <h3 className="loading">loading...</h3>
   );
 };
 
