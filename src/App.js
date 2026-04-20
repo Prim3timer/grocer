@@ -22,7 +22,10 @@ import UserSettings from "./components/UserSettings";
 import PersistLogin from "./components/PersistLogin";
 import RequiredAuth from "./components/RequiredAuth";
 import Unauthorized from "./components/Unauthorized";
+import UserSelect from "./components/UserSelect";
 import { useLocation } from "react-router-dom";
+import AdminReceipt from "./components/AdminReceipt";
+import AdminSales from "./components/AdminSales";
 
 function App() {
   const year = new Date().getFullYear();
@@ -49,7 +52,10 @@ function App() {
             <Route path="/unauthorized" element={<Unauthorized />}></Route>
             <Route path="edit-item" element={<EditItem />} />
             <Route path="create-item" element={<CreateItem />} />
+            <Route path="user-select" element={<UserSelect />} />
             <Route path="admin" element={<Admin />} />
+            <Route path="admin-receipt" element={<AdminReceipt />} />
+            <Route path="admin-sales" element={<AdminSales />} />
 
             <Route element={<PersistLogin />}>
               <Route element={<RequiredAuth allowedRoles={[1984]} />}></Route>

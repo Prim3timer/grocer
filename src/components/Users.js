@@ -19,6 +19,10 @@ const Users = () => {
   const navigate = useNavigate();
   const location = useLocation();
   console.log(auth);
+
+  const setId = (id) => {
+    const userId = localStorage.setItem("AdminUserId", id);
+  };
   return (
     <div className="users">
       <h3>Users</h3>
@@ -38,7 +42,9 @@ const Users = () => {
                     backgroundColor: index % 2 === 0 ? "white" : "powderblue",
                   }}
                 >
-                  <th>{user.username}</th>
+                  <Link to="/user-select">
+                    <th onClick={() => setId(user._id)}>{user.username}</th>
+                  </Link>
                   <td>{Object.keys(user.roles).join(", ")}</td>
                   <td>
                     <Link

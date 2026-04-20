@@ -8,6 +8,10 @@ const Admin = () => {
   return currentUsers?.length ? (
     <div className="admin">
       <h4>Admin</h4>
+      <article className="gen-admin">
+        <button>All Sales</button>
+        <button>All Receipts</button>
+      </article>
       <Users />
     </div>
   ) : (
