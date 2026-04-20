@@ -783,7 +783,7 @@ button {
   box-shadow: .2rem .3rem .6rem gray;
 }
 
-.invent-loading {
+.loading {
   position: fixed;
    justify-self: center;
     top: 35%;

@@ -157,7 +157,7 @@ const Sales = () => {
       </div>
     </div>
   ) : (
-    <h3 className="invent-loading">Loading...</h3>
+    <h3 className="loading">Loading...</h3>
   );
 };
 
