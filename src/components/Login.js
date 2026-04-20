@@ -29,7 +29,7 @@ const Login = () => {
   const [passwordCheck2, setPasswordCheck2] = useState(faEyeSlash);
   const [isPassword2, setisPassword2] = useState("password");
 
-  console.log({ auth });
+  console.log(auth, location.pathname);
 
   const userRef = useRef();
   const errRef = useRef();
