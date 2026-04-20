@@ -31,12 +31,8 @@ function App() {
   return (
     <main className="App">
       {console.log(auth)}
-      {location.pathname === "/one-receipt" && auth.user ? "" : <Navbar />}
-      {auth.user && location.pathname !== "/one-receipt" ? (
-        <h5 className="greetings">Welcome, {auth.user}</h5>
-      ) : (
-        ""
-      )}
+      {auth.user ? <Navbar /> : ""}
+      {auth.user ? <h5 className="greetings">Welcome, {auth.user}</h5> : ""}
       <div className="grower">
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -66,11 +62,7 @@ function App() {
           <Route path="*" element={<Missing />} />
         </Routes>
       </div>
-      {location.pathname !== "/one-receipt" ? (
-        <p className="footer">&copy; {year} Amalu Productions.</p>
-      ) : (
-        ""
-      )}
+      {<p className="footer">&copy; {year} Amalu Productions.</p>}
     </main>
   );
 }
