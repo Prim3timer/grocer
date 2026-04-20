@@ -10,12 +10,12 @@ const useLogout = () => {
   const logout = async () => {
     setAuth({});
     // setIsRotated(false);
-    localStorage.removeItem("memId");
-    localStorage.removeItem("memUser");
-    localStorage.removeItem("memTransaction");
+    // localStorage.removeItem("memId");
+    // localStorage.removeItem("memUser");
+    // localStorage.removeItem("memTransaction");
     console.log(isRotated);
     try {
-      const response = await axios.get("/auth/logout", {
+      const response = await axios.get("/grocery-auth/logout", {
         withCredentials: true,
       });
     } catch (error) {
