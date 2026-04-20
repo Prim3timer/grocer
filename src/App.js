@@ -66,7 +66,11 @@ function App() {
           <Route path="*" element={<Missing />} />
         </Routes>
       </div>
-      <p className="footer">&copy; {year} Amalu Productions.</p>
+      {location.pathname !== "/one-receipt" ? (
+        <p className="footer">&copy; {year} Amalu Productions.</p>
+      ) : (
+        ""
+      )}
     </main>
   );
 }
