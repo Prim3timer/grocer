@@ -42,8 +42,19 @@ const Users = () => {
                     backgroundColor: index % 2 === 0 ? "white" : "powderblue",
                   }}
                 >
-                  <Link to="/user-select">
-                    <th onClick={() => setId(user._id)}>{user.username}</th>
+                  <Link
+                    to="/user-select"
+                    style={{
+                      display: "flex",
+                      // textAlign: "left",
+                    }}
+                  >
+                    <th
+                      onClick={() => setId(user._id)}
+                      className="user-table-username"
+                    >
+                      {user.username}
+                    </th>
                   </Link>
                   <td>{Object.keys(user.roles).join(", ")}</td>
                   <td>

@@ -50,7 +50,7 @@ const AllSales = () => {
   }, [state.search, state.search2]);
   return transactions.length ? (
     <div className="sales-cont">
-      <h3 className="header">All Sales ({transactions.length} )</h3>
+      <h3 className="header">All Sales</h3>
       {/* <article className="measure-select-cont">
         <button onClick={changeUnitMesure}>primary</button>
         <button onClick={changeUnitMesure}>secondary</button>
