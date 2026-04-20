@@ -49,7 +49,7 @@ const Inventory = () => {
     getItems();
   }, [state.search, state.search2]);
 
-  return (
+  return state.inventItems?.length ? (
     <div className="inventory">
       <h3 className="header">
         {" "}
@@ -164,6 +164,8 @@ const Inventory = () => {
         </tbody>
       </table>
     </div>
+  ) : (
+    <h3>Loading...</h3>
   );
 };
 
