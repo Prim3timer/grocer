@@ -22,14 +22,17 @@ import UserSettings from "./components/UserSettings";
 import PersistLogin from "./components/PersistLogin";
 import RequiredAuth from "./components/RequiredAuth";
 import Unauthorized from "./components/Unauthorized";
+import { useLocation } from "react-router-dom";
 
 function App() {
   const year = new Date().getFullYear();
   const { auth } = useContext(AuthContext);
+  const location = useLocation();
   return (
     <main className="App">
-      <Navbar />
-      {auth.user && <h5 className="greetings">Welcome, {auth.user}</h5>}
+      {console.log(auth)}
+      {location.pathname === "/one-receipt" ? "" : <Navbar />}
+      {auth.user ? <h5 className="greetings">Welcome, {auth.user}</h5> : ""}
       <div className="grower">
         <Routes>
           <Route path="/" element={<Layout />}>
