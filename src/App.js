@@ -26,6 +26,8 @@ import UserSelect from "./components/UserSelect";
 import { useLocation } from "react-router-dom";
 import AdminReceipt from "./components/AdminReceipt";
 import AdminSales from "./components/AdminSales";
+import AllReceipts from "./components/AllReceipts";
+import AllSales from "./components/AllSales";
 
 function App() {
   const year = new Date().getFullYear();
@@ -47,8 +49,10 @@ function App() {
             {/* <Route path="transactions" element={<Transactions />} />   */}
             <Route path="item-list" element={<ItemList />} />
             <Route path="sales" element={<Sales />} />
+            <Route path="all-sales" element={<AllSales />} />
             <Route path="inventory" element={<Inventory />} />
             <Route path="receipts" element={<Receipts />} />
+            <Route path="all-receipts" element={<AllReceipts />} />
             <Route path="/unauthorized" element={<Unauthorized />}></Route>
             <Route path="edit-item" element={<EditItem />} />
             <Route path="create-item" element={<CreateItem />} />

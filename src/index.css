@@ -204,7 +204,7 @@ code {
   column-gap: 2rem;
 }
 
-.gen-admin>* {
+.gen-admin button{
   background-color: aliceblue;
   border-color: aliceblue;
   color: black;

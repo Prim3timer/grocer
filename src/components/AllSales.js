@@ -1,40 +1,25 @@
-import { useContext, useEffect, useReducer, useState } from "react";
+import { useContext, useReducer, useState, useEffect } from "react";
 import ItemContext from "../context/itemProvider";
 import AuthContext from "../context/authProvider";
-import Transactions from "./Transactions";
-import { Link } from "react-router-dom";
 import initialState from "../store";
 import reducer from "../reducer";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
-const AdminSales = () => {
-  const { items, transactions, bizName, currency, numberWithCommas } =
-    useContext(ItemContext);
-  const [transactionArray, setTransactionArray] = useState([]);
-  const userId = localStorage.getItem("AdminUserId");
+const AllSales = () => {
   const { currentUsers } = useContext(AuthContext);
+  const { transactions, numberWithCommas } = useContext(ItemContext);
+  const [transactionArray, setTransactionArray] = useState([]);
+  console.log(transactions, currentUsers);
   const [state, dispatch] = useReducer(reducer, initialState);
   const axiosPrivate = useAxiosPrivate();
-  console.log(transactions);
-  const currentSelect = currentUsers.find(
-    (currentUser) => currentUser._id === userId,
-  );
-
-  const myTrans = transactions.filter(
-    (transaction) => transaction.cashierID === userId,
-  );
-
   const getTrans = async () => {
     try {
       // if (transactions) {
       // }
       const response = await axiosPrivate.get("/grocery-transactions");
       console.log(response.data);
-      const myTrans = response.data.filter(
-        (trans) => trans.cashierID === userId,
-      );
       let innerArray = [];
-      myTrans.map((transaction) => {
+      response.data.map((transaction) => {
         return transaction.goods.map((good) => {
           const elements = {
             name: good.name,
@@ -63,10 +48,9 @@ const AdminSales = () => {
   useEffect(() => {
     getTrans();
   }, [state.search, state.search2]);
-  console.log(myTrans);
   return transactions.length ? (
     <div className="sales-cont">
-      <h3 className="header">{currentSelect.username}'s Sales</h3>
+      <h3 className="header">All Sales ({transactions.length} )</h3>
       {/* <article className="measure-select-cont">
         <button onClick={changeUnitMesure}>primary</button>
         <button onClick={changeUnitMesure}>secondary</button>
@@ -166,4 +150,4 @@ const AdminSales = () => {
   );
 };
 
-export default AdminSales;
+export default AllSales;
