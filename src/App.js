@@ -31,7 +31,7 @@ function App() {
   return (
     <main className="App">
       {console.log(auth)}
-      {location.pathname === "/one-receipt" ? "" : <Navbar />}
+      {location.pathname === "/one-receipt" && auth.user ? "" : <Navbar />}
       {auth.user && location.pathname !== "/one-receipt" ? (
         <h5 className="greetings">Welcome, {auth.user}</h5>
       ) : (
