@@ -784,6 +784,7 @@ button {
 }
 
 .invent-loading {
+  position: fixed;
    justify-self: center;
     top: 35%;
 }
