@@ -83,7 +83,7 @@ const AllReceipts = () => {
                     parseFloat(transaction.grandTotal).toFixed(2),
                   )}
                 </h4>
-                {/* <h5>Cashier: {transaction.cashier}</h5> */}
+                <h5>Cashier: {transaction.cashier}</h5>
                 {/* <h3
                   onClick={(e) => assertain(transaction._id, e)}
                   style={{
