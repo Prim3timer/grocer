@@ -36,8 +36,8 @@ function App() {
   return (
     <main className="App">
       {console.log(auth)}
-      <Navbar />
-      {auth.accessToken ? (
+      {location.pathname !== "/one-receipt" && <Navbar />}
+      {auth.accessToken && location.pathname !== "/one-receipt" ? (
         <h5 className="greetings">Welcome, {auth.user}</h5>
       ) : (
         ""
@@ -76,7 +76,9 @@ function App() {
           <Route path="*" element={<Missing />} />
         </Routes>
       </div>
-      {<p className="footer">&copy; {year} Amalu Productions.</p>}
+      {location.pathname !== "/one-receipt" && (
+        <p className="footer">&copy; {year} Amalu Productions.</p>
+      )}
     </main>
   );
 }

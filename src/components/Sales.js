@@ -16,8 +16,8 @@ const Sales = () => {
     try {
       console.log(userId);
       console.log();
-      // const response = await axiosPrivate.get("/grocery-transactions");
-      const userTrans = transactions.filter(
+      const response = await axiosPrivate.get("/grocery-transactions");
+      const userTrans = response.data.filter(
         (transaction) => transaction.cashierID === userId,
       );
       console.log(userTrans);
