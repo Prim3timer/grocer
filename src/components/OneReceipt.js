@@ -64,12 +64,15 @@ const OneReceipt = () => {
               </div>
             );
           })}
-          <p>
-            cash paid:
-            {currentTrans.last4
-              ? `...${currentTrans.last4}`
-              : currentTrans.cashPaid}
-          </p>
+
+          {<p>card ending in....{currentTrans.last4}</p>}
+          {
+            <p>
+              cash paid: {currency}
+              {currentTrans.cashPaid}
+            </p>
+          }
+
           <h4>
             Grand Total: {currency}
             {numberWithCommas(parseFloat(currentTrans.grandTotal).toFixed(2))}
