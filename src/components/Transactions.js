@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const Transactions = () => {
   const { items, picUrl, numberWithCommas, currency } = useContext(ItemContext);
-  const { auth, getTransactions } = useContext(AuthContext);
+  const { auth, getTransactions, currentUsers } = useContext(AuthContext);
   const [state, dispatch] = useReducer(reducer, initialState);
   const [firstRedChecker, setFirstRedChecker] = useState("");
   const [success, setSuccess] = useState(false);
@@ -37,12 +37,12 @@ const Transactions = () => {
     dispatch({ type: "CASH", payload: false });
   };
 
+  const userId = localStorage.getItem("GroceryUserId");
   const cardCheckout = async () => {
     try {
-      const userId = localStorage.getItem("GroceryUserId");
       if (state.transArray.length) {
         const transItems = {
-          // cashier: auth.user,
+          cashier: auth.user,
           cashierID: userId,
           goods: state.transArray,
           grandTotal: state.total,
@@ -155,11 +155,12 @@ const Transactions = () => {
   const doneSales = async () => {
     try {
       const { transArray, total } = state;
+      const currentUser = currentUsers.find((user) => user._id === userId);
 
       if (state.transArray.length) {
         const transItems = {
-          // cashier: auth.user,
-          // cashierID: auth.picker,
+          cashier: currentUser.username,
+          cashierID: userId,
           paidAmount: state.paidAmount,
           goods: transArray,
           grandTotal: total,

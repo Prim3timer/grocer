@@ -16,7 +16,10 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [persistence, setPersistence] = useState(false);
+  // const [persistence, setPersistence] = useState(false);
+  const [persistence, setPersistence] = useState(
+    JSON.parse(localStorage.getItem("persitence")) || false,
+  );
   // const getUsers = async () => {
   //   const users = await axios.get("/groceryUsers");
 
@@ -47,7 +50,6 @@ export const AuthProvider = ({ children }) => {
         //   return {
         //     ...prev,
         //     users: response.data.users,
-        //     accessToken: response.data.accessToken,
         //   };
         // });
       } catch (error) {
@@ -86,6 +88,7 @@ export const AuthProvider = ({ children }) => {
         auth,
         setAuth,
         userPage,
+        users,
       }}
     >
       {children}

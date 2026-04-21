@@ -7,18 +7,22 @@ import { axiosPrivate } from "../app/api/axios";
 
 const Sales = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { getTransactions, auth } = useContext(ItemContext);
+  const { getTransactions, auth, transactions } = useContext(ItemContext);
   const [transactionArray, setTransactionArray] = useState([]);
-  const [transactions, setTransactions] = useState([]);
+  // const [transactions, setTransactions] = useState([]);
 
+  const userId = localStorage.getItem("GroceryUserId");
   const getTrans = async () => {
     try {
-      // if (transactions) {
-      // }
-      const response = await axiosPrivate.get("/grocery-transactions");
-      console.log(response.data);
+      console.log(userId);
+      console.log();
+      // const response = await axiosPrivate.get("/grocery-transactions");
+      const userTrans = transactions.filter(
+        (transaction) => transaction.cashierID === userId,
+      );
+      console.log(userTrans);
       let innerArray = [];
-      response.data.map((transaction) => {
+      userTrans.map((transaction) => {
         return transaction.goods.map((good) => {
           const elements = {
             name: good.name,

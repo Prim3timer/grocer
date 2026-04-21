@@ -11,14 +11,15 @@ import {
   useLocation,
   useLoaderData,
 } from "react-router-dom";
+import useRefreshToken from "../hooks/useRefreshToken";
 const Users = () => {
   const { users, userPage, auth, setAuth, currentUsers } =
     useContext(AuthContext);
+  const refresh = useRefreshToken();
   // const [currentUsers, setCurrentUsers] = useState();
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(auth);
 
   const setId = (id) => {
     const userId = localStorage.setItem("AdminUserId", id);
@@ -45,7 +46,7 @@ const Users = () => {
                   <Link
                     to="/user-select"
                     style={{
-                      display: "flex",  
+                      display: "flex",
                       // textAlign: "left",
                     }}
                   >
@@ -70,6 +71,7 @@ const Users = () => {
             })}
         </tbody>
       </table>
+      <button onClick={() => refresh()}>refresh</button>
     </div>
   );
 };

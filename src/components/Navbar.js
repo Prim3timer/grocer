@@ -17,7 +17,7 @@ const Navbar = () => {
   const logout = useLogout();
   return (
     <div className="navbar">
-      {auth.user ? (
+      {auth.accessToken ? (
         multiLinks.map((link) => {
           const { id, name, path } = link;
           return (
