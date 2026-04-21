@@ -66,7 +66,9 @@ const AdminSales = () => {
   console.log(myTrans);
   return transactions.length ? (
     <div className="sales-cont">
-      <h3 className="header">{currentSelect.username}'s Sales</h3>
+      <h3 className="header">
+        {currentSelect && currentSelect.username}'s Sales
+      </h3>
       {/* <article className="measure-select-cont">
         <button onClick={changeUnitMesure}>primary</button>
         <button onClick={changeUnitMesure}>secondary</button>
