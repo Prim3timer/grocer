@@ -10,17 +10,20 @@ const UserSettings = () => {
   const [username, setUsername] = useState("");
   const [isPassword3, setisPassword3] = useState("password");
   const [password, setPassword] = useState("");
-  const [active, setActive] = useState();
+  const [active, setActive] = useState("");
   const { currentUsers } = useContext(AuthContext);
   const userId = localStorage.getItem("GroceryUserId");
   const [passwordCheck3, setPasswordCheck3] = useState(faEyeSlash);
+  const [roles, setRoles] = useState(Object.keys(""));
   const getAUser = () => {
     try {
       const currentUser = currentUsers.find((user) => user._id === userId);
+      console.log(currentUser);
       if (currentUser) {
         setUsername(currentUser.username);
         setPassword(currentUser.password);
-        console.log(currentUser.password);
+        setRoles(currentUser.roles);
+        setActive(currentUser.active);
       }
     } catch (error) {
       console.log(error.message);
@@ -44,6 +47,43 @@ const UserSettings = () => {
       setisPassword3("password");
       setPasswordCheck3(faEyeSlash);
     }
+  };
+
+  const onRolesChanged = (e) => {
+    const values = Array.from(e.target.selectedOptions, (option) => option);
+    if (values.length > 1 && !values.includes("Manager")) {
+      return;
+    } else {
+      setRoles(values);
+    }
+  };
+
+  const onActiveChanged = () => {
+    setActive((prev) => !prev);
+  };
+
+  const updateUser = (e) => {
+    e.preventDefault();
+    try {
+      const newRoles = {
+        Employee: 2001,
+      };
+      let newest = {};
+      const userChange = roles.map((role) => {
+        if (role === "Manager") newest = { ...newRoles, Manager: 1984 };
+        else if (role === "Admin") {
+          newest = { ...newRoles, Manager: 1984, Admin: 5150 };
+        } else newest = newRoles;
+        return newest;
+      });
+      const currentRole = userChange.pop();
+      const updatedPerson = {
+        username: username,
+        roles: currentRole,
+        password,
+        active,
+      };
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -82,8 +122,8 @@ const UserSettings = () => {
             id="user-active"
             name="user-active"
             type="checkbox"
-            // checked={active}
-            // onChange={onActiveChanged}
+            checked={active}
+            onChange={onActiveChanged}
           />
         </label>
 
@@ -96,16 +136,14 @@ const UserSettings = () => {
           >
             ASSINGED ROLES:
           </label>
-
           <select
             name="roles"
             size="3"
             multiple={true}
-            //  ref={selectRef}
-
-            // value={roles}
-            // onChange={(e) => onRolesChanged(e)}
-            // className="roles-select"
+            // ref={selectRef}
+            value={roles}
+            onChange={(e) => onRolesChanged(e)}
+            className="roles-select"
           >
             {options}
           </select>

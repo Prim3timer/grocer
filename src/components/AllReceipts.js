@@ -3,6 +3,11 @@ import ItemContext from "../context/itemProvider";
 import AuthContext from "../context/authProvider";
 import Transactions from "./Transactions";
 import { Link } from "react-router-dom";
+import { FaTrashAlt } from "react-icons/fa";
+import { useReducer } from "react";
+import reducer from "../reducer";
+import initialState from "../store";
+import axios from "../app/api/axios";
 
 const AllReceipts = () => {
   const { items, transactions, bizName, currency, numberWithCommas } =
@@ -13,16 +18,53 @@ const AllReceipts = () => {
     (transaction) => transaction.cashierID === userId,
   );
 
+  const [state, dispatch] = useReducer(reducer, initialState);
   const currentSelect = currentUsers.find(
     (currentUser) => currentUser._id === userId,
   );
   console.log(myTrans);
   console.log(currentUsers);
 
+  const assertain = (id) => {
+    dispatch({ type: "cancel", payload: true });
+    const trans = transactions.find((item) => item._id === id);
+    dispatch({ type: "currentTransaction", payload: trans });
+  };
+
   const oneShow = (id) => {
     localStorage.setItem("groceryTransactions", id);
     // auth.picker2 = id;
     // console.log(auth);
+  };
+
+  const remainDelete = () => {
+    // this condition statement is to enable the removal of the confirm window once any part of the
+    // page is touched.
+    if (state.cancel) {
+      dispatch({ type: "cancel", payload: false });
+    }
+  };
+
+  const handleRemove = async () => {
+    //   e.preventDefault()
+    console.log(state.currentTransaction);
+    try {
+      dispatch({ type: "cancel", payload: false });
+      const response = await axios.delete(
+        `/grocery-transactions/${state.currentTransaction._id}`,
+      );
+
+      if (response) {
+        const newTransList = transactions.filter(
+          (item) => item._id !== state.currentTransaction._id,
+        );
+        console.log(newTransList);
+        dispatch({ type: "transactions", payload: newTransList });
+        // setTransactions(newTransList);
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
   };
   return transactions.length ? (
     <div>
@@ -84,14 +126,14 @@ const AllReceipts = () => {
                   )}
                 </h4>
                 <h5>Cashier: {transaction.cashier}</h5>
-                {/* <h3
+                <h3
                   onClick={(e) => assertain(transaction._id, e)}
                   style={{
                     textAlign: "center",
                   }}
                 >
                   <FaTrashAlt role="button" />
-                </h3> */}
+                </h3>
                 <br />
               </article>
             ) : (
@@ -100,6 +142,26 @@ const AllReceipts = () => {
           </section>
         );
       })}
+      <div className={state.cancel ? "delete" : "no-delete"}>
+        <h3
+          id="verify-header"
+          style={{
+            margin: ".5rem auto",
+            //   display: 'flex',
+          }}
+        >
+          Delete from Receipts
+        </h3>
+        <article className="delete-buttons">
+          <button onClick={remainDelete}>No</button>
+          <button
+            onClick={handleRemove}
+            style={{ backgroundColor: "red", borderColor: "red" }}
+          >
+            Yes
+          </button>
+        </article>
+      </div>
     </div>
   ) : (
     <h3 className="loading">Loading...</h3>
