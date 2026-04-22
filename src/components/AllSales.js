@@ -120,30 +120,30 @@ const AllSales = () => {
                 </tr>
               );
             })}
+          <tr>
+            <th>Total:</th>
+            <th>
+              {numberWithCommas(
+                transactionArray
+                  .reduce((a, b) => {
+                    return a + parseFloat(b.qty);
+                  }, 0)
+                  .toFixed(2),
+              )}
+            </th>
+            <th colSpan={2}>
+              $
+              {numberWithCommas(
+                transactionArray
+                  .reduce((a, b) => {
+                    return a + parseFloat(b.total);
+                  }, 0)
+                  .toFixed(2),
+              )}
+            </th>
+          </tr>
         </tbody>
       </table>
-      <div className="sales-total">
-        <h3>Total:</h3>
-        <h3>
-          {numberWithCommas(
-            transactionArray
-              .reduce((a, b) => {
-                return a + parseFloat(b.qty);
-              }, 0)
-              .toFixed(2),
-          )}
-        </h3>
-        <h3>
-          $
-          {numberWithCommas(
-            transactionArray
-              .reduce((a, b) => {
-                return a + parseFloat(b.total);
-              }, 0)
-              .toFixed(2),
-          )}
-        </h3>
-      </div>
     </div>
   ) : (
     <h3 className="loading">Loading...</h3>

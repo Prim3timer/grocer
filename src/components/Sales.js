@@ -146,7 +146,7 @@ const Sales = () => {
                   .toFixed(2),
               )}
             </th>
-            <th>
+            <th colSpan={2}>
               $
               {numberWithCommas(
                 transactionArray
