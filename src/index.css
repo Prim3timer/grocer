@@ -230,6 +230,13 @@ code {
   margin: 1rem 0;
 }
 
+.usersetting-actions {
+  margin-top: 1rem;
+  column-gap: 6rem;
+  display: flex;
+  justify-content: flex-start;
+}
+
 .form-label input {
   transform: scale(1.8);
 }
@@ -1269,6 +1276,16 @@ position: relative;
   border: none8
 }
 
+}
+
+@media screen and (min-width: 1551px){
+   .items-container {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  /* column-gap: .5rem; */
+  /* background-color: red; */
+  
+}
 }
 
 /* MOBILE DEVICE LANDSCAPE */

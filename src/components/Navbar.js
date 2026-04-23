@@ -15,6 +15,7 @@ const Navbar = () => {
   const { auth } = useContext(AuthContext);
   const [state, dispatch] = useReducer(reducer, initialState);
   const logout = useLogout();
+  console.log(auth.accessToken);
   return (
     <div className="navbar">
       {auth.accessToken ? (

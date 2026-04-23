@@ -47,7 +47,6 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route path="/" index element={<Login />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/transactions" element={<Transactions />} />
             <Route path="/register" element={<Register />} />
             <Route path="one-receipt" element={<OneReceipt />} />
             {/* <Route path="transactions" element={<Transactions />} />   */}
@@ -61,11 +60,13 @@ function App() {
             <Route path="edit-item" element={<EditItem />} />
             <Route path="create-item" element={<CreateItem />} />
             <Route path="user-select" element={<UserSelect />} />
-            <Route path="admin" element={<Admin />} />
             <Route path="admin-receipt" element={<AdminReceipt />} />
             <Route path="admin-sales" element={<AdminSales />} />
+            <Route path="admin" element={<Admin />} />
 
             <Route element={<PersistLogin />}>
+              <Route path="/transactions" element={<Transactions />} />
+              <Route element={<RequiredAuth allowedRoles={[2001]} />}></Route>
               <Route element={<RequiredAuth allowedRoles={[1984]} />}></Route>
 
               <Route element={<RequiredAuth allowedRoles={[5150]} />}></Route>

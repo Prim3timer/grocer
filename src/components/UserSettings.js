@@ -1,20 +1,32 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef, useReducer } from "react";
 import AuthContext from "../context/authProvider";
 import { ROLES } from "../config/roles";
-import { FaTrash } from "react-icons/fa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { FaEyeSlash, FaEye } from "react-icons/fa";
-import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
+import initialState from "../store";
+import reducer from "../reducer";
+
+import {
+  faTrash,
+  faCheck,
+  faTimes,
+  faInfoCircle,
+  faEyeSlash,
+  faEye,
+  faSave,
+} from "@fortawesome/free-solid-svg-icons";
 
 const UserSettings = () => {
   const [username, setUsername] = useState("");
   const [isPassword3, setisPassword3] = useState("password");
   const [password, setPassword] = useState("");
   const [active, setActive] = useState("");
-  const { currentUsers } = useContext(AuthContext);
+  const { currentUsers, auth } = useContext(AuthContext);
   const userId = localStorage.getItem("GroceryUserId");
   const [passwordCheck3, setPasswordCheck3] = useState(faEyeSlash);
   const [roles, setRoles] = useState(Object.keys(""));
+  const saveRef = useRef(null);
+  const pwdRef = useRef();
+  const [state, dispatch] = useReducer(reducer, initialState);
   const getAUser = () => {
     try {
       const currentUser = currentUsers.find((user) => user._id === userId);
@@ -22,7 +34,7 @@ const UserSettings = () => {
       if (currentUser) {
         setUsername(currentUser.username);
         setPassword(currentUser.password);
-        setRoles(currentUser.roles);
+        setRoles(Object.keys(currentUser.roles));
         setActive(currentUser.active);
       }
     } catch (error) {
@@ -39,6 +51,8 @@ const UserSettings = () => {
     );
   });
 
+  console.log(options);
+
   const showPassword = () => {
     if (isPassword3 === "password") {
       setisPassword3("text");
@@ -49,13 +63,55 @@ const UserSettings = () => {
     }
   };
 
+  const handleRemove = async () => {
+    console.log(auth.picker3);
+    const response = await axiosPrivate.delete(
+      `/users/delete/${currentUser._id}`,
+    );
+    dispatch({ type: "cancel", payload: false });
+    dispatch({ type: "success", payload: true });
+    navigate("/admin");
+    console.log(state.success);
+    setTimeout(() => {
+      dispatch({ type: "success", payload: false });
+    }, 3000);
+    if (response) {
+      dispatch({ type: "selectUser", payload: response.data });
+
+      // const newGraw =  users.filter((item)=> item._id !== auth.picker3)
+
+      // setUsers(newGraw)
+    } else {
+      console.log("nothing for you");
+    }
+  };
+
+  const remainDelete = () => {
+    // this condition statement is to enable the removal of the confirm window once any part
+    // of the
+    // page is touched.
+    if (state.cancel) {
+      dispatch({ type: "cancel", payload: false });
+    }
+  };
+
   const onRolesChanged = (e) => {
-    const values = Array.from(e.target.selectedOptions, (option) => option);
+    const values = Array.from(
+      e.target.selectedOptions,
+      (option) => option.value,
+    );
+    if (!values.includes("Employee")) {
+      return;
+    }
     if (values.length > 1 && !values.includes("Manager")) {
       return;
     } else {
       setRoles(values);
     }
+  };
+
+  const assertain = () => {
+    dispatch({ type: "cancel", payload: true });
   };
 
   const onActiveChanged = () => {
@@ -148,7 +204,56 @@ const UserSettings = () => {
             {options}
           </select>
         </div>
+        <article className="usersetting-actions">
+          <button
+            onClick={(e) => updateUser(e)}
+            className="user-action"
+            ref={saveRef}
+            //   className={'icon-button'}
+            title="Save"
+          >
+            <FontAwesomeIcon icon={faSave} />
+          </button>
+          <button className="user-action">
+            <FontAwesomeIcon
+              icon={faTrash}
+              onClick={assertain}
+              tableindex="0"
+            />{" "}
+          </button>
+        </article>
       </form>
+      <div className={state.cancel ? "delete" : "no-delete"}>
+        <h3
+          id="verify-header"
+          style={{
+            margin: ".5rem auto",
+            //   display: 'flex',
+          }}
+        >
+          {" "}
+          Delete {username && username} from users
+        </h3>
+        <article
+          style={{
+            display: "flex",
+            //  flexDirection: 'row',
+            columnGap: "4vw",
+            justifyContent: "center",
+          }}
+        >
+          <button onClick={remainDelete}>No</button>
+          <button
+            onClick={handleRemove}
+            style={{
+              backgroundColor: "red",
+              borderColor: "red",
+            }}
+          >
+            Yes
+          </button>
+        </article>
+      </div>
     </div>
   );
 };

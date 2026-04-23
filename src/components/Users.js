@@ -71,7 +71,7 @@ const Users = () => {
             })}
         </tbody>
       </table>
-      <button onClick={() => refresh()}>refresh</button>
+      {/* <button onClick={() => refresh()}>refresh</button> */}
     </div>
   );
 };
