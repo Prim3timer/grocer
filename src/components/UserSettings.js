@@ -4,6 +4,8 @@ import { ROLES } from "../config/roles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import initialState from "../store";
 import reducer from "../reducer";
+import { useNavigate } from "react-router-dom";
+import axios from "../app/api/axios";
 
 import {
   faTrash,
@@ -14,22 +16,28 @@ import {
   faEye,
   faSave,
 } from "@fortawesome/free-solid-svg-icons";
+import { axiosPrivate } from "../app/api/axios";
 
 const UserSettings = () => {
   const [username, setUsername] = useState("");
   const [isPassword3, setisPassword3] = useState("password");
   const [password, setPassword] = useState("");
   const [active, setActive] = useState("");
-  const { currentUsers, auth } = useContext(AuthContext);
+  const { auth } = useContext(AuthContext);
   const userId = localStorage.getItem("GroceryUserId");
   const [passwordCheck3, setPasswordCheck3] = useState(faEyeSlash);
   const [roles, setRoles] = useState(Object.keys(""));
   const saveRef = useRef(null);
   const pwdRef = useRef();
   const [state, dispatch] = useReducer(reducer, initialState);
-  const getAUser = () => {
+  const [currentUser, setCurrentUser] = useState({});
+  const navigate = useNavigate();
+  const getAUser = async () => {
     try {
-      const currentUser = currentUsers.find((user) => user._id === userId);
+      const response = await axiosPrivate.get("/groceryUsers");
+      const currentUser = response.data.users.find(
+        (user) => user._id === userId,
+      );
       console.log(currentUser);
       if (currentUser) {
         setUsername(currentUser.username);
