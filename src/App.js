@@ -35,7 +35,7 @@ function App() {
   const location = useLocation();
   return (
     <main className="App">
-      {console.log(auth)}
+      {/* {console.log(auth)} */}
       {location.pathname !== "/one-receipt" && <Navbar />}
       {auth.accessToken && location.pathname !== "/one-receipt" ? (
         <h5 className="greetings">Welcome, {auth.user}</h5>

@@ -63,7 +63,7 @@ const Sales = () => {
   useEffect(() => {
     getTrans();
   }, [state.search, state.search2]);
-  return transactionArray?.length ? (
+  return transactions?.length ? (
     <div className="sales-cont">
       <h3 className="header">Sales</h3>
       {/* <article className="measure-select-cont">

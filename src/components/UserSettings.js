@@ -24,7 +24,7 @@ const UserSettings = () => {
   const [password, setPassword] = useState("");
   const [active, setActive] = useState("");
   const { auth } = useContext(AuthContext);
-  const userId = localStorage.getItem("GroceryUserId");
+  const userId = localStorage.getItem("AdminUserId");
   const [passwordCheck3, setPasswordCheck3] = useState(faEyeSlash);
   const [roles, setRoles] = useState(Object.keys(""));
   const saveRef = useRef(null);

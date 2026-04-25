@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
   // };
 
   const userPage = (id) => {
-    localStorage.setItem("GroceryUserId", id);
+    localStorage.setItem("AdminUserId", id);
   };
 
   useEffect(() => {

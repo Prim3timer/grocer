@@ -13,7 +13,7 @@ import {
 } from "react-router-dom";
 import useRefreshToken from "../hooks/useRefreshToken";
 const Users = () => {
-  const { users, userPage, auth, setAuth, currentUsers } =
+  const { users, auth, setAuth, currentUsers, userPage } =
     useContext(AuthContext);
   const refresh = useRefreshToken();
   // const [currentUsers, setCurrentUsers] = useState();
