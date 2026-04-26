@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
-import { useState, useEffect, useContext } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { useState, useEffect, useContext, use } from "react";
+import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./App.css";
 import CreateItem from "./components/CreateItem";
@@ -28,11 +28,16 @@ import AdminReceipt from "./components/AdminReceipt";
 import AdminSales from "./components/AdminSales";
 import AllReceipts from "./components/AllReceipts";
 import AllSales from "./components/AllSales";
+import useAxiosPrivate from "./hooks/useAxiosPrivate";
 
 function App() {
   const year = new Date().getFullYear();
-  const { auth } = useContext(AuthContext);
+  const { auth, setAuth, setCurrentUsers, currentUsers } =
+    useContext(AuthContext);
+  const navigate = useNavigate();
   const location = useLocation();
+  const axiosPrivate = useAxiosPrivate();
+
   return (
     <main className="App">
       {/* {console.log(auth)} */}
