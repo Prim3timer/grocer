@@ -4,6 +4,7 @@ import AuthContext from "../context/authProvider";
 
 const RequiredAuth = ({ allowedRoles }) => {
   const { auth } = useContext(AuthContext);
+  console.log(auth);
   const location = useLocation();
   const navigate = useNavigate();
   return auth?.roles.find((role) => allowedRoles?.includes(role)) ? (

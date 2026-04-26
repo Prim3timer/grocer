@@ -36,12 +36,12 @@ const Users = () => {
         isMounted && setCurrentUsers(response.data.users);
         // setUsers(response.data.users);
 
-        // setAuth((prev) => {
-        //   return {
-        //     ...prev,
-        //     users: response.data.users,
-        //   };
-        // });
+        setAuth((prev) => {
+          return {
+            ...prev,
+            users: response.data.users,
+          };
+        });
       } catch (error) {
         console.error(error);
 

@@ -63,16 +63,16 @@ function App() {
             <Route path="admin-receipt" element={<AdminReceipt />} />
             <Route path="admin-sales" element={<AdminSales />} />
             <Route path="admin" element={<Admin />} />
+            <Route path="/transactions" element={<Transactions />} />
 
             <Route element={<PersistLogin />}>
-              <Route path="/transactions" element={<Transactions />} />
               <Route element={<RequiredAuth allowedRoles={[2001]} />}></Route>
               <Route element={<RequiredAuth allowedRoles={[1984]} />}></Route>
 
               <Route element={<RequiredAuth allowedRoles={[5150]} />}></Route>
-
-              <Route path="user-settings" element={<UserSettings />} />
             </Route>
+
+            <Route path="user-settings" element={<UserSettings />} />
           </Route>
           <Route path="*" element={<Missing />} />
         </Routes>

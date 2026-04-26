@@ -10,7 +10,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const Transactions = () => {
   const { items, picUrl, numberWithCommas, currency } = useContext(ItemContext);
-  const { auth, getTransactions, currentUsers, setCurrentUsers } =
+  const { auth, setAuth, getTransactions, currentUsers, setCurrentUsers } =
     useContext(AuthContext);
   const axiosPrivate = useAxiosPrivate();
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -54,12 +54,12 @@ const Transactions = () => {
         isMounted && setCurrentUsers(response.data.users);
         // setUsers(response.data.users);
 
-        // setAuth((prev) => {
-        //   return {
-        //     ...prev,
-        //     users: response.data.users,
-        //   };
-        // });
+        setAuth((prev) => {
+          return {
+            ...prev,
+            users: response.data.users,
+          };
+        });
       } catch (error) {
         console.error(error);
 

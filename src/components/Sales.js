@@ -20,7 +20,7 @@ const Sales = () => {
       const userTrans = response.data.filter(
         (transaction) => transaction.cashierID === userId,
       );
-      console.log(userTrans);
+
       let innerArray = [];
       userTrans.map((transaction) => {
         return transaction.goods.map((good) => {
@@ -37,7 +37,6 @@ const Sales = () => {
             innerArray.filter((inner) =>
               inner.name.toLowerCase().includes(state.search.toLowerCase()),
             );
-          console.log(filterate);
           const filterate2 = filterate.filter((inner) =>
             inner.date.substring(0, 10).includes(state.search2),
           );
