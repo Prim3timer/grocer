@@ -20,53 +20,30 @@ export const AuthProvider = ({ children }) => {
   const [persistence, setPersistence] = useState(
     JSON.parse(localStorage.getItem("persitence")) || false,
   );
-  // const getUsers = async () => {
-  //   const users = await axios.get("/groceryUsers");
+  const getUsers = async () => {
+    try {
+      const users = await axios.get("/groceryUsers");
+      setUsers(users);
 
-  //   dispatch({ type: "users", payload: users.data });
-  // };
+      dispatch({ type: "users", payload: users.data });
+    } catch (error) {
+      navigate("/login", { state: { from: location }, replace: true });
+    }
+  };
 
   const userPage = (id) => {
     localStorage.setItem("AdminUserId", id);
   };
 
-  useEffect(() => {
-    // console.log(auth)
-    let isMounted = true;
-    // to cancel our request if the Component unmounts
-    const controller = new AbortController();
+  // const accessTokenChecker = () => {
+  //   if (!auth) {
+  //     navigate("/login", { state: { from: location }, replace: true });
+  //   }
+  // };
 
-    const getUsers = async () => {
-      try {
-        const response = await axiosPrivate.get("/groceryUsers", {
-          signal: controller.signal,
-        });
-        console.log(response.data);
-
-        isMounted && setCurrentUsers(response.data.users);
-        setUsers(response.data.users);
-
-        // setAuth((prev) => {
-        //   return {
-        //     ...prev,
-        //     users: response.data.users,
-        //   };
-        // });
-      } catch (error) {
-        console.error(error);
-
-        navigate("/login", { state: { from: location }, replace: true });
-      }
-    };
-
-    getUsers();
-    // clean up function
-    return () => {
-      isMounted = false;
-
-      controller.abort();
-    };
-  }, []);
+  // useEffect(() => {
+  //   accessTokenChecker();
+  // }, []);
 
   // const user = {};
   // const users = [];
@@ -85,6 +62,7 @@ export const AuthProvider = ({ children }) => {
         setPersistence,
         ...state,
         currentUsers,
+        setCurrentUsers,
         auth,
         setAuth,
         userPage,

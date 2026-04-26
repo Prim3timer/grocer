@@ -1,21 +1,26 @@
 import { useContext, useState, useRef, useReducer, useEffect } from "react";
 import ItemContext from "../context/itemProvider";
 import AuthContext from "../context/authProvider";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import initialState from "../store";
 import reducer from "../reducer";
 import { FaTrashAlt, FaPlus } from "react-icons/fa";
 import axios from "../app/api/axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const Transactions = () => {
   const { items, picUrl, numberWithCommas, currency } = useContext(ItemContext);
-  const { auth, getTransactions, currentUsers } = useContext(AuthContext);
+  const { auth, getTransactions, currentUsers, setCurrentUsers } =
+    useContext(AuthContext);
+  const axiosPrivate = useAxiosPrivate();
   const [state, dispatch] = useReducer(reducer, initialState);
   const [firstRedChecker, setFirstRedChecker] = useState("");
   const [success, setSuccess] = useState(false);
   const [noShow, setNoShow] = useState(false);
   const [groceries, setGroceries] = useState([]);
   const now = new Date();
+  const navigate = useNavigate();
+  const location = useLocation();
   const inputRef = useRef();
   const qtyRef = useRef();
   const [numerator, setNumerator] = useState();
@@ -32,6 +37,44 @@ const Transactions = () => {
       dispatch({ type: "CASH", payload: true });
     }
   };
+
+  useEffect(() => {
+    // console.log(auth)
+    let isMounted = true;
+    // to cancel our request if the Component unmounts
+    const controller = new AbortController();
+
+    const getUsers = async () => {
+      try {
+        const response = await axiosPrivate.get("/groceryUsers", {
+          signal: controller.signal,
+        });
+        console.log(response.status);
+
+        isMounted && setCurrentUsers(response.data.users);
+        // setUsers(response.data.users);
+
+        // setAuth((prev) => {
+        //   return {
+        //     ...prev,
+        //     users: response.data.users,
+        //   };
+        // });
+      } catch (error) {
+        console.error(error);
+
+        navigate("/login", { state: { from: location }, replace: true });
+      }
+    };
+
+    getUsers();
+    // clean up function
+    return () => {
+      isMounted = false;
+
+      controller.abort();
+    };
+  }, []);
 
   const closeCashWindow = () => {
     dispatch({ type: "CASH", payload: false });

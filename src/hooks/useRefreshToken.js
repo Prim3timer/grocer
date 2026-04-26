@@ -8,7 +8,7 @@ const useRefreshToken = () => {
   const { setAuth, auth } = useContext(AuthProvider);
 
   const refresh = async () => {
-    console.log("on refresh");
+    console.log("on grocery-refresh");
     const response = await axios.get("/grocery-refresh", {
       // this allows us to send cookies with our request
       withCredentials: true,

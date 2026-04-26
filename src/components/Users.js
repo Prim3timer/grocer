@@ -13,13 +13,50 @@ import {
 } from "react-router-dom";
 import useRefreshToken from "../hooks/useRefreshToken";
 const Users = () => {
-  const { users, auth, setAuth, currentUsers, userPage } =
-    useContext(AuthContext);
+  const { users, auth, setAuth, userPage } = useContext(AuthContext);
   const refresh = useRefreshToken();
-  // const [currentUsers, setCurrentUsers] = useState();
+  const [currentUsers, setCurrentUsers] = useState();
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    // console.log(auth)
+    let isMounted = true;
+    // to cancel our request if the Component unmounts
+    const controller = new AbortController();
+
+    const getUsers = async () => {
+      try {
+        const response = await axiosPrivate.get("/groceryUsers", {
+          signal: controller.signal,
+        });
+        console.log(response.status);
+
+        isMounted && setCurrentUsers(response.data.users);
+        // setUsers(response.data.users);
+
+        // setAuth((prev) => {
+        //   return {
+        //     ...prev,
+        //     users: response.data.users,
+        //   };
+        // });
+      } catch (error) {
+        console.error(error);
+
+        navigate("/login", { state: { from: location }, replace: true });
+      }
+    };
+
+    getUsers();
+    // clean up function
+    return () => {
+      isMounted = false;
+
+      controller.abort();
+    };
+  }, []);
 
   const setId = (id) => {
     const userId = localStorage.setItem("AdminUserId", id);

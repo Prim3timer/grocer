@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Admin = () => {
   const { currentUsers, users } = useContext(AuthContext);
   console.log(currentUsers, users);
-  return currentUsers?.length ? (
+  return (
     currentUsers && (
       <div className="admin">
         <h4>Admin</h4>
@@ -21,8 +21,6 @@ const Admin = () => {
         <Users />
       </div>
     )
-  ) : (
-    <h3 className="loading">loading...</h3>
   );
 };
 
