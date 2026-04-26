@@ -61,7 +61,8 @@ const ItemList = () => {
                   <section className="list-item-texts">
                     <h3>
                       {currency}
-                      {item.availablePrices[0]}/{item.availableUnitMeasures[0]}
+                      {parseFloat(item.availablePrices[0]).toFixed(2)}/
+                      {item.availableUnitMeasures[0]}
                     </h3>
                     <h4>{item.name}</h4>
                     <h4>
