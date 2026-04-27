@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { useLocation, Navigate, Outlet, useNavigate } from "react-router-dom";
 import AuthContext from "../context/authProvider";
+import useRefreshToken from "../hooks/useRefreshToken";
 
 const RequiredAuth = ({ allowedRoles }) => {
   const { auth } = useContext(AuthContext);
+  const refresh = useRefreshToken();
   console.log(auth);
   const location = useLocation();
   const navigate = useNavigate();

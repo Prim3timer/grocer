@@ -886,6 +886,19 @@ display: flex;
   width: 140vw;
 }
 
+.sales-button {
+  margin: 0 0 0 2rem;
+  display: flex;
+  float: left;
+  justify-content: center;
+  column-gap: 2rem;
+}
+
+.sales-button>* {
+  /* background-color: red; */
+  width: 7rem;
+}
+
 /* .sales-table {
   text-align: left;
   width: 80%;

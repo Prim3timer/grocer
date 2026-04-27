@@ -7,12 +7,42 @@ import { axiosPrivate } from "../app/api/axios";
 
 const Sales = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { getTransactions, auth, transactions } = useContext(ItemContext);
+  const { getTransactions, auth, transactions, items } =
+    useContext(ItemContext);
   const [transactionArray, setTransactionArray] = useState([]);
+  const [same, setSame] = useState(false);
   // const [transactions, setTransactions] = useState([]);
 
+  const firstUnit = () => {
+    console.log(items);
+    const firstElement = transactionArray[0];
+    const currentItem =
+      items && items.items.find((item) => item.name === firstElement.name);
+    console.log(currentItem);
+    const unitMeasureMeasureArray = [];
+
+    const currentArray = transactionArray.filter(
+      (item) => item.unitMeasure === currentItem.availableUnitMeasures[0],
+    );
+    setTransactionArray(currentArray);
+  };
+
+  const secondUnit = () => {
+    console.log(items);
+    const firstElement = transactionArray[0];
+    const currentItem =
+      items && items.items.find((item) => item.name === firstElement.name);
+    console.log(currentItem);
+    const unitMeasureMeasureArray = [];
+
+    const currentArray = transactionArray.filter(
+      (item) => item.unitMeasure === currentItem.availableUnitMeasures[1],
+    );
+    setTransactionArray(currentArray);
+  };
   const userId = localStorage.getItem("GroceryUserId");
   const getTrans = async () => {
+    const index = 0;
     try {
       console.log(userId);
       console.log();
@@ -41,6 +71,10 @@ const Sales = () => {
             inner.date.substring(0, 10).includes(state.search2),
           );
           setTransactionArray(filterate2);
+          const allEqual = (arr) =>
+            arr.every((val) => val.name === arr[0].name);
+          const allTheSame = allEqual(filterate2);
+          setSame(allTheSame);
           return innerArray;
         });
       });
@@ -64,6 +98,12 @@ const Sales = () => {
   }, [state.search, state.search2]);
   return transactions?.length ? (
     <div className="sales-cont">
+      {same && (
+        <article className="sales-button">
+          <button onClick={firstUnit}>unit 1</button>
+          <button onClick={secondUnit}>unit 2</button>
+        </article>
+      )}
       <h3 className="header">Sales</h3>
       {/* <article className="measure-select-cont">
         <button onClick={changeUnitMesure}>primary</button>
@@ -137,13 +177,14 @@ const Sales = () => {
           <tr>
             <th>Total:</th>
             <th>
-              {numberWithCommas(
-                transactionArray
-                  .reduce((a, b) => {
-                    return a + parseFloat(b.qty);
-                  }, 0)
-                  .toFixed(2),
-              )}
+              {same &&
+                numberWithCommas(
+                  transactionArray
+                    .reduce((a, b) => {
+                      return a + parseFloat(b.qty);
+                    }, 0)
+                    .toFixed(2),
+                )}
             </th>
             <th colSpan={2}>
               $
