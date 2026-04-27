@@ -62,7 +62,7 @@ export const AuthProvider = ({ children }) => {
         setPersistence,
         ...state,
         currentUsers,
-        setCurrentUsers,
+      setCurrentUsers,
         auth,
         setAuth,
         userPage,

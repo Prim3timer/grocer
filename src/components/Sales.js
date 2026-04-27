@@ -18,6 +18,7 @@ const Sales = () => {
     const firstElement = transactionArray[0];
     const currentItem =
       items && items.items.find((item) => item.name === firstElement.name);
+    // const currentItems =
     console.log(currentItem);
     const unitMeasureMeasureArray = [];
 
