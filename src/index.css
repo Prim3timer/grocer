@@ -78,9 +78,10 @@ code {
   place-content: center;
 }
 
-.footer {
-  /* margin-top: .5rem; */
-}
+/* .footer {
+  font-size: 1rem;
+  background-color: red
+} */
 
 .home-names {
   display: flex;
@@ -100,7 +101,7 @@ code {
 }
 
 .footer {
-  /* font-size: 1rem; */
+  font-size: 1rem;
   bottom: 0;
 }
 
@@ -866,7 +867,7 @@ display: flex;
 }
 
 .invent-header-trow {
-  /* width: 150vw */
+/* width: 150vw aa*/
 }
 
 .invent-header-trow th {
