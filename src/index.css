@@ -870,7 +870,7 @@ display: flex;
 }
 
 .invent-header-trow th {
-  border-bottom: 2px solid brown;
+  border-bottom: 1px solid brown;
   white-space: nowrap;
 }
 
