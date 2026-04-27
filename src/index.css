@@ -892,6 +892,7 @@ display: flex;
   float: left;
   justify-content: center;
   column-gap: 2rem;
+  padding-bottom: 2rem;
 }
 
 .sales-button>* {
