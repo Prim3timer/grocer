@@ -886,6 +886,10 @@ display: flex;
   width: 140vw;
 }
 
+.theader-row >* {
+  border-bottom: 1px solid brown;
+}
+
 .sales-button {
   margin: 0 0 0 2rem;
   display: flex;

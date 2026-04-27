@@ -74,6 +74,7 @@ const reducer = (state, action) => {
       return { ...state, amount, total };
     case "ALERTMSG":
       return { ...state, alertMsg: action.payload };
+
     case "unitMeasure":
       const currentArray = state.transArray.map((item) => {
         if (item._id === action.id) {
