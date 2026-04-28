@@ -74,8 +74,8 @@ function App() {
                 <Route path="receipts" element={<Receipts />} />
                 <Route path="item-list" element={<ItemList />} />
                 <Route path="/transactions" element={<Transactions />} />
-                <Route path="user-settings" element={<UserSettings />} />
               </Route>
+              <Route path="user-settings" element={<UserSettings />} />
               <Route element={<RequiredAuth allowedRoles={[1984]} />}></Route>
 
               <Route element={<RequiredAuth allowedRoles={[5150]} />}></Route>
