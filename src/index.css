@@ -191,6 +191,7 @@ code {
   /* width: 90%; */
   /* flex-grow: 1; */
   padding: 0.5rem 1rem;
+  width: 80vw;
   margin: 1rem 0;
   overflow-y: auto;
 }
@@ -276,14 +277,14 @@ input[type=checkbox] {
 }
 
 .asinged-roles-cont select {
-
+  
   /* background-color: red; */
   width: 12rem;
   /* height: 6.7rem; */
   border: 4px solid black;
   padding: .5rem;
-
-
+  
+  
 }
 
 
@@ -342,16 +343,17 @@ input[type=checkbox] {
 
 
 .username-form>*:nth-child(2) {
-  align-self: flex-start;
+  /* align-self: flex-start; */
 }
 
 .username-form>*:nth-child(5) {
-  align-self: flex-start;
+  /* align-self: flex-start; */
 }
 
 .username-form>*:nth-child(3) {
   align-self: flex-start;
 }
+
 
 
 
@@ -362,14 +364,17 @@ input[type=checkbox] {
   flex-direction: column;
   align-items: center;
   margin: 1rem 0;
+  width: 70vw;
+  padding: 0 1rem;
   /* align-items: flex-start; */
   font-size: 1.5rem;
-
+  
 }
 
 .username-form input {
   font-size: 1.5rem;
   padding: .5rem;
+  width: 50vw;
 }
 
 .username {
@@ -1182,6 +1187,18 @@ position: relative;
 @media screen and (min-width: 576px){
   .trans-cont section {
   justify-content: center;
+}
+
+.username-form {
+  width: 40vw;
+}
+
+.reg-cont {
+  width: 50vw;
+}
+
+.username-form input {
+  max-width: 20rem;
 }
 
 .field2 {
