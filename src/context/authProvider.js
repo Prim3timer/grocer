@@ -10,7 +10,7 @@ const AuthContext = createContext({});
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [auth, setAuth] = useState({});
-  const [users, setUsers] = useState({});
+  const [users, setUsers] = useState([]);
   const [currentUsers, setCurrentUsers] = useState([]);
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
@@ -18,18 +18,18 @@ export const AuthProvider = ({ children }) => {
 
   // const [persistence, setPersistence] = useState(false);
   const [persistence, setPersistence] = useState(
-    JSON.parse(localStorage.getItem("persitence")) || false,
+    JSON.parse(localStorage.getItem("persistence")) || false,
   );
-  const getUsers = async () => {
-    try {
-      const users = await axios.get("/groceryUsers");
-      setUsers(users);
+  // const getUsers = async () => {
+  //   try {
+  //     const users = await axiosPrivate.get("/groceryUsers");
+  //     setUsers(users.data.users);
 
-      dispatch({ type: "users", payload: users.data });
-    } catch (error) {
-      navigate("/login", { state: { from: location }, replace: true });
-    }
-  };
+  //     dispatch({ type: "users", payload: users.data });
+  //   } catch (error) {
+  //     navigate("/login", { state: { from: location }, replace: true });
+  //   }
+  // };
 
   const userPage = (id) => {
     localStorage.setItem("AdminUserId", id);
@@ -48,10 +48,6 @@ export const AuthProvider = ({ children }) => {
   // const user = {};
   // const users = [];
 
-  // useEffect(() => {
-  //   getUsers();
-  // }, []);
-
   // const [persistence, setPersistence] = useState(
   //   JSON.parse(localStorage.getItem("persistence")) || false,
   // );
@@ -62,7 +58,7 @@ export const AuthProvider = ({ children }) => {
         setPersistence,
         ...state,
         currentUsers,
-      setCurrentUsers,
+        setCurrentUsers,
         auth,
         setAuth,
         userPage,

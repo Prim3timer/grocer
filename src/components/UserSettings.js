@@ -23,7 +23,8 @@ const UserSettings = () => {
   const [isPassword3, setisPassword3] = useState("password");
   const [password, setPassword] = useState("");
   const [active, setActive] = useState("");
-  const { auth } = useContext(AuthContext);
+  const { auth, users, getUsers } = useContext(AuthContext);
+
   const userId = localStorage.getItem("AdminUserId");
   const [passwordCheck3, setPasswordCheck3] = useState(faEyeSlash);
   const [roles, setRoles] = useState(Object.keys(""));
@@ -33,13 +34,17 @@ const UserSettings = () => {
   const [currentUser, setCurrentUser] = useState({});
   const navigate = useNavigate();
   const getAUser = async () => {
+    console.log(userId);
     try {
-      const response = await axiosPrivate.get("/groceryUsers");
-      const currentUser = response.data.users.find(
-        (user) => user._id === userId,
-      );
-      console.log(currentUser);
+      const users = await axiosPrivate.get("/groceryUsers");
+      // setUsers(users.data.users);
+      console.log(users.data);
+      // dispatch({ type: "users", payload: users.data });
+      // const response = await axiosPrivate.get"/groceryUsers");
+      const currentUser = users.data.users.find((user) => user._id === userId);
+
       if (currentUser) {
+        console.log(currentUser);
         setUsername(currentUser.username);
         setPassword(currentUser.password);
         setRoles(Object.keys(currentUser.roles));
@@ -153,6 +158,7 @@ const UserSettings = () => {
   useEffect(() => {
     getAUser();
   }, []);
+
   return (
     <div className="usersetting">
       <h3>User Settings</h3>

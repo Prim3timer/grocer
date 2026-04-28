@@ -14,11 +14,12 @@ import reducer from "../reducer";
 const Navbar = () => {
   const { auth } = useContext(AuthContext);
   const [state, dispatch] = useReducer(reducer, initialState);
+  const location = useLocation();
   const logout = useLogout();
-  console.log(auth.accessToken);
+  console.log(auth);
   return (
     <div className="navbar">
-      {auth.accessToken ? (
+      {auth.accessToken && location.pathname !== "/login" ? (
         multiLinks.map((link) => {
           const { id, name, path } = link;
           return (
@@ -33,7 +34,7 @@ const Navbar = () => {
         <h3>RetailDaily</h3>
       )}
 
-      {auth.user && (
+      {auth.user && location.pathname !== "/login" && (
         <Link to="/login" className="lining" onClick={logout}>
           logout
         </Link>

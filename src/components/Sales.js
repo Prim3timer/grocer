@@ -14,32 +14,40 @@ const Sales = () => {
   // const [transactions, setTransactions] = useState([]);
 
   const firstUnit = () => {
-    console.log(items);
-    const firstElement = transactionArray[0];
-    const currentItem =
-      items && items.items.find((item) => item.name === firstElement.name);
-    // const currentItems =
-    console.log(currentItem);
-    const unitMeasureMeasureArray = [];
+    try {
+      console.log(items);
+      const firstElement = transactionArray[0];
+      const currentItem =
+        items && items.items.find((item) => item.name === firstElement.name);
+      // const currentItems =
+      console.log(currentItem);
+      const unitMeasureMeasureArray = [];
 
-    const currentArray = transactionArray.filter(
-      (item) => item.unitMeasure === currentItem.availableUnitMeasures[0],
-    );
-    setTransactionArray(currentArray);
+      const currentArray = transactionArray.filter(
+        (item) => item.unitMeasure === currentItem.availableUnitMeasures[0],
+      );
+      setTransactionArray(currentArray);
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   const secondUnit = () => {
-    console.log(items);
-    const firstElement = transactionArray[0];
-    const currentItem =
-      items && items.items.find((item) => item.name === firstElement.name);
-    console.log(currentItem);
-    const unitMeasureMeasureArray = [];
+    try {
+      console.log(items);
+      const firstElement = transactionArray[0];
+      const currentItem =
+        items && items.items.find((item) => item.name === firstElement.name);
+      console.log(currentItem);
+      const unitMeasureMeasureArray = [];
 
-    const currentArray = transactionArray.filter(
-      (item) => item.unitMeasure === currentItem.availableUnitMeasures[1],
-    );
-    setTransactionArray(currentArray);
+      const currentArray = transactionArray.filter(
+        (item) => item.unitMeasure === currentItem.availableUnitMeasures[1],
+      );
+      setTransactionArray(currentArray);
+    } catch (error) {
+      console.error(error.message);
+    }
   };
   const userId = localStorage.getItem("GroceryUserId");
   const getTrans = async () => {

@@ -42,7 +42,9 @@ function App() {
     <main className="App">
       {/* {console.log(auth)} */}
       {location.pathname !== "/one-receipt" && <Navbar />}
-      {auth.accessToken && location.pathname !== "/one-receipt" ? (
+      {auth.accessToken &&
+      location.pathname !== "/one-receipt" &&
+      location.pathname !== "/login" ? (
         <h5 className="greetings">Welcome, {auth.user}</h5>
       ) : (
         ""
@@ -68,10 +70,11 @@ function App() {
             <Route path="admin-receipt" element={<AdminReceipt />} />
             <Route path="admin-sales" element={<AdminSales />} />
             <Route path="admin" element={<Admin />} />
-            <Route path="/transactions" element={<Transactions />} />
 
             <Route element={<PersistLogin />}>
-              <Route element={<RequiredAuth allowedRoles={[2001]} />}></Route>
+              <Route element={<RequiredAuth allowedRoles={[2001]} />}>
+                <Route path="/transactions" element={<Transactions />} />
+              </Route>
               <Route element={<RequiredAuth allowedRoles={[1984]} />}></Route>
 
               <Route element={<RequiredAuth allowedRoles={[5150]} />}></Route>
