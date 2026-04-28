@@ -1190,17 +1190,27 @@ position: relative;
 }
 
 .username-form {
+  /* align-items: flex-start; */
   padding: 0 2rem;
-  width: 40vw;
+  width: 50vw;
+}
+
+.register-button {
+  justify-self: center;
+  /* background-color: red; */
 }
 
 .reg-cont {
-  /* background-color: red; */
   width: 70vw;
 }
 
+.field-eye input {
+  min-width: 25rem;
+  /* background-color: red; */
+}
+
 .username-form input {
-  max-width: 20rem;
+  min-width: 25rem;
 }
 
 .field2 {
