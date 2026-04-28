@@ -76,7 +76,7 @@ const ItemList = () => {
   }, [state.search]);
   return shopItems?.length ? (
     <div className="items-list">
-      <h3 className="header">Item List ({shopItems.length} items) </h3>
+      <h3 className="header">Item List ({shopItems.length}) </h3>
       <form className="searcher">
         <input
           placeholder="filter items"
