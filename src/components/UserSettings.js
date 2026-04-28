@@ -36,12 +36,9 @@ const UserSettings = () => {
   const getAUser = async () => {
     console.log(userId);
     try {
-      const users = await axiosPrivate.get("/groceryUsers");
-      // setUsers(users.data.users);
       console.log(users.data);
-      // dispatch({ type: "users", payload: users.data });
-      // const response = await axiosPrivate.get"/groceryUsers");
-      const currentUser = users.data.users.find((user) => user._id === userId);
+      dispatch({ type: "users", payload: users.data });
+      const currentUser = auth.users.find((user) => user._id === userId);
 
       if (currentUser) {
         console.log(currentUser);

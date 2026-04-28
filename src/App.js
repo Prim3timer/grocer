@@ -60,7 +60,6 @@ function App() {
             <Route path="sales" element={<Sales />} />
             <Route path="all-sales" element={<AllSales />} />
             <Route path="inventory" element={<Inventory />} />
-            <Route path="receipts" element={<Receipts />} />
             <Route path="all-receipts" element={<AllReceipts />} />
             <Route path="/unauthorized" element={<Unauthorized />}></Route>
             <Route path="edit-item" element={<EditItem />} />
@@ -72,15 +71,15 @@ function App() {
 
             <Route element={<PersistLogin />}>
               <Route element={<RequiredAuth allowedRoles={[2001]} />}>
+                <Route path="receipts" element={<Receipts />} />
                 <Route path="item-list" element={<ItemList />} />
                 <Route path="/transactions" element={<Transactions />} />
+                <Route path="user-settings" element={<UserSettings />} />
               </Route>
               <Route element={<RequiredAuth allowedRoles={[1984]} />}></Route>
 
               <Route element={<RequiredAuth allowedRoles={[5150]} />}></Route>
             </Route>
-
-            <Route path="user-settings" element={<UserSettings />} />
           </Route>
           <Route path="*" element={<Missing />} />
         </Routes>
