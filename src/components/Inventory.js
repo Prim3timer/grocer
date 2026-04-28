@@ -51,10 +51,7 @@ const Inventory = () => {
 
   return state.inventItems?.length ? (
     <div className="inventory">
-      <h3 className="header">
-        {" "}
-        Inventory ({state.inventItems && state.inventItems.length} items){" "}
-      </h3>
+      <h3 className="header"> Inventory</h3>
 
       <form
         className="searcher"
