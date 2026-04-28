@@ -20,16 +20,17 @@ export const AuthProvider = ({ children }) => {
   const [persistence, setPersistence] = useState(
     JSON.parse(localStorage.getItem("persistence")) || false,
   );
-  // const getUsers = async () => {
-  //   try {
-  //     const users = await axiosPrivate.get("/groceryUsers");
-  //     setUsers(users.data.users);
+  const getUsers = async () => {
+    try {
+      const users = await axiosPrivate.get("/groceryUsers");
+      setUsers(users.data.users);
+      setCurrentUsers(users.data.users);
 
-  //     dispatch({ type: "users", payload: users.data });
-  //   } catch (error) {
-  //     navigate("/login", { state: { from: location }, replace: true });
-  //   }
-  // };
+      dispatch({ type: "users", payload: users.data });
+    } catch (error) {
+      navigate("/login", { state: { from: location }, replace: true });
+    }
+  };
 
   const userPage = (id) => {
     localStorage.setItem("AdminUserId", id);
@@ -48,9 +49,9 @@ export const AuthProvider = ({ children }) => {
   // const user = {};
   // const users = [];
 
-  // const [persistence, setPersistence] = useState(
-  //   JSON.parse(localStorage.getItem("persistence")) || false,
-  // );
+  useEffect(() => {
+    getUsers();
+  }, []);
   return (
     <AuthContext.Provider
       value={{
