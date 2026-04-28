@@ -343,11 +343,11 @@ input[type=checkbox] {
 
 
 .username-form>*:nth-child(2) {
-  /* align-self: flex-start; */
+  align-self: flex-start;
 }
 
 .username-form>*:nth-child(5) {
-  /* align-self: flex-start; */
+  align-self: flex-start;
 }
 
 .username-form>*:nth-child(3) {
