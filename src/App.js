@@ -57,7 +57,6 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="one-receipt" element={<OneReceipt />} />
             {/* <Route path="transactions" element={<Transactions />} />   */}
-            <Route path="item-list" element={<ItemList />} />
             <Route path="sales" element={<Sales />} />
             <Route path="all-sales" element={<AllSales />} />
             <Route path="inventory" element={<Inventory />} />
@@ -73,6 +72,7 @@ function App() {
 
             <Route element={<PersistLogin />}>
               <Route element={<RequiredAuth allowedRoles={[2001]} />}>
+                <Route path="item-list" element={<ItemList />} />
                 <Route path="/transactions" element={<Transactions />} />
               </Route>
               <Route element={<RequiredAuth allowedRoles={[1984]} />}></Route>
