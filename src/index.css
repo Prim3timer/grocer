@@ -286,6 +286,11 @@ input[type=checkbox] {
   
 }
 
+.unauthorized section {
+  /* background-color: red; */
+  padding: 1rem;
+}
+
 
 .asigned-roles-cont label {
   /* background-color: red; */

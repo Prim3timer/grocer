@@ -57,17 +57,13 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="one-receipt" element={<OneReceipt />} />
             {/* <Route path="transactions" element={<Transactions />} />   */}
-            <Route path="sales" element={<Sales />} />
             <Route path="all-sales" element={<AllSales />} />
             <Route path="inventory" element={<Inventory />} />
             <Route path="all-receipts" element={<AllReceipts />} />
             <Route path="/unauthorized" element={<Unauthorized />}></Route>
-            <Route path="edit-item" element={<EditItem />} />
-            <Route path="create-item" element={<CreateItem />} />
             <Route path="user-select" element={<UserSelect />} />
             <Route path="admin-receipt" element={<AdminReceipt />} />
             <Route path="admin-sales" element={<AdminSales />} />
-            <Route path="admin" element={<Admin />} />
 
             <Route element={<PersistLogin />}>
               <Route element={<RequiredAuth allowedRoles={[2001]} />}>
@@ -78,7 +74,12 @@ function App() {
               </Route>
               <Route element={<RequiredAuth allowedRoles={[1984]} />}></Route>
 
-              <Route element={<RequiredAuth allowedRoles={[5150]} />}></Route>
+              <Route element={<RequiredAuth allowedRoles={[5150]} />}>
+                <Route path="create-item" element={<CreateItem />} />
+                <Route path="sales" element={<Sales />} />
+                <Route path="edit-item" element={<EditItem />} />
+                <Route path="admin" element={<Admin />} />
+              </Route>
             </Route>
           </Route>
           <Route path="*" element={<Missing />} />

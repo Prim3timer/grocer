@@ -86,7 +86,7 @@ const Receipts = () => {
   //   getTransactions();
   // }, [  ]);
 
-  return transactions?.length ? (
+  return transactions ? (
     <div>
       <h3 className="header">Receipts ({transactions?.length})</h3>
       {transactions &&
@@ -96,20 +96,20 @@ const Receipts = () => {
             <section key={transaction._id} className="receipt-main-cont">
               {transactions.length !== 0 ? (
                 <article className="receipts">
-                  <br />
-                  <h4 className="biz-name">{bizName}</h4>
-                  <p>{theDay}</p>
-                  <p>{transaction._id}</p>
-                  {transaction.goods.map((good) => {
-                    return (
-                      <div className="goods-container" key={good._id}>
-                        <Link
-                          to="/one-receipt"
-                          style={{
-                            textDecoration: "none",
-                          }}
-                          onClick={() => oneShow(transaction._id)}
-                        >
+                  <Link
+                    to="/one-receipt"
+                    style={{
+                      textDecoration: "none",
+                    }}
+                    onClick={() => oneShow(transaction._id)}
+                  >
+                    <br />
+                    <h4 className="biz-name">{bizName}</h4>
+                    <p>{theDay}</p>
+                    <p>{transaction._id}</p>
+                    {transaction.goods.map((good) => {
+                      return (
+                        <div className="goods-container" key={good._id}>
                           {/* <h4>{good._id}</h4> */}
                           <h4>{good.name}</h4>
                           <p>
@@ -129,25 +129,25 @@ const Receipts = () => {
                               parseFloat(good.total).toFixed(2),
                             )}
                           </p>
-                        </Link>
-                      </div>
-                    );
-                  })}
+                        </div>
+                      );
+                    })}
 
-                  {<p>card ending in....{transaction.last4}</p>}
-                  {
-                    <p>
-                      cash paid: {currency}
-                      {transaction.cashPaid}
-                    </p>
-                  }
-                  <h4 className="receipts-grand-total">
-                    Grand Total: {currency}
-                    {numberWithCommas(
-                      parseFloat(transaction.grandTotal).toFixed(2),
-                    )}
-                  </h4>
-                  {/* <h5>Cashier: {transaction.cashier}</h5> */}
+                    {<p>card ending in....{transaction.last4}</p>}
+                    {
+                      <p>
+                        cash paid: {currency}
+                        {transaction.cashPaid}
+                      </p>
+                    }
+                    <h4 className="receipts-grand-total">
+                      Grand Total: {currency}
+                      {numberWithCommas(
+                        parseFloat(transaction.grandTotal).toFixed(2),
+                      )}
+                    </h4>
+                    {/* <h5>Cashier: {transaction.cashier}</h5> */}
+                  </Link>
                   <h3
                     onClick={(e) => assertain(transaction._id, e)}
                     style={{
