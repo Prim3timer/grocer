@@ -43,7 +43,7 @@ const UserSettings = () => {
       if (currentUser) {
         console.log(currentUser);
         setUsername(currentUser.username);
-        setPassword(currentUser.password);
+        // setPassword(currentUser.password);
         setRoles(Object.keys(currentUser.roles));
         setActive(currentUser.active);
       }
@@ -135,7 +135,7 @@ const UserSettings = () => {
       const updatedPerson = {
         username: username,
         roles: currentRole,
-        password,
+        password: password ? password : "",
         active,
       };
       console.log(updatedPerson);
