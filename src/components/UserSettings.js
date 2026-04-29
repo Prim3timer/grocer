@@ -167,14 +167,16 @@ const UserSettings = () => {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-        <div>
+        <div className="usersetting-password">
           <input
             type={isPassword3}
             className="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <FontAwesomeIcon icon={passwordCheck3} onClick={showPassword} />
+          <span className="show-hide-password">
+            <FontAwesomeIcon icon={passwordCheck3} onClick={showPassword} />
+          </span>
         </div>
         <label
           className="form-label"
