@@ -36,19 +36,6 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("AdminUserId", id);
   };
 
-  // const accessTokenChecker = () => {
-  //   if (!auth) {
-  //     navigate("/login", { state: { from: location }, replace: true });
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   accessTokenChecker();
-  // }, []);
-
-  // const user = {};
-  // const users = [];
-
   useEffect(() => {
     getUsers();
   }, []);
