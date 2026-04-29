@@ -139,7 +139,7 @@ const UserSettings = () => {
         active,
       };
       console.log(updatedPerson);
-      const response = await axios.patch(
+      const response = await axiosPrivate.patch(
         `/groceryUsers/update/${userId}`,
         updatedPerson,
       );
