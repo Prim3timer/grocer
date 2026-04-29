@@ -16,7 +16,7 @@ import {
   faEye,
   faSave,
 } from "@fortawesome/free-solid-svg-icons";
-import { axiosPrivate } from "../app/api/axios";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 const UserSettings = () => {
   const [username, setUsername] = useState("");
@@ -24,7 +24,7 @@ const UserSettings = () => {
   const [password, setPassword] = useState("");
   const [active, setActive] = useState("");
   const { auth, users, getUsers } = useContext(AuthContext);
-
+  const axiosPrivate = useAxiosPrivate();
   const userId = localStorage.getItem("AdminUserId");
   const [passwordCheck3, setPasswordCheck3] = useState(faEyeSlash);
   const [roles, setRoles] = useState(Object.keys(""));
@@ -52,6 +52,11 @@ const UserSettings = () => {
     }
   };
 
+  const assertain = (e) => {
+    e.preventDefault();
+    dispatch({ type: "VERIFY", payload: true });
+  };
+
   const options = Object.keys(ROLES).map((role, index) => {
     return (
       <option className="assigned-roles-options" key={index}>
@@ -74,25 +79,11 @@ const UserSettings = () => {
   };
 
   const handleRemove = async () => {
-    console.log(auth.picker3);
     const response = await axiosPrivate.delete(
-      `/users/delete/${currentUser._id}`,
+      `/groceryUsers/delete/${userId}`,
     );
-    dispatch({ type: "cancel", payload: false });
-    dispatch({ type: "success", payload: true });
-    navigate("/admin");
-    console.log(state.success);
-    setTimeout(() => {
-      dispatch({ type: "success", payload: false });
-    }, 3000);
     if (response) {
-      dispatch({ type: "selectUser", payload: response.data });
-
-      // const newGraw =  users.filter((item)=> item._id !== auth.picker3)
-
-      // setUsers(newGraw)
-    } else {
-      console.log("nothing for you");
+      navigate("/admin");
     }
   };
 
@@ -100,8 +91,8 @@ const UserSettings = () => {
     // this condition statement is to enable the removal of the confirm window once any part
     // of the
     // page is touched.
-    if (state.cancel) {
-      dispatch({ type: "cancel", payload: false });
+    if (state.verify) {
+      dispatch({ type: "VERIFY", payload: false });
     }
   };
 
@@ -120,17 +111,14 @@ const UserSettings = () => {
     }
   };
 
-  const assertain = () => {
-    dispatch({ type: "cancel", payload: true });
-  };
-
   const onActiveChanged = () => {
     setActive((prev) => !prev);
   };
 
-  const updateUser = (e) => {
+  const updateUser = async (e) => {
     e.preventDefault();
     try {
+      console.log("break is over");
       const newRoles = {
         Employee: 2001,
       };
@@ -142,6 +130,7 @@ const UserSettings = () => {
         } else newest = newRoles;
         return newest;
       });
+      console.log("break time");
       const currentRole = userChange.pop();
       const updatedPerson = {
         username: username,
@@ -149,6 +138,18 @@ const UserSettings = () => {
         password,
         active,
       };
+      console.log(updatedPerson);
+      const response = await axios.patch(
+        `/groceryUsers/update/${userId}`,
+        updatedPerson,
+      );
+      if (response) {
+        dispatch({ type: "success", payload: true });
+        dispatch({ type: "ALERTMSG", payload: response.data });
+        setTimeout(() => {
+          dispatch({ type: "success", payload: false });
+        }, 3000);
+      }
     } catch (error) {}
   };
 
@@ -234,7 +235,7 @@ const UserSettings = () => {
           </button>
         </article>
       </form>
-      <div className={state.cancel ? "delete" : "no-delete"}>
+      <div className={state.verify ? "delete" : "no-delete"}>
         <h3
           id="verify-header"
           style={{
@@ -264,6 +265,24 @@ const UserSettings = () => {
             Yes
           </button>
         </article>
+      </div>
+      <div
+        style={{
+          display: state.success ? "block" : "none",
+          position: "fixed",
+          margin: "1rem 0",
+          top: "40%",
+          left: "30%",
+          width: "40%",
+          textAlign: "center",
+          padding: "1rem",
+          backgroundColor: "lightpink",
+          borderRadius: "5px",
+          fontSize: "1.5rem",
+          opacity: ".85",
+        }}
+      >
+        <h4>{state.alertMsg}</h4>
       </div>
     </div>
   );

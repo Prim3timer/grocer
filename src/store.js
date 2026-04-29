@@ -25,6 +25,7 @@ const initialState = {
   tranItemName: "",
   transactions: [],
   cancel: false,
+  verify: false,
   currentTransaction: {},
   currentTransactions: [],
   search: "",

@@ -143,6 +143,8 @@ const reducer = (state, action) => {
         return item;
       });
       return { ...state, inventItems: newArray2 };
+    case "VERIFY":
+      return { ...state, verify: action.payload };
     default:
       throw new Error();
   }
