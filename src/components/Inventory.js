@@ -90,7 +90,7 @@ const Inventory = () => {
     getItems();
   }, [state.search, state.search2]);
 
-  return state.inventItems?.length ? (
+  return state.inventItems ? (
     <div className="inventory">
       <h3 className="header"> Inventory</h3>
 
