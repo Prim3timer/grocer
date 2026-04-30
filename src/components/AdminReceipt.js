@@ -1,30 +1,83 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import ItemContext from "../context/itemProvider";
-import AuthContext from "../context/authProvider";
 import Transactions from "./Transactions";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, location, useLocation } from "react-router-dom";
+import AuthContext from "../context/authProvider";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 const AdminReceipt = () => {
-  const { items, transactions, bizName, currency, numberWithCommas } =
-    useContext(ItemContext);
-  const { currentUsers } = useContext(AuthContext);
+  const {
+    items,
+    transactions,
+    bizName,
+    currency,
+    numberWithCommas,
+    currentUsers,
+  } = useContext(ItemContext);
+  const axiosPrivate = useAxiosPrivate();
+  // const [currentUsers, setCurrentUsers] = useState([]);
+  const { auth, setCurrentUsers, setAuth } = useContext(AuthContext);
   const userId = localStorage.getItem("AdminUserId");
   const myTrans = transactions.filter(
     (transaction) => transaction.cashierID === userId,
   );
 
-  const currentSelect = currentUsers.find(
+  console.log(currentUsers);
+
+  const currentSelect = auth?.users?.find(
     (currentUser) => currentUser._id === userId,
   );
   console.log(myTrans);
-  console.log(currentUsers);
+
+  useEffect(() => {
+    // console.log(auth)
+    let isMounted = true;
+    // to cancel our request if the Component unmounts
+    const controller = new AbortController();
+
+    const getUsers = async () => {
+      try {
+        const response = await axiosPrivate.get("/groceryUsers", {
+          signal: controller.signal,
+        });
+        console.log(response.status);
+
+        isMounted && setCurrentUsers(response.data.users);
+        const currentSelect = response.data.users.find(
+          (user) => user._id === userId,
+        );
+        // setUser(currentSelect);
+
+        console.log(currentUsers);
+
+        // setAuth((prev) => {
+        //   return {
+        //     ...prev,
+        //     users: response.data.users,
+        //   };
+        // });
+      } catch (error) {
+        console.error(error);
+
+        // navigate("/login", { state: { from: location }, replace: true });
+      }
+    };
+
+    getUsers();
+    // clean up function
+    return () => {
+      isMounted = false;
+
+      controller.abort();
+    };
+  }, []);
 
   const oneShow = (id) => {
     localStorage.setItem("groceryTransactions", id);
     // auth.picker2 = id;
     // console.log(auth);
   };
-  return (
+  return transactions.length ? (
     <div>
       <h3>
         {currentSelect && currentSelect.username}'s Receipts ({myTrans.length})
@@ -103,6 +156,8 @@ const AdminReceipt = () => {
         );
       })}
     </div>
+  ) : (
+    <h3 className="loading">loading...</h3>
   );
 };
 

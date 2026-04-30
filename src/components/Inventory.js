@@ -4,6 +4,7 @@ import AuthContext from "../context/authProvider";
 import initialState from "../store";
 import reducer from "../reducer";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import { useLocation, useNavigate } from "react-router-dom";
 const { v4: uuid } = require("uuid");
 const Inventory = () => {
   // const { items } = useContext(ItemContext);
@@ -12,6 +13,8 @@ const Inventory = () => {
   const [measureIdex, setMeasureIndex] = useState(0);
   const { auth } = useContext(AuthContext);
   const axiosPrivate = useAxiosPrivate();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const getItems = async () => {
     try {
@@ -44,6 +47,44 @@ const Inventory = () => {
       id,
     });
   };
+
+  useEffect(() => {
+    // console.log(auth)
+    let isMounted = true;
+    // to cancel our request if the Component unmounts
+    const controller = new AbortController();
+
+    const getUsers = async () => {
+      try {
+        const response = await axiosPrivate.get("/groceryUsers", {
+          signal: controller.signal,
+        });
+        console.log(response.status);
+
+        // isMounted && setCurrentUsers(response.data.users);
+        // setUsers(response.data.users);
+
+        // setAuth((prev) => {
+        //   return {
+        //     ...prev,
+        //     users: response.data.users,
+        //   };
+        // });
+      } catch (error) {
+        console.error(error);
+
+        navigate("/login", { state: { from: location }, replace: true });
+      }
+    };
+
+    getUsers();
+    // clean up function
+    return () => {
+      isMounted = false;
+
+      controller.abort();
+    };
+  }, []);
 
   useEffect(() => {
     getItems();

@@ -12,7 +12,7 @@ const AdminSales = () => {
     useContext(ItemContext);
   const [transactionArray, setTransactionArray] = useState([]);
   const userId = localStorage.getItem("AdminUserId");
-  const { currentUsers } = useContext(AuthContext);
+  const { currentUsers, setCurrentUsers } = useContext(AuthContext);
   const [state, dispatch] = useReducer(reducer, initialState);
   const axiosPrivate = useAxiosPrivate();
   console.log(transactions);
@@ -23,6 +23,49 @@ const AdminSales = () => {
   const myTrans = transactions.filter(
     (transaction) => transaction.cashierID === userId,
   );
+
+  useEffect(() => {
+    // console.log(auth)
+    let isMounted = true;
+    // to cancel our request if the Component unmounts
+    const controller = new AbortController();
+
+    const getUsers = async () => {
+      try {
+        const response = await axiosPrivate.get("/groceryUsers", {
+          signal: controller.signal,
+        });
+        console.log(response.status);
+
+        isMounted && setCurrentUsers(response.data.users);
+        const currentSelect = response.data.users.find(
+          (user) => user._id === userId,
+        );
+        // setUser(currentSelect);
+
+        console.log(currentUsers);
+
+        // setAuth((prev) => {
+        //   return {
+        //     ...prev,
+        //     users: response.data.users,
+        //   };
+        // });
+      } catch (error) {
+        console.error(error);
+
+        // navigate("/login", { state: { from: location }, replace: true });
+      }
+    };
+
+    getUsers();
+    // clean up function
+    return () => {
+      isMounted = false;
+
+      controller.abort();
+    };
+  }, []);
 
   const getTrans = async () => {
     try {

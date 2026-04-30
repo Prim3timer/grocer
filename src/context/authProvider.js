@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
   );
   const getUsers = async () => {
     try {
-      const users = await axiosPrivate.get("/groceryUsers");
+      const users = await axios.get("/uniqueRequest");
       setUsers(users.data.users);
       setCurrentUsers(users.data.users);
 
@@ -36,9 +36,10 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("AdminUserId", id);
   };
 
-  useEffect(() => {
-    getUsers();
-  }, []);
+  // useEffect(() => {
+  //   console.log(users);
+  //   getUsers();
+  // }, []);
   return (
     <AuthContext.Provider
       value={{
@@ -51,6 +52,7 @@ export const AuthProvider = ({ children }) => {
         setAuth,
         userPage,
         users,
+        getUsers,
       }}
     >
       {children}

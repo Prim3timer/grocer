@@ -2,7 +2,7 @@ import { useRef, useState, useEffect, useReducer, useContext } from "react";
 import AuthContext from "../context/authProvider";
 // import useAuth from "../hooks/useAuth";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-// import useRefreshToken from "../hooks/useRefreshToken";
+import useRefreshToken from "../hooks/useRefreshToken";
 import initialState from "../store";
 import {
   faCheck,
@@ -14,10 +14,12 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "../app/api/axios";
 import reducer from "../reducer";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 const LOGIN_URL = "/grocery-auth";
 
 const Login = () => {
+  const axiosPrivate = useAxiosPrivate();
   const { auth, setAuth, persistence, setPersistence } =
     useContext(AuthContext);
   console.log(persistence);
@@ -62,6 +64,7 @@ const Login = () => {
           withCredentials: true,
         },
       );
+
       console.log(JSON.stringify(response?.data));
       // console.log(JSON.stringify(response));
       const accessToken = response?.data?.accessToken;
