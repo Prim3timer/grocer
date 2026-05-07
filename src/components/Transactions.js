@@ -100,7 +100,7 @@ const Transactions = () => {
         } else console.log("no checkout");
       }
     } catch (error) {
-      console.log(error.meassage);
+      console.log(error.message);
     }
   };
 
