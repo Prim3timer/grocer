@@ -807,7 +807,7 @@ button {
   /* color: whitesmoke; */
 z-index: 10;
   row-gap: .5rem;
-  top: 5%;
+  top: 30%;
   min-width: 50vw;
   padding: 1rem;
   background-color: gainsboro;
@@ -1204,12 +1204,9 @@ position: relative;
 
 
 /* SMALL */
-@media screen and (max-width: 576px){
+@media screen and (min-width: 576px){
   .trans-cont section {
     justify-content: center;
-  }
-  .cash-window {
-    top: 30%;
   }
 
 .username-form {
@@ -1218,7 +1215,10 @@ position: relative;
   width: 50vw;
 }
 
-
+  .cash-window {
+    top: 5%;
+    /* background-color: red; */
+  }
 
 .register-button {
   justify-self: center;
@@ -1362,10 +1362,7 @@ position: relative;
 @media screen and (min-width: 1551px){
    .items-container {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  /* column-gap: .5rem; */
-  /* background-color: red; */
-  
+  grid-template-columns: repeat(6, 1fr);  
 }
 }
 
@@ -1373,12 +1370,7 @@ position: relative;
 @media screen and (min-height: 425px) and (min-aspect-ratio: 7/4){
  .items-container {
   display: grid;
-  /* grid-template-columns: repeat(2, 1fr); */
-  /* column-gap: .5rem; */
-  /* background-color: red; */
-
 }
-
 }
 
 
