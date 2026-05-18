@@ -45,7 +45,7 @@ function App() {
       {auth.accessToken &&
       location.pathname !== "/one-receipt" &&
       location.pathname !== "/login" ? (
-        <h5 className="greetings">Welcome, {auth.user}</h5>
+        <h5 className="greetings">Hi, {auth.user}</h5>
       ) : (
         ""
       )}

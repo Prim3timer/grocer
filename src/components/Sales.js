@@ -21,7 +21,7 @@ const Sales = () => {
         items && items.items.find((item) => item.name === firstElement.name);
       // const currentItems =
       console.log(currentItem);
-      const unitMeasureMeasureArray = [];
+      // const unitMeasureMeasureArray = [];
 
       const currentArray = transactionArray.filter(
         (item) => item.unitMeasure === currentItem.availableUnitMeasures[0],
@@ -39,7 +39,7 @@ const Sales = () => {
       const currentItem =
         items && items.items.find((item) => item.name === firstElement.name);
       console.log(currentItem);
-      const unitMeasureMeasureArray = [];
+      // const unitMeasureMeasureArray = [];
 
       const currentArray = transactionArray.filter(
         (item) => item.unitMeasure === currentItem.availableUnitMeasures[1],

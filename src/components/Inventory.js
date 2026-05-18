@@ -59,17 +59,6 @@ const Inventory = () => {
         const response = await axiosPrivate.get("/groceryUsers", {
           signal: controller.signal,
         });
-        console.log(response.status);
-
-        // isMounted && setCurrentUsers(response.data.users);
-        // setUsers(response.data.users);
-
-        // setAuth((prev) => {
-        //   return {
-        //     ...prev,
-        //     users: response.data.users,
-        //   };
-        // });
       } catch (error) {
         console.error(error);
 
@@ -172,12 +161,6 @@ const Inventory = () => {
                     </select>
                   </td>
                   <td className="sales-items">
-                    {/* {new Date(inv.date).toLocaleString("en-us", {
-                      day: "numeric",
-                      month: "long",
-                      year: "numeric",
-                    })} */}
-
                     {new Date(inv.date).toLocaleString("en-US", {
                       day: "numeric",
                       month: "long",

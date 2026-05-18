@@ -33,15 +33,20 @@ const Receipts = () => {
     const response = await axios.get("/grocery-transactions");
     const userId = localStorage.getItem("GroceryUserId");
     console.log(userId);
-    const filterate = response.data.filter((item) => item.cashierID === userId);
-    const reverse = response.data.reverse();
-    setTransactions(filterate.reverse());
-    console.log(reverse);
+    const cashierTrans = response.data.filter(
+      (item) => item.cashierID === userId,
+    );
+    cashierTrans.reverse();
+    const filterate = cashierTrans.filter((trans) =>
+      trans.date.substring(0, 10).includes(state.search),
+    );
+
+    setTransactions(filterate);
   };
 
   useEffect(() => {
     getReceipt();
-  }, [transactions?.length]);
+  }, [transactions?.length, state.search]);
 
   const remainDelete = () => {
     // this condition statement is to enable the removal of the confirm window once any part of the
@@ -88,10 +93,27 @@ const Receipts = () => {
 
   return transactions ? (
     <div>
+      <form className="searcher">
+        <input
+          placeholder="filter by date eg. yyyy-MM-dd"
+          value={state.search}
+          onChange={(e) =>
+            dispatch({ type: "search", payload: e.target.value })
+          }
+        />
+      </form>
       <h3 className="header">Receipts ({transactions?.length})</h3>
       {transactions &&
         transactions.map((transaction) => {
-          const theDay = new Date(transaction.date).toString().substring(4, 25);
+          const theDay = new Date(transaction.date).toLocaleString("en-us", {
+            weekday: "short",
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+            second: "numeric",
+          });
           return (
             <section key={transaction._id} className="receipt-main-cont">
               {transactions.length !== 0 ? (

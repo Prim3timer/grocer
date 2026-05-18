@@ -1,9 +1,11 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useReducer } from "react";
 import ItemContext from "../context/itemProvider";
 import Transactions from "./Transactions";
 import { Link, useNavigate, location, useLocation } from "react-router-dom";
 import AuthContext from "../context/authProvider";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import reducer from "../reducer";
+import initialState from "../store";
 
 const AdminReceipt = () => {
   const {
@@ -17,6 +19,7 @@ const AdminReceipt = () => {
   const axiosPrivate = useAxiosPrivate();
   // const [currentUsers, setCurrentUsers] = useState([]);
   const { auth, setCurrentUsers, setAuth } = useContext(AuthContext);
+  const [state, dispatch] = useReducer(reducer, initialState);
   const userId = localStorage.getItem("AdminUserId");
   const myTrans = transactions.filter(
     (transaction) => transaction.cashierID === userId,
@@ -79,6 +82,15 @@ const AdminReceipt = () => {
   };
   return transactions.length ? (
     <div>
+      <form className="searcher">
+        <input
+          placeholder="filter by date eg. yyyy-MM-dd"
+          value={state.search}
+          onChange={(e) =>
+            dispatch({ type: "search", payload: e.target.value })
+          }
+        />
+      </form>
       <h3>
         {currentSelect && currentSelect.username}'s Receipts ({myTrans.length})
       </h3>
@@ -138,8 +150,8 @@ const AdminReceipt = () => {
                     parseFloat(transaction.grandTotal).toFixed(2),
                   )}
                 </h4>
-                {/* <h5>Cashier: {transaction.cashier}</h5> */}
-                {/* <h3
+                {/* <h5>Cashier: {transaction.cashier}</h5>
+                <h3
                   onClick={(e) => assertain(transaction._id, e)}
                   style={{
                     textAlign: "center",
