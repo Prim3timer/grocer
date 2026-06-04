@@ -267,11 +267,14 @@ code {
 }
 
 .show-hide-password {
+  text-align: left;
   margin-left: 1rem;
+  width: 100%;
+  max-width: 22rem;
+  /* background-color: red; */
 }
 
 .usersetting-password {
-  /* background-color: red; */
   /* width: 18rem; */
 }
 
@@ -424,7 +427,7 @@ input[type=checkbox] {
   color: white;
   text-decoration: none;
 }
-.lining-underling {
+#lining-underline {
   color: white;
   text-decoration: underline;
 }

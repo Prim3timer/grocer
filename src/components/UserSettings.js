@@ -163,21 +163,21 @@ const UserSettings = () => {
       <form className="usersetting-form">
         <input
           type="text"
-          className="username"
+          className="setting-username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-        <div className="usersetting-password">
-          <input
-            type={isPassword3}
-            className="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <span className="show-hide-password">
-            <FontAwesomeIcon icon={passwordCheck3} onClick={showPassword} />
-          </span>
-        </div>
+        {/* <div className="usersetting-password"> */}
+        <input
+          type={isPassword3}
+          className="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        {/* </div> */}
+        <p className="show-hide-password">
+          <FontAwesomeIcon icon={passwordCheck3} onClick={showPassword} />
+        </p>
         <label
           className="form-label"
           htmlFor="user-active"
