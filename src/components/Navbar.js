@@ -20,7 +20,7 @@ const Navbar = () => {
   return (
     <div className="navbar">
       {auth.accessToken && location.pathname !== "/login" ? (
-        multiLinks.map((link) => {
+        multiLinks.map((link, i) => {
           const { id, name, path } = link;
           return (
             <div className="paths" key={id}>
@@ -31,7 +31,10 @@ const Navbar = () => {
           );
         })
       ) : (
-        <h3>RetailDaily</h3>
+        <div>
+          <span>Retail</span>
+          <span style={{ color: "limegreen" }}>Daily</span>
+        </div>
       )}
 
       {auth.user && location.pathname !== "/login" && (

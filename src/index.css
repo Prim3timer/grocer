@@ -413,7 +413,6 @@ input[type=checkbox] {
 
 .items-link {
   text-decoration: none;
-
 }
 
 
@@ -424,6 +423,10 @@ input[type=checkbox] {
 .lining {
   color: white;
   text-decoration: none;
+}
+.lining-underling {
+  color: white;
+  text-decoration: underline;
 }
   .header {
     margin: 1rem 0 1rem 0;

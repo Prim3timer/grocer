@@ -192,7 +192,7 @@ const Register = () => {
               numbers, underscores, hyphens are allowed.
             </p>
 
-            <label htmlFor="email">email:</label>
+            {/* <label htmlFor="email">email:</label>
             <input
               type="text"
               id="email"
@@ -210,7 +210,7 @@ const Register = () => {
               onBlur={() =>
                 dispatch({ type: ACTION.USERFOCUS, payload: false })
               }
-            />
+            /> */}
 
             {/* <article className="passwords"> */}
             <label htmlFor="password">
@@ -322,17 +322,19 @@ const Register = () => {
               Sign Up
             </button>
           </form>
-          <p>Already registered? </p>
+          <article className="sign-up-cont">
+            <p>Already registered? </p>
 
-          {/*put router link here*/}
-          <Link
-            style={{
-              color: "blue",
-            }}
-            to={"/login"}
-          >
-            Sign In
-          </Link>
+            {/*put router link here*/}
+            <Link
+              style={{
+                color: "blue",
+              }}
+              to={"/login"}
+            >
+              Sign In
+            </Link>
+          </article>
         </section>
       )}
     </div>
