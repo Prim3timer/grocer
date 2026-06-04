@@ -36,6 +36,10 @@ code {
 
 }
 
+.login {
+    margin-top: 2rem;
+}
+
 /* .persistCheck {
   background-color: red;
   width: 40VW;
@@ -146,7 +150,7 @@ code {
 .sign-up-cont {
   display: flex;
   flex-direction: column;
-  row-gap: 1rem;
+  row-gap: .5rem;
 
 }
 
@@ -351,31 +355,15 @@ input[type=checkbox] {
 }
 
 
-/* .username-form>*:nth-child(2) {
-  align-self: flex-start;
-} */
-
-/* .username-form>*:nth-child(5) {
-  align-self: flex-start;
-} */
-
-/* .username-form>*:nth-child(3) {
-  align-self: flex-start;
-} */
-
-
-
-
 .username-form {
-  min-width: 100%;
+  /* min-width: 100%; */
   /* background-color: green; */
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 1rem 0;
-  width: 100%;
-  max-width: 800px;
-  /* padding: 0 1rem; */
+  width: 70vw;
+  padding: 0 1rem;
   /* align-items: flex-start; */
   font-size: 1.5rem;
   
@@ -384,7 +372,7 @@ input[type=checkbox] {
 .username-form input {
   font-size: 1.5rem;
   padding: .5rem;
-  width: 100%;
+  width: 50vw;
 }
 
 .username {
@@ -405,7 +393,6 @@ input[type=checkbox] {
   width: 100%;
   align-items: center;
   justify-content: flex-start;
-  margin: .5rem 0;
 }
 
 .items-list >* {
