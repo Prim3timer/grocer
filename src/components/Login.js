@@ -145,7 +145,6 @@ const Login = () => {
               required
             ></input>
             <section className="password-icon-container">
-              {" "}
               <FontAwesomeIcon
                 icon={passwordCheck2}
                 onClick={showPassord}

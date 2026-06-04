@@ -271,7 +271,12 @@ code {
   margin-left: 1rem;
   width: 100%;
   max-width: 22rem;
-  /* background-color: red; */
+}
+
+.password-icon-container {
+  margin-top: .5rem;
+  width: 100%;
+  text-align: left;
 }
 
 .usersetting-password {
