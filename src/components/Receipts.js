@@ -6,6 +6,7 @@ import AuthContext from "../context/authProvider";
 import { Link } from "react-router-dom";
 import ItemContext from "../context/itemProvider";
 import { FaTrashAlt } from "react-icons/fa";
+import { format } from "date-fns";
 
 const Receipts = () => {
   const { bizName, numberWithCommas, currency, getTransactions } =
@@ -105,15 +106,17 @@ const Receipts = () => {
       <h3 className="header">Receipts ({transactions?.length})</h3>
       {transactions &&
         transactions.map((transaction) => {
-          const theDay = new Date(transaction.date).toLocaleString("en-us", {
-            weekday: "short",
-            day: "numeric",
-            month: "short",
-            year: "numeric",
-            hour: "numeric",
-            minute: "numeric",
-            second: "numeric",
-          });
+          // const theDay = new Date(transaction.date).toLocaleString("en-us", {
+          //   weekday: "short",
+          //   day: "numeric",
+          //   month: "short",
+          //   year: "numeric",
+          //   hour: "numeric",
+          //   minute: "numeric",
+          //   second: "numeric",
+          // });
+
+          const theDay = format(transaction.date, "MM/dd/yyyy");
           return (
             <section key={transaction._id} className="receipt-main-cont">
               {transactions.length !== 0 ? (

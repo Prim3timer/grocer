@@ -1,6 +1,7 @@
 import { useEffect, useContext, useState } from "react";
 import ItemContext from "../context/itemProvider";
 import axios from "../app/api/axios";
+import { format } from "date-fns";
 
 const OneReceipt = () => {
   const { transactions, currency, getTransactions, bizName } =
@@ -30,9 +31,11 @@ const OneReceipt = () => {
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
-  const theDay = new Date(currentTrans && currentTrans.date)
-    .toString()
-    .substring(4, 25);
+  // const theDay = new Date(currentTrans && currentTrans.date)
+  //   .toString()
+  //   .substring(4, 25);
+
+  const theDay = currentTrans && format(currentTrans.date, "MM/dd/yyyy");
 
   // useEffect(() => {
   //   getTransactions();
