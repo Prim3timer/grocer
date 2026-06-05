@@ -73,13 +73,16 @@ const OneReceipt = () => {
           </section>
           <hr className="horizontal" />
 
-          {<p>card ending in....{currentTrans.last4}</p>}
-          {
+          {currentTrans.last4 ? (
+            <p>card ending in....{currentTrans.last4}</p>
+          ) : currentTrans.cashPaid ? (
             <p>
               cash paid: {currency}
               {currentTrans.cashPaid}
             </p>
-          }
+          ) : (
+            ""
+          )}
           <hr className="horizontal" />
 
           <section className="total-elements">

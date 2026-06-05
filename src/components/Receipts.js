@@ -164,13 +164,16 @@ const Receipts = () => {
                     </section>
 
                     <hr className="horizontal" />
-                    {<p>card ending in....{transaction.last4}</p>}
-                    {
+                    {transaction.last4 ? (
+                      <p>card ending in....{transaction.last4}</p>
+                    ) : transaction.cashPaid ? (
                       <p>
                         cash paid: {currency}
                         {transaction.cashPaid}
                       </p>
-                    }
+                    ) : (
+                      ""
+                    )}
                     <hr className="horizontal" />
                     <section className="total-elements">
                       <h4 className="receipts-grand-total">Grand Total:</h4>{" "}
