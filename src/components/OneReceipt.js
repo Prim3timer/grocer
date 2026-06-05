@@ -42,14 +42,17 @@ const OneReceipt = () => {
       <article className="outer-one-receipt">
         <section className="inner-one-receipt">
           <h4>{bizName}</h4>
-          <p className="receipts-date">{theDay}</p>
-          <p className="receipts-date">{currentTrans._id}</p>
+          <section className="date-and-id">
+            <p className="receipts-date">{theDay}</p>
+            <p className="receipts-date">{currentTrans._id}</p>
+          </section>
+          <article className="items-header">
+            <h4>item</h4>
+            <h4>qty</h4>
+            <h4>cost</h4>
+          </article>
+          <hr />
           <section className="good-outer">
-            <article className="items-header">
-              <h4>item</h4>
-              <h4>qty</h4>
-              <h4>cost</h4>
-            </article>
             {currentTrans.goods.map((good) => {
               console.log(good);
               return (
@@ -71,15 +74,20 @@ const OneReceipt = () => {
               );
             })}
           </section>
-          <hr className="horizontal" />
 
           {currentTrans.last4 ? (
-            <p>card ending in....{currentTrans.last4}</p>
+            <div>
+              <hr className="horizontal" />
+              <p>card ending in....{currentTrans.last4}</p>
+            </div>
           ) : currentTrans.cashPaid ? (
-            <p>
-              cash paid: {currency}
-              {currentTrans.cashPaid}
-            </p>
+            <div>
+              <hr className="horizontal" />
+              <p>
+                cash paid: {currency}
+                {currentTrans.cashPaid}
+              </p>
+            </div>
           ) : (
             ""
           )}
