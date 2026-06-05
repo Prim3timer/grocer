@@ -125,16 +125,18 @@ const Receipts = () => {
                     }}
                     onClick={() => oneShow(transaction._id)}
                   >
-                    {/* <br /> */}
                     <h4 className="biz-name">{bizName}</h4>
-                    <p>{theDay}</p>
-                    <p>{transaction._id}</p>
+                    <section className="date-and-id">
+                      <p>{theDay}</p>
+                      <p>{transaction._id}</p>
+                    </section>
+                    <article className="items-header">
+                      <h4>item</h4>
+                      <h4>qty</h4>
+                      <h4>cost</h4>
+                    </article>
+                    <hr />
                     <section className="good-outer">
-                      <article className="items-header">
-                        <h4>item</h4>
-                        <h4>qty</h4>
-                        <h4>cost</h4>
-                      </article>
                       {transaction.goods.map((good) => {
                         return (
                           <div className="goods-container" key={good._id}>
@@ -163,14 +165,19 @@ const Receipts = () => {
                       })}
                     </section>
 
-                    <hr className="horizontal" />
                     {transaction.last4 ? (
-                      <p>card ending in....{transaction.last4}</p>
+                      <div>
+                        <hr className="horizontal" />
+                        <p>card ending in....{transaction.last4}</p>
+                      </div>
                     ) : transaction.cashPaid ? (
-                      <p>
-                        cash paid: {currency}
-                        {transaction.cashPaid}
-                      </p>
+                      <div>
+                        <p>
+                          <hr className="horizontal" />
+                          cash paid: {currency}
+                          {transaction.cashPaid}
+                        </p>
+                      </div>
                     ) : (
                       ""
                     )}
