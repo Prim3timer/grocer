@@ -98,7 +98,7 @@ const Login = () => {
         dispatch({ type: "errMsg", payload: "Login Failed" });
       }
       // set the focus on error display so the screen reader can read that info
-      errRef.current.focus();
+      // errRef.current.focus();
     }
     dispatch({ type: "user", payload: user });
   };

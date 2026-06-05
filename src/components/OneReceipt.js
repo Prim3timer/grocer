@@ -41,29 +41,37 @@ const OneReceipt = () => {
     <div className="one-receipt">
       <article className="outer-one-receipt">
         <section className="inner-one-receipt">
-          <h3>{bizName}</h3>
-          <p className="receipts-date">{currentTrans._id}</p>
+          <h4>{bizName}</h4>
           <p className="receipts-date">{theDay}</p>
-          {currentTrans.goods.map((good) => {
-            console.log(good);
-            return (
-              <div>
-                <h4>{good.name}</h4>
-                <p>
-                  Qty: {parseFloat(good.qty).toFixed(2)} {good.unitMeasure}
-                  {good.qty > 1 ? "s" : ""}
-                </p>
-                <p>
-                  Unit Price: {currency}
-                  {numberWithCommas(parseFloat(good.price).toFixed(2))}
-                </p>
-                <p>
-                  Sub Total: {currency}
-                  {numberWithCommas(parseFloat(good.total).toFixed(2))}
-                </p>
-              </div>
-            );
-          })}
+          <p className="receipts-date">{currentTrans._id}</p>
+          <section className="good-outer">
+            <article className="items-header">
+              <h4>item</h4>
+              <h4>qty</h4>
+              <h4>cost</h4>
+            </article>
+            {currentTrans.goods.map((good) => {
+              console.log(good);
+              return (
+                <div className="goods-container">
+                  <p>{good.name}</p>
+                  <p>
+                    {parseFloat(good.qty).toFixed(2)} {good.unitMeasure}
+                    {good.qty > 1 ? "s" : ""}
+                  </p>
+                  {/* <p>
+                    Unit Price: {currency}
+                    {numberWithCommas(parseFloat(good.price).toFixed(2))}
+                  </p> */}
+                  <p>
+                    {currency}
+                    {numberWithCommas(parseFloat(good.total).toFixed(2))}
+                  </p>
+                </div>
+              );
+            })}
+          </section>
+          <hr className="horizontal" />
 
           {<p>card ending in....{currentTrans.last4}</p>}
           {
@@ -72,12 +80,15 @@ const OneReceipt = () => {
               {currentTrans.cashPaid}
             </p>
           }
+          <hr className="horizontal" />
 
-          <h4>
-            Grand Total: {currency}
-            {numberWithCommas(parseFloat(currentTrans.grandTotal).toFixed(2))}
-          </h4>
-          <h4>cashier: {currentTrans.cashier}</h4>
+          <section className="total-elements">
+            <h4 className="receipts-grand-total">Grand Total:</h4>{" "}
+            <h4>
+              {currency}
+              {numberWithCommas(parseFloat(currentTrans.grandTotal).toFixed(2))}
+            </h4>
+          </section>
         </section>
       </article>
     </div>

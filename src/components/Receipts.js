@@ -125,36 +125,45 @@ const Receipts = () => {
                     }}
                     onClick={() => oneShow(transaction._id)}
                   >
-                    <br />
+                    {/* <br /> */}
                     <h4 className="biz-name">{bizName}</h4>
                     <p>{theDay}</p>
                     <p>{transaction._id}</p>
-                    {transaction.goods.map((good) => {
-                      return (
-                        <div className="goods-container" key={good._id}>
-                          {/* <h4>{good._id}</h4> */}
-                          <h4>{good.name}</h4>
-                          <p>
-                            Qty: {parseFloat(good.qty).toFixed(2)}{" "}
-                            {good.unitMeasure}
-                            {good.qty > 1 ? "s" : ""}
-                          </p>
-                          <p>
+                    <section className="good-outer">
+                      <article className="items-header">
+                        <h4>item</h4>
+                        <h4>qty</h4>
+                        <h4>cost</h4>
+                      </article>
+                      {transaction.goods.map((good) => {
+                        return (
+                          <div className="goods-container" key={good._id}>
+                            {/* <h4>{good._id}</h4> */}
+                            <p>{good.name}</p>
+                            <p>
+                              {parseFloat(good.qty).toFixed(2)}{" "}
+                              {good.unitMeasure}
+                              {good.qty > 1 ? "s" : ""}
+                            </p>
+
+                            {/* <p>
                             Unit Price: {currency}
                             {numberWithCommas(
                               parseFloat(good.price).toFixed(2),
                             )}
-                          </p>
-                          <p>
-                            Sub Total: {currency}
-                            {numberWithCommas(
-                              parseFloat(good.total).toFixed(2),
-                            )}
-                          </p>
-                        </div>
-                      );
-                    })}
+                          </p> */}
+                            <p>
+                              {currency}
+                              {numberWithCommas(
+                                parseFloat(good.total).toFixed(2),
+                              )}
+                            </p>
+                          </div>
+                        );
+                      })}
+                    </section>
 
+                    <hr className="horizontal" />
                     {<p>card ending in....{transaction.last4}</p>}
                     {
                       <p>
@@ -162,12 +171,16 @@ const Receipts = () => {
                         {transaction.cashPaid}
                       </p>
                     }
-                    <h4 className="receipts-grand-total">
-                      Grand Total: {currency}
-                      {numberWithCommas(
-                        parseFloat(transaction.grandTotal).toFixed(2),
-                      )}
-                    </h4>
+                    <hr className="horizontal" />
+                    <section className="total-elements">
+                      <h4 className="receipts-grand-total">Grand Total:</h4>{" "}
+                      <h4>
+                        {currency}
+                        {numberWithCommas(
+                          parseFloat(transaction.grandTotal).toFixed(2),
+                        )}
+                      </h4>
+                    </section>
                     {/* <h5>Cashier: {transaction.cashier}</h5> */}
                   </Link>
                   <h3

@@ -850,11 +850,45 @@ display: flex;
 }
 
 .receipts {
-  /* background-color: yellow; */
   text-align: left;
   max-width: 80vw;
 }
 
+.goods-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 1rem;
+}
+
+.good-outer {
+  margin: .5rem 0;
+  row-gap: 1rem;
+  display: grid;
+  flex-direction: column;
+}
+
+.items-header {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 2rem;
+}
+
+.total-elements {
+  margin: 1rem 0;
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: end;
+}
+
+.total-elements>*:nth-child(2){
+  text-align: right;
+
+}
+
+.horizontal {
+  margin: .5rem 0;
+}
 
 .searcher, .tran-form, .gen-admin {
   display: flex;
