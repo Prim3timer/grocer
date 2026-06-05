@@ -1041,23 +1041,21 @@ display: flex;
 }
 
 .inner-one-receipt{
-  /* background-color: red; */
   text-align: left;
   /* width: 50%; */
   
 }
-/* 
+
 .searcher {
-  display: flex;
-  flex-direction: column;
-  row-gap: .5rem;
-  margin: 1rem 0;
-} */
+  width: 95%;
+  /* background-color: red; */
+  overflow: auto;
+}
 
 .searcher input {
   font-size: 1.5rem;
   padding: .5rem .2rem;
-  width: 12.5rem;
+  width: 50%;
 
 }
 

@@ -77,7 +77,7 @@ const AllReceipts = () => {
               <article className="receipts">
                 <br />
                 <h4 className="biz-name">{bizName}</h4>
-                {/* <p>{theDay}</p> */}
+                <p>{theDay}</p>
                 <p>{transaction._id}</p>
                 {transaction.goods.map((good) => {
                   return (
