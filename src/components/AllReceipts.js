@@ -147,6 +147,7 @@ const AllReceipts = () => {
                     </h4>
                   </section>
                 </Link>
+                <h5>Cashier: {transaction.cashier}</h5>
               </article>
             ) : (
               <p>"empty list"</p>

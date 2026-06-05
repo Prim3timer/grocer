@@ -303,7 +303,7 @@ const Register = () => {
               Must match the first password input field.
             </p>
             {/* </article> */}
-            <div className="field-eye">
+            <div className="password-icon-container">
               <FontAwesomeIcon
                 icon={passwordCheck}
                 onClick={showPassword}
