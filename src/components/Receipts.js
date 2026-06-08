@@ -144,11 +144,19 @@ const Receipts = () => {
                         return (
                           <div className="goods-container" key={good._id}>
                             {/* <h4>{good._id}</h4> */}
-                            <p>{good.name}</p>
-                            <p>
+                            <p className="good-name">
+                              {good.name}
+                              <span className="good-name-span">
+                                ...........................
+                              </span>
+                            </p>
+                            <p className="good-measure">
                               {parseFloat(good.qty).toFixed(2)}{" "}
                               {good.unitMeasure}
                               {good.qty > 1 ? "s" : ""}
+                              <span className="good-measure-span">
+                                ...........................
+                              </span>
                             </p>
 
                             {/* <p>

@@ -867,11 +867,27 @@ display: flex;
   flex-direction: column;
 }
 
+.good-measure, .good-name {
+  overflow-y: auto;
+
+}
+.good-measure-span {
+  /* background-color: red; */
+}
+
 .items-header {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   column-gap: 2rem;
 }
+
+.good-name, .good-measure {
+  white-space: nowrap;
+}
+
+/* .good-name-dot {
+  
+} */
 
 .total-elements {
   margin: 1rem 0 0 0;
