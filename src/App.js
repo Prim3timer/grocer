@@ -40,7 +40,6 @@ function App() {
 
   return (
     <main className="App">
-      {/* {console.log(auth)} */}
       {location.pathname !== "/one-receipt" && <Navbar />}
       {auth.accessToken &&
       location.pathname !== "/one-receipt" &&

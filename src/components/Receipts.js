@@ -131,7 +131,7 @@ const Receipts = () => {
                     <h4 className="biz-name">{bizName}</h4>
                     <section className="date-and-id">
                       <p>{theDay}</p>
-                      <p>{transaction._id}</p>
+                      {/* <p>{transaction._id}</p> */}
                     </section>
                     <article className="items-header">
                       <h4>item</h4>
@@ -146,17 +146,13 @@ const Receipts = () => {
                             {/* <h4>{good._id}</h4> */}
                             <p className="good-name">
                               {good.name}
-                              <span className="good-name-span">
-                                ...........................
-                              </span>
+                              <span className="good-name-span"></span>
                             </p>
                             <p className="good-measure">
                               {parseFloat(good.qty).toFixed(2)}{" "}
                               {good.unitMeasure}
                               {good.qty > 1 ? "s" : ""}
-                              <span className="good-measure-span">
-                                ...........................
-                              </span>
+                              <span className="good-measure-span"></span>
                             </p>
 
                             {/* <p>
@@ -221,7 +217,7 @@ const Receipts = () => {
           );
         })}
 
-      <div className={state.cancel ? "delete" : "no-delete"}>
+      <div className={state.verify ? "delete" : "no-delete"}>
         <h3
           id="verify-header"
           style={{

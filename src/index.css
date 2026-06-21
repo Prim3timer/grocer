@@ -1,4 +1,4 @@
-body {
+rbody {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -49,7 +49,7 @@ code {
   transform: scale(1.8);
 }
 
-.greetings {
+.recings {
   text-align: left;
   margin: .5rem 1rem;
 }
@@ -161,10 +161,11 @@ code {
   align-items: center;
   /* min-width: 100% !important; */
   text-align: center;
-  /* min-height: 100vh; */
-  /* justify-content: center; */
-  /* background-color: green; */
+}
 
+.greetings {
+  text-align: left;
+  margin: .5rem;
 }
 
 .success {
@@ -833,6 +834,7 @@ z-index: 10;
   box-shadow: .2rem .3rem .6rem gray;
 }
 
+
 .loading {
   position: fixed;
    justify-self: center;
@@ -890,19 +892,26 @@ display: flex;
 } */
 
 .total-elements {
-  margin: 1rem 0 0 0;
+  margin: 0 0 1rem, 0;
   width: 90%;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  align-items: end;
+  grid-template-columns: repeat(5, 1fr);
+  float: left;
+  /* align-items: end; */
+  /* background-color: red; */
 }
 
 .date-and-id {
   margin-bottom: .5rem;
 }
 
+.total-elements>*:nth-child(1){
+grid-column: 1/3;
+/* background-color: red; */
+
+}
 .total-elements>*:nth-child(2){
-  text-align: right;
+grid-column: 4/5;
 
 }
 

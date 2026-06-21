@@ -86,7 +86,7 @@ const AllReceipts = () => {
                   <h4 className="biz-name">{bizName}</h4>
                   <section className="date-and-id">
                     <p>{theDay}</p>
-                    <p>{transaction._id}</p>
+                    {/* <p>{transaction._id}</p> */}
                   </section>
                   <article className="items-header">
                     <h4>item</h4>

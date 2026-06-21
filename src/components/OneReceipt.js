@@ -47,7 +47,7 @@ const OneReceipt = () => {
           <h4>{bizName}</h4>
           <section className="date-and-id">
             <p className="receipts-date">{theDay}</p>
-            <p className="receipts-date">{currentTrans._id}</p>
+            {/* <p className="receipts-date">{currentTrans._id}</p> */}
           </section>
           <article className="items-header">
             <h4>item</h4>

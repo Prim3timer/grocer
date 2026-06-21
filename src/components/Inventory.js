@@ -36,6 +36,7 @@ const Inventory = () => {
       dispatch({ type: "errMsg", payload: error.Message });
     }
   };
+  console.log(state.inventItems);
   const onUnitMeasureChange = (e, id) => {
     const currentItem = state.inventItems.find((item) => item._id === id);
     const measureIndex = currentItem.availableUnitMeasures.indexOf(
